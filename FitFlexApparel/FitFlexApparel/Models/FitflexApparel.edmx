@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -70,8 +70,9 @@
           <Property Name="City" Type="nvarchar(max)" />
           <Property Name="Country" Type="nvarchar(max)" />
           <Property Name="PostalCode" Type="nvarchar(max)" />
-          <Property Name="ProfilePicture" Type="nvarchar(max)" />
+          <Property Name="ProfilePictureUrl" Type="nvarchar(max)" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="Profile_Picture" Type="image" />
         </EntityType>
         <EntityType Name="Brands">
           <Key>
@@ -100,6 +101,7 @@
           <Property Name="Category_Name" Type="nvarchar(max)" />
           <Property Name="Category_Description" Type="nvarchar(max)" />
           <Property Name="Category_Image" Type="nvarchar(max)" />
+          <Property Name="Category_Slug" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CustomerContactRequests">
           <Key>
@@ -154,6 +156,7 @@
           <Property Name="Original_Price" Type="float" />
           <Property Name="Average_Rating" Type="float" />
           <Property Name="Total_Ratings" Type="int" />
+          <Property Name="Product_Slug" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ProductSpecifications">
           <Key>
@@ -174,6 +177,30 @@
           <Property Name="Subcategory_Description" Type="nvarchar(max)" />
           <Property Name="Subcategory_Image" Type="nvarchar(max)" />
           <Property Name="Category_Id" Type="int" />
+          <Property Name="Subcategory_Slug" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserAddresses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="Address_1" Type="nvarchar(max)" />
+          <Property Name="Address_2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="Zip_Code" Type="nvarchar(max)" />
+          <Property Name="IsEnabled" Type="bit" />
+          <Property Name="Added_On" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="Product_Id" Type="int" />
+          <Property Name="Added_At" Type="datetime" />
         </EntityType>
         <Association Name="FK_Cart_ToAspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
@@ -339,6 +366,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserAddresses_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UserAddresses" Type="Self.UserAddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAddresses">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -355,6 +418,8 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSpecifications" EntityType="Self.ProductSpecifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategories" EntityType="Self.SubCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAddresses" EntityType="Self.UserAddresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_ToAspNetUsers" Association="Self.FK_Cart_ToAspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Cart" EntitySet="Cart" />
@@ -407,8 +472,21 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="SubCategories" EntitySet="SubCategories" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserAddresses_ToAspNetUsers" Association="Self.FK_UserAddresses_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserAddresses" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_ToAspNetUsers" Association="Self.FK_Wishlist_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_ToProducts" Association="Self.FK_Wishlist_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -472,13 +550,16 @@
           <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Profile_Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToAspNetUsers" FromRole="AspNetUsers" ToRole="Cart" />
           <NavigationProperty Name="ProductReviews" Relationship="Self.FK_ProductReviews_ToAspNetUsers" FromRole="AspNetUsers" ToRole="ProductReviews" />
+          <NavigationProperty Name="UserAddresses" Relationship="Self.FK_UserAddresses_ToAspNetUsers" FromRole="AspNetUsers" ToRole="UserAddresses" />
+          <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToAspNetUsers" FromRole="AspNetUsers" ToRole="Wishlist" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -511,6 +592,7 @@
           <Property Name="Category_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Category_Slug" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategories_ToCategories" FromRole="Categories" ToRole="SubCategories" />
         </EntityType>
         <EntityType Name="CustomerContactRequest">
@@ -568,11 +650,13 @@
           <Property Name="Original_Price" Type="Double" />
           <Property Name="Average_Rating" Type="Double" />
           <Property Name="Total_Ratings" Type="Int32" />
+          <Property Name="Product_Slug" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Products_ToBrand" FromRole="Products" ToRole="Brands" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToProducts" FromRole="Products" ToRole="Cart" />
           <NavigationProperty Name="ProductPrices" Relationship="Self.FK_ProductPrices_ToProducts" FromRole="Products" ToRole="ProductPrices" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Products_ToSubCategories" FromRole="Products" ToRole="SubCategories" />
           <NavigationProperty Name="ProductSpecifications" Relationship="Self.FK_ProductSpecifications_ToProducts" FromRole="Products" ToRole="ProductSpecifications" />
+          <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToProducts" FromRole="Products" ToRole="Wishlist" />
         </EntityType>
         <EntityType Name="ProductSpecification">
           <Key>
@@ -595,8 +679,35 @@
           <Property Name="Subcategory_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Subcategory_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category_Id" Type="Int32" />
+          <Property Name="Subcategory_Slug" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategories_ToCategories" FromRole="SubCategories" ToRole="Categories" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToSubCategories" FromRole="SubCategories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Address_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Zip_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsEnabled" Type="Boolean" />
+          <Property Name="Added_On" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserAddresses_ToAspNetUsers" FromRole="UserAddresses" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Id" Type="Int32" />
+          <Property Name="Added_At" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Wishlist_ToAspNetUsers" FromRole="Wishlist" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Wishlist_ToProducts" FromRole="Wishlist" ToRole="Products" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -646,6 +757,30 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ProductReviews">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAddresses_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="UserAddresses" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAddresses">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wishlist">
               <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -734,6 +869,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Wishlist_ToProducts">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -753,6 +900,8 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductSpecifications" EntityType="Self.ProductSpecification" />
           <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
+          <EntitySet Name="UserAddresses" EntityType="Self.UserAddress" />
+          <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -768,6 +917,14 @@
           <AssociationSet Name="FK_ProductReviews_ToAspNetUsers" Association="Self.FK_ProductReviews_ToAspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="ProductReviews" EntitySet="ProductReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAddresses_ToAspNetUsers" Association="Self.FK_UserAddresses_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserAddresses" EntitySet="UserAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_ToAspNetUsers" Association="Self.FK_Wishlist_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_ToBrand" Association="Self.FK_Products_ToBrand">
             <End Role="Brands" EntitySet="Brands" />
@@ -796,6 +953,10 @@
           <AssociationSet Name="FK_ProductSpecifications_ToProducts" Association="Self.FK_ProductSpecifications_ToProducts">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductSpecifications" EntitySet="ProductSpecifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_ToProducts" Association="Self.FK_Wishlist_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -848,7 +1009,6 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -866,7 +1026,9 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="ProfilePictureUrl" ColumnName="ProfilePictureUrl" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Profile_Picture" ColumnName="Profile_Picture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -898,6 +1060,7 @@
                 <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
                 <ScalarProperty Name="Category_Description" ColumnName="Category_Description" />
                 <ScalarProperty Name="Category_Image" ColumnName="Category_Image" />
+                <ScalarProperty Name="Category_Slug" ColumnName="Category_Slug" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -956,6 +1119,7 @@
                 <ScalarProperty Name="Original_Price" ColumnName="Original_Price" />
                 <ScalarProperty Name="Average_Rating" ColumnName="Average_Rating" />
                 <ScalarProperty Name="Total_Ratings" ColumnName="Total_Ratings" />
+                <ScalarProperty Name="Product_Slug" ColumnName="Product_Slug" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -978,6 +1142,32 @@
                 <ScalarProperty Name="Subcategory_Description" ColumnName="Subcategory_Description" />
                 <ScalarProperty Name="Subcategory_Image" ColumnName="Subcategory_Image" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Subcategory_Slug" ColumnName="Subcategory_Slug" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAddresses">
+            <EntityTypeMapping TypeName="Model.UserAddress">
+              <MappingFragment StoreEntitySet="UserAddresses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+                <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Zip_Code" ColumnName="Zip_Code" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="Added_On" ColumnName="Added_On" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wishlists">
+            <EntityTypeMapping TypeName="Model.Wishlist">
+              <MappingFragment StoreEntitySet="Wishlist">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Added_At" ColumnName="Added_At" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

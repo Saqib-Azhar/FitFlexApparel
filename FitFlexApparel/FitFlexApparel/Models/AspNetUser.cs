@@ -21,6 +21,8 @@ namespace FitFlexApparel.Models
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.Carts = new HashSet<Cart>();
             this.ProductReviews = new HashSet<ProductReview>();
+            this.UserAddresses = new HashSet<UserAddress>();
+            this.Wishlists = new HashSet<Wishlist>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
@@ -41,8 +43,9 @@ namespace FitFlexApparel.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string PostalCode { get; set; }
-        public string ProfilePicture { get; set; }
+        public string ProfilePictureUrl { get; set; }
         public string DisplayName { get; set; }
+        public byte[] Profile_Picture { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -52,6 +55,10 @@ namespace FitFlexApparel.Models
         public virtual ICollection<Cart> Carts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserAddress> UserAddresses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }

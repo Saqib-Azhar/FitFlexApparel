@@ -25,6 +25,7 @@ namespace FitFlexApparel.Models
         public string Subcategory_Description { get; set; }
         public string Subcategory_Image { get; set; }
         public Nullable<int> Category_Id { get; set; }
+        public string Subcategory_Slug { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
