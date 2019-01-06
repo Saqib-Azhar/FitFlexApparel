@@ -35,6 +35,8 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
 </head>
 
 <body>
@@ -46,7 +48,7 @@
                 <div class="pull-left">
                     <!-- Logo -->
                     <div class="header-logo">
-                        <a class="logo" href="#">
+                        <a class="logo" href="/Home/Index">
                             <img src="/Assets/img/logo.png" style="width:155px" alt="">
                         </a>
                     </div>
@@ -635,6 +637,9 @@
     <script src="/Assets/js/jquery.zoom.min.js"></script>
     <script src="/Assets/js/main.js"></script>
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

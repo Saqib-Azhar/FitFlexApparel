@@ -149,12 +149,21 @@ namespace FitFlexApparel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var db = new FitflexApparelEntities();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNo };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var registeredUser = db.AspNetUsers.Find(user.Id);
+                    registeredUser.Address1 = model.Address1;
+                    registeredUser.Address2 = model.Address2;
+                    registeredUser.City = model.City;
+                    registeredUser.Country = model.Country;
+                    registeredUser.DisplayName = model.Name;
+                    registeredUser.PostalCode = model.PostalCode;
+                    db.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

@@ -65,9 +65,33 @@ namespace FitFlexApparel.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Phone]
+        [Display(Name = "Phone No")]
+        public string PhoneNo { get; set; }
+        
+        [Display(Name = "Address Line 1")]
+        public string Address1 { get; set; }
+        
+        [Display(Name = "Address Line 2")]
+        public string Address2 { get; set; }
+        
+        [Display(Name = "City")]
+        public string City { get; set; }
+        
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+        
+        [Display(Name = "Postal Code")]
+        public string PostalCode { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
