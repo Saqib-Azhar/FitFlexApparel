@@ -36,6 +36,7 @@
         <AssociationConnector Association="Model.FK_ProductSpecifications_ToProducts" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Wishlist_ToProducts" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Blog" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

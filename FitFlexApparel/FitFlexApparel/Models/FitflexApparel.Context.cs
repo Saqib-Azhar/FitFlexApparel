@@ -41,5 +41,6 @@ namespace FitFlexApparel.Models
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<UserAddress> UserAddresses { get; set; }
         public virtual DbSet<Wishlist> Wishlists { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
     }
 }

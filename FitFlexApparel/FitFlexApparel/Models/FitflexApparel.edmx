@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -73,6 +73,19 @@
           <Property Name="ProfilePictureUrl" Type="nvarchar(max)" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
           <Property Name="Profile_Picture" Type="image" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Blog_Name" Type="nvarchar(max)" />
+          <Property Name="Written_On" Type="datetime" />
+          <Property Name="Edited_On" Type="datetime" />
+          <Property Name="IsAvailable" Type="bit" />
+          <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
+          <Property Name="Blogger_Name" Type="nvarchar(max)" />
+          <Property Name="Blog" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Brands">
           <Key>
@@ -409,6 +422,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -485,8 +499,7 @@
             <End Role="Wishlist" EntitySet="Wishlist" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -962,7 +975,21 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Blogs" EntityType="Model.Blog" />
         </EntityContainer>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Blog_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Written_On" Type="DateTime" Precision="3" />
+          <Property Name="Edited_On" Type="DateTime" Precision="3" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Blogger_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Blog1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1179,6 +1206,20 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="Model.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="Blog1" ColumnName="Blog" />
+                <ScalarProperty Name="Blogger_Name" ColumnName="Blogger_Name" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Edited_On" ColumnName="Edited_On" />
+                <ScalarProperty Name="Written_On" ColumnName="Written_On" />
+                <ScalarProperty Name="Blog_Name" ColumnName="Blog_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
