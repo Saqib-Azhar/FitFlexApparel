@@ -22,7 +22,6 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
 }
 
-<h2><#= ViewName#></h2>
 
 <#
 } else {
@@ -59,9 +58,11 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
             continue;
         }
 #>
-		<div class="col-md-6">
+		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
-				@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+				<b>
+					@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+				</b>
 			</div>
 
 			<div class="col-md-12">
@@ -80,12 +81,12 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 string pkName = GetPrimaryKeyName();
 if (pkName != null) {
 #>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.<#= pkName #> }, htmlAttributes: new { @class = "btn btn-sm btn-success" }) 
+    @Html.ActionLink("Edit", "Edit", new { id = Model.<#= pkName #> }, htmlAttributes: new { @class = "btn btn-success" }) 
     @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
 <#
 } else {
 #>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }, htmlAttributes: new { @class = "btn btn-sm btn-success" }) 
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }, htmlAttributes: new { @class = "btn btn-success" }) 
     @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
 <#
 }

@@ -22,7 +22,7 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
 }
 
-<h2><#= ViewName#></h2>
+<h2><#= ViewDataTypeShortName #></h2>
 
 <#
 } else {
@@ -47,7 +47,7 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 <p>
     @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
 </p>
-<table class="table">
+<table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
     <tr>
 <#
 IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;

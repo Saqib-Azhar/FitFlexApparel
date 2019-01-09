@@ -22,7 +22,6 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
 }
 
-<h2><#= ViewDataTypeShortName #></h2>
 
 <#
 } else {
@@ -60,9 +59,11 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
             continue;
         }
 #>
-		<div class="col-md-6">
+		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
-				@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+				<b>
+					@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+				</b>
 			</div>
 
 			<div class="col-md-12">
@@ -80,7 +81,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color" style="margin:15px!important">
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
             @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
         </div>
     }

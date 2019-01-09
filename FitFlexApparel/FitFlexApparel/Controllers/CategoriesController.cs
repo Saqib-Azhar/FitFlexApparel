@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitFlexApparel.Models;
-using System.IO;
 
 namespace FitFlexApparel.Controllers
 {
@@ -18,28 +17,55 @@ namespace FitFlexApparel.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Categories.Where(s => s.IsDeleted != true).ToList());
-        }
+			try{
+				return View(db.Categories.Where(s => s.IsDeleted != true).ToList());
+			}
+			catch(Exception ex)
+			{
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+				return RedirectToAction("Error","Home");
+			}
+		}
 
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
+			try
+			{
+				if (id == null)
+				{
+					return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+				}
+				Category category = db.Categories.Find(id);
+				if (category == null)
+				{
+					return HttpNotFound();
+				}
+				return View(category);
+			
+			}
+			catch(Exception ex)
+			{
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+				return RedirectToAction("Error","Home");
+			}
         }
 
         // GET: Categories/Create
         public ActionResult Create()
         {
-            return View();
+			try{
+				return View();
+				
+			}
+			catch(Exception ex)
+			{
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+				return RedirectToAction("Error","Home");
+			}
         }
 
         // POST: Categories/Create
@@ -47,71 +73,127 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Category_Name,Category_Description,Category_Image,Category_Slug")] Category category, HttpPostedFileBase Category_Image)
+        public ActionResult Create([Bind(Include = "Id,Category_Name,Category_Description,Category_Image,Category_Slug,IsDeleted")] Category category)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    if (Category_Image != null && Category_Image.ContentLength > 0)
-                    {
-                        var fileName = Path.GetFileName(Category_Image.FileName);
-                        var path = Path.Combine(Server.MapPath("~/UploadedImages/"), fileName);
-                        Category_Image.SaveAs(path);
-                        category.Category_Image = fileName;
-                    }
-                    category.Category_Slug = category.Category_Name.Trim().Replace(' ', '-').Replace("\'", "");
-                    db.Categories.Add(category);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            catch(Exception ex)
-            {
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					db.Categories.Add(category);
+					db.SaveChanges();
+					return RedirectToAction("Index");
+				}
+
+				return View(category);
+				
+			}
+			catch(Exception ex)
+			{
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-            }
-            return View(category);
-
+				return RedirectToAction("Error","Home");
+			}
         }
 
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
+			try
+			{
+				if (id == null)
+				{
+					return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+				}
+				Category category = db.Categories.Find(id);
+				if (category == null)
+				{
+					return HttpNotFound();
+				}
+				return View(category);
+				
+			}
+			catch(Exception ex)
+			{
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+				return RedirectToAction("Error","Home");
+			}
+		}
 
         // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Category_Name,Category_Description,Category_Image,Category_Slug")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,Category_Name,Category_Description,Category_Image,Category_Slug,IsDeleted")] Category category)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(category);
+			try{
+				if (ModelState.IsValid)
+				{
+					db.Entry(category).State = EntityState.Modified;
+					db.SaveChanges();
+					return RedirectToAction("Index");
+				}
+				return View(category);
+			}
+			catch(Exception ex)
+			{
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+				return RedirectToAction("Error","Home");
+			}
         }
 
+        // GET: Categories/Delete/5
+        public ActionResult Delete(int? id)
+        {
+			try
+			{
+				if (id == null)
+				{
+					return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+				}
+				Category category = db.Categories.Find(id);
+				if (category == null)
+				{
+					return HttpNotFound();
+				}
+				return View(category);
+			}
+			catch(Exception ex)
+			{
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+				return RedirectToAction("Error","Home");
+			}
+        }
 
+        // POST: Categories/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+			try
+			{
+				Category category = db.Categories.Find(id);
+				db.Categories.Remove(category);
+				db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+			catch(Exception ex)
+			{
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+				return RedirectToAction("Error","Home");
+			}
+        }
+
+		
         public ActionResult SoftDelete(int id)
         {
             try
             {
-                Category category = db.Categories.Find(id);
+				Category category = db.Categories.Find(id);
                 category.IsDeleted = true;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -124,33 +206,6 @@ namespace FitFlexApparel.Controllers
             }
         }
 
-
-
-        // GET: Categories/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-        
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
