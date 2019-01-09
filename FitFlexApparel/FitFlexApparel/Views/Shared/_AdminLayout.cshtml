@@ -1,1427 +1,476 @@
-﻿<!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<!--<![endif]-->
-<!-- Mirrored from corpthemes.com/html/oneadmin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Jan 2019 21:33:43 GMT -->
+﻿@{ Layout = null;}
+<!doctype html>
+<html lang="en">
+
 <head>
-    <!-- Basic Page Needs -->
-    <meta charset="UTF-8">
-    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <title>One Admin</title>
+    <title>Fitflex Apparel</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <meta name="author" content="themsflat.com">
-
-    <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!-- Boostrap style -->
-    <!-- <link rel="stylesheet" type="text/css" href="/AdminAssets/stylesheets/bootstrap.min.css"> -->
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="/AdminAssets/stylesheets/bootstrap4-alpha3.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
 
-    <!-- FONTS-->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- Theme style -->
-    <link rel="stylesheet" type="text/css" href="/AdminAssets/stylesheets/style.css">
+    <link rel="stylesheet" href="/AdminAssets/css/portal.white.min.css">
+    <link href="/AdminAssets/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
-    <!-- Calendar -->
-    <link href='stylesheets/fullcalendar.min.css' rel='stylesheet' />
-    <link href='stylesheets/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-
-    <!-- Responsive -->
-    <link rel="stylesheet" type="text/css" href="/AdminAssets/stylesheets/responsive.css">
-
-    <!-- Favicon -->
-    <link href="/favicon.png" rel="shortcut icon">
+    <style>
+    </style>
 </head>
+
 <body>
 
-    <!-- Loader -->
-    <div class="loader">
-        <div class="inner one"></div>
-        <div class="inner two"></div>
-        <div class="inner three"></div>
-    </div>
+    <header class="navbar navbar-expand flex-column flex-md-row sw-navbar">
 
-    <header id="header" class="header fixed">
-        <div class="navbar-top">
-            <div class="curren-menu info-left">
-                <div class="logo">
-                    <a href="index-2.html" title="">
-                        <img src="/AdminAssets/images/logo.png" alt="One Admin">
-                    </a>
-                </div><!-- /.logo -->
-                <div class="top-button">
-                    <span></span>
-                </div><!-- /.top-button -->
-                <div class="box-search">
-                    <form action="#" method="get" accept-charset="utf-8">
-                        <button><img src="/AdminAssets/images/icon/search.png" alt=""></button>
-                        <input type="text" placeholder="Search Projects..." name="Search">
-                    </form>
-                </div><!-- /.box-search -->
-            </div><!-- /.curren-menu -->
-            <ul class="info-right">
-                <li class="setting">
-                    <a href="#" class="waves-effect waves-teal" title="">
-                        <img src="/AdminAssets/images/icon/setting.png" alt="">
-                    </a>
-                </li><!-- /.setting -->
-                <li class="notification">
-                    <a href="#" class="waves-effect waves-teal" title="">
-                        7
-                    </a>
-                </li><!-- /.notification -->
-                <li class="user">
-                    <div class="avatar">
-                        <img src="/AdminAssets/images/avatar/01.png" alt="">
-                    </div>
-                    <div class="info">
-                        <p class="name">STUARD ALEX</p>
-                        <p class="address">San Fransico, CA</p>
-                    </div>
-                    <div class="arrow-down">
-                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                        <i class="fa fa-angle-up" aria-hidden="true"></i>
-                    </div>
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li>
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/01.png" alt="">
-                                </div>
-                                <div class="profile">
-                                    <a href="#" title="">View Profile</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li>
-                                <a href="#" class="waves-effect" title="">My Account</a>
-                            </li>
-                            <li>
-                                <a href="#" class="waves-effect" title="">Setting</a>
-                            </li>
-                            <li>
-                                <a href="#" class="waves-effect" title="">Logout</a>
-                            </li>
-                        </ul>
-                    </div><!-- /.dropdown-menu -->
-                    <div class="clearfix"></div>
-                </li><!-- /.user -->
-                <li class="button-menu-right">
-                    <img src="/AdminAssets/images/icon/menu-right.png" alt="">
-                </li><!-- /.button-menu-right -->
-            </ul><!-- /.info-right -->
-            <div class="clearfix"></div>
-        </div>	<!-- /.navbar-top -->
-    </header><!-- /header <-->
+        <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Swastika I/O">
+            <img src="/Assets/img/logo.png" style="width:150px;" />
+        </a>
 
-    <section class="vertical-navigation left">
-        <div class="user-profile">
-            <div class="user-img">
-                <a href="#" title="">
-                    <div class="img">
-                        <img src="/AdminAssets/images/avatar/avatar-dashboard.png" alt="">
-                    </div>
-                    <div class="status-color blue heartbit style1"></div>
-                </a>
-            </div>
-            <ul class="user-options">
-                <li class="name"><a href="#" title="">STUARD ALEX</a></li>
-                <li class="options">ADMINISTRATOR</li>
+        <button type="button" id="sidebarCollapse" class="btn btn-link">
+            <span class="oi oi-menu"></span>
+        </button>
+
+
+        <div class="navbar-nav-scroll">
+
+            <ul class="navbar-nav sw-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" onclick="">Articles</a>
+                </li>
+                <span class="oi oi-chevron-right breadcrumb-item"></span>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/" onclick="">Create</a>
+                </li>
             </ul>
         </div>
-        <ul class="sidebar-nav">
-            <li class="dashboard waves-effect waves-teal active">
-                <div class="img-nav">
-                    <img src="/AdminAssets/images/icon/monitor.png" alt="">
+
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <li class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="sw-versions" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    Notification
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sw-versions">
+                    <a class="dropdown-item active" href="#">Lorem...</a>
+                    <a class="dropdown-item" href="#">Lorem...</a>
+                    <a class="dropdown-item" href="#">Lorem...</a>
+                    <a class="dropdown-item" href="#">Lorem...</a>
                 </div>
-                <span>DASHBOARD</span>
             </li>
-            <li class="message waves-effect waves-teal">
-                <div class="img-nav">
-                    <img src="/AdminAssets/images/icon/message.png" alt="">
-                    <span>3</span>
-                </div>
-                <span>MESSAGE</span>
+
+            <li class="nav-item">
+                <a class="nav-link p-2" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg class="navbar-nav-svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 499.36" focusable="false">
+                        <title>GitHub</title>
+                        <path d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"
+                              fill="currentColor" fill-rule="evenodd" />
+                    </svg>
+
+                </a>
             </li>
-            <li class="calendar waves-effect waves-teal">
-                <div class="img-nav">
-                    <img src="/AdminAssets/images/icon/calendar.png" alt="">
-                </div>
-                <span>CALENDAR</span>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="#" target="_blank" rel="noopener" aria-label="Twitter">
+                    <svg class="navbar-nav-svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 416.32" focusable="false">
+                        <title>Twitter</title>
+                        <path d="M160.83 416.32c193.2 0 298.92-160.22 298.92-298.92 0-4.51 0-9-.2-13.52A214 214 0 0 0 512 49.38a212.93 212.93 0 0 1-60.44 16.6 105.7 105.7 0 0 0 46.3-58.19 209 209 0 0 1-66.79 25.37 105.09 105.09 0 0 0-181.73 71.91 116.12 116.12 0 0 0 2.66 24c-87.28-4.3-164.73-46.3-216.56-109.82A105.48 105.48 0 0 0 68 159.6a106.27 106.27 0 0 1-47.53-13.11v1.43a105.28 105.28 0 0 0 84.21 103.06 105.67 105.67 0 0 1-47.33 1.84 105.06 105.06 0 0 0 98.14 72.94A210.72 210.72 0 0 1 25 370.84a202.17 202.17 0 0 1-25-1.43 298.85 298.85 0 0 0 160.83 46.92"
+                              fill="currentColor" />
+                    </svg>
+
+                </a>
             </li>
-            <li class="pages waves-effect waves-teal">
-                <div class="img-nav">
-                    <img src="/AdminAssets/images/icon/pages.png" alt="">
-                </div>
-                <span>PAGES</span>
-            </li>
-            <li class="apps waves-effect waves-teal">
-                <div class="img-nav">
-                    <img src="/AdminAssets/images/icon/apps.png" alt="">
-                </div>
-                <span>APPS</span>
-            </li>
-            <li class="setting waves-effect waves-teal">
-                <div class="img-nav">
-                    <img src="/AdminAssets/images/icon/setting-02.png" alt="">
-                </div>
-                <span>SETTING</span>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="#" target="_blank" rel="noopener" aria-label="Slack">
+                    <svg class="navbar-nav-svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" focusable="false">
+                        <title>Slack</title>
+                        <path fill="currentColor" d="M210.787 234.832l68.31-22.883 22.1 65.977-68.309 22.882z" />
+                        <path d="M490.54 185.6C437.7 9.59 361.6-31.34 185.6 21.46S-31.3 150.4 21.46 326.4 150.4 543.3 326.4 490.54 543.34 361.6 490.54 185.6zM401.7 299.8l-33.15 11.05 11.46 34.38c4.5 13.92-2.87 29.06-16.78 33.56-2.87.82-6.14 1.64-9 1.23a27.32 27.32 0 0 1-24.56-18l-11.46-34.38-68.36 22.92 11.46 34.38c4.5 13.92-2.87 29.06-16.78 33.56-2.87.82-6.14 1.64-9 1.23a27.32 27.32 0 0 1-24.56-18l-11.46-34.43-33.15 11.05c-2.87.82-6.14 1.64-9 1.23a27.32 27.32 0 0 1-24.56-18c-4.5-13.92 2.87-29.06 16.78-33.56l33.12-11.03-22.1-65.9-33.15 11.05c-2.87.82-6.14 1.64-9 1.23a27.32 27.32 0 0 1-24.56-18c-4.48-13.93 2.89-29.07 16.81-33.58l33.15-11.05-11.46-34.38c-4.5-13.92 2.87-29.06 16.78-33.56s29.06 2.87 33.56 16.78l11.46 34.38 68.36-22.92-11.46-34.38c-4.5-13.92 2.87-29.06 16.78-33.56s29.06 2.87 33.56 16.78l11.47 34.42 33.15-11.05c13.92-4.5 29.06 2.87 33.56 16.78s-2.87 29.06-16.78 33.56L329.7 194.6l22.1 65.9 33.15-11.05c13.92-4.5 29.06 2.87 33.56 16.78s-2.88 29.07-16.81 33.57z"
+                              fill="currentColor" />
+                    </svg>
+
+                </a>
             </li>
         </ul>
-    </section><!-- /.vertical-navigation -->
+        <img class="rounded-circle sw-avatar" alt="200x200" src="https://avatars1.githubusercontent.com/u/3785721?s=40&v=4" data-holder-rendered="true"
+             style="width: 36px; height: 36px;">
+    </header>
 
-    <main>
-        <section id="dashboard">
-            <div class="rows">
-                <div class="status-bar">
-                    <ul>
-                        <li class="progres">
-                            <div class="icon">
-                                <img src="/AdminAssets/images/icon/progress.png" alt="">
-                            </div>
-                            <div class="content">
-                                <div class="numb" data-from="0" data-to="38" data-speed="1000" data-waypoint-active="yes">38</div>
-                                <div class="text">
-                                    TASK PROGRESS
-                                </div>
-                            </div>
-                        </li><!-- /.progres -->
-                        <li class="progres">
-                            <div class="icon">
-                                <img src="/AdminAssets/images/icon/task.png" alt="">
-                            </div>
-                            <div class="content">
-                                <div class="numb" data-from="0" data-to="59" data-speed="1000" data-waypoint-active="yes">59</div>
-                                <div class="text">
-                                    TASK RESEARCH
-                                </div>
-                            </div>
-                        </li><!-- /.progres -->
-                        <li class="progres">
-                            <div class="icon">
-                                <img src="/AdminAssets/images/icon/tick.png" alt="">
-                            </div>
-                            <div class="content">
-                                <div class="numb" data-from="0" data-to="87" data-speed="1000" data-waypoint-active="yes">87</div>
-                                <div class="text">
-                                    TASK COMPLETED
-                                </div>
-                            </div>
-                        </li><!-- /.progres -->
-                        <li class="progres">
-                            <div class="icon">
-                                <img src="/AdminAssets/images/icon/chart.png" alt="">
-                            </div>
-                            <div class="content">
-                                <div class="numb" data-from="0" data-to="43" data-speed="1000" data-waypoint-active="yes">43</div>
-                                <div class="text">
-                                    ONGOING PROJECT
-                                </div>
-                            </div>
-                        </li><!-- /.progres -->
-                    </ul>
-                </div><!-- /.status-bar -->
-            </div><!-- /.rows -->
+    <!-- Page Content Holder -->
+    <div class="container-fluid wrapper">
+        <div class="row flex-xl-nowrap">
+            <!-- Sidebar Holder -->
+            <div id="sidebar" class="sw-sidebar">
+                <form class="sw-search d-flex align-items-center">
+                    <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+                    <button class="btn btn-link sw-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#sw-docs-nav"
+                            aria-controls="sw-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 30 30" width="30" height="30" focusable="false">
+                            <title>Menu</title>
+                            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22" />
+                        </svg>
 
-            <div class="rows">
-                <div class="box box-danger left">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>ANALYSIS</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content chart-doughnut">
-                        <div class="divider50"></div>
-                        <div class="chart" id="sales-chart" style="height: 250px; width: 280px; position: relative;"></div>
-                        <div class="legend style1">
-                            <ul class="legend-list">
-                                <li class="ux">
-                                    <span class="text">UX DESIGN</span>
-                                    <p>45 %</p>
-                                </li>
-                                <li class="ui">
-                                    <span class="text">UI DESIGN</span>
-                                    <p>35 %</p>
-                                </li>
-                                <li class="code">
-                                    <span class="text">CODE</span>
-                                    <p>20 %</p>
-                                </li>
-                            </ul><!-- /.legend-list -->
-                        </div><!-- /.legend style1 -->
-                    </div><!-- /.box-body -->
-                </div><!-- /.box box-danger -->
-                <div class="box box-statistics right">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>STATISTICS</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content style1">
-                        <ul class="chart-tab">
-                            <li class="waves-effect waves-teal">WEEK</li>
-                            <li class="waves-effect waves-teal">MONTH</li>
-                            <li class="active waves-effect waves-teal">YEAR</li>
-                        </ul>
-                        <div id="chartStatistics">
-                        </div><!-- /#chartStatistics -->
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-statistics -->
-                <div class="clearfix"></div>
-            </div><!-- /.rows -->
+                    </button>
+                </form>
 
-            <div class="rows">
-                <div class="box box-stackedColumn left">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>UX & UI ANALYSIS</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content style2">
-                        <div class="divider35"></div>
-                        <div id="chart-stackedColumn"></div>
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-stackedColumn -->
-                <div class="box box-spline right">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>POLAR CHART</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content">
-                        <div class="divider35"></div>
-                        <div id="chart-spline"></div>
-                        <div class="legend">
-                            <ul class="legend-list">
-                                <li class="ux">
-                                    <span class="dot"></span>
-                                    <span class="text">UX Design</span>
-                                </li>
-                                <li class="ui">
-                                    <span class="dot"></span>
-                                    <span class="text">UI Design</span>
-                                </li>
-                                <li class="code">
-                                    <span class="dot"></span>
-                                    <span class="text">Code</span>
-                                </li>
-                            </ul><!-- /.legend-list -->
-                        </div><!-- /.legend -->
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-spline -->
-                <div class="clearfix"></div>
-            </div><!-- /.rows -->
 
-            <div class="rows">
-                <div class="box box-map left">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>MAP DIAGRAM</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content">
-                        <div class="divider35"></div>
-                        <div id="chartdiv"></div>
-                        <div class="legend">
-                            <ul class="legend-list">
-                                <li class="ux">
-                                    <span class="dot"></span>
-                                    <span class="text">UX Design</span>
-                                </li>
-                                <li class="ui">
-                                    <span class="dot"></span>
-                                    <span class="text">UI Design</span>
-                                </li>
-                                <li class="code">
-                                    <span class="dot"></span>
-                                    <span class="text">Code</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-map -->
-                <div class="box box-bubble right">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>LINE SCATTER DIAGRAM</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content style2">
-                        <div class="divider22"></div>
-                        <div id="bubble-chart"></div>
-                        <div class="legend">
-                            <ul class="legend-list">
-                                <li class="ux">
-                                    <span class="dot"></span>
-                                    <span class="text">UX Design</span>
-                                </li>
-                                <li class="ui">
-                                    <span class="dot"></span>
-                                    <span class="text">UI Design</span>
-                                </li>
-                                <li class="code">
-                                    <span class="dot"></span>
-                                    <span class="text">Code</span>
-                                </li>
-                            </ul><!-- /.legend-list -->
-                        </div><!-- /.legend -->
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-bubble -->
-                <div class="clearfix"></div>
-            </div><!-- /.rows -->
-
-            <div class="rows">
-                <div class="box box-line left">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>LINE CHART</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content style2">
-                        <div class="divider50"></div>
-                        <div id="lineChart"></div>
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-line -->
-                <div class="box box-radar right">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>RADAR VALUE</h3>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content">
-                        <div class="divider22"></div>
-                        <canvas id="radarChart" height="150"></canvas>
-                        <div class="legend style2">
-                            <ul class="legend-list">
-                                <li class="ux">
-                                    <span class="dot"></span>
-                                    <span class="text">Last Month</span>
-                                </li>
-                                <li class="code">
-                                    <span class="dot"></span>
-                                    <span class="text">This Month</span>
-                                </li>
-                            </ul><!-- /.legend-list -->
-                        </div><!-- /.legend style2 -->
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-radar -->
-                <div class="clearfix"></div>
-            </div><!-- /.rows -->
-
-            <div class="rows">
-                <div class="box box-project left">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>PROJECT STATUS</h3>
-                            <span>56</span>
-                        </div>
-                        <div class="box-tools pull-right ">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content">
-                        <table class="">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>PROJECT</th>
-                                    <th>STATUS</th>
-                                    <th>PROGRESS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="developing">
-                                    <td>1024</td>
-                                    <td>User Research</td>
-                                    <td class="bg"><span data-percent="60" data-waypoint-active="yes">Developing</span></td>
-                                    <td>Ongoing</td>
-                                </tr>
-                                <tr class="design">
-                                    <td>ID</td>
-                                    <td>Wings Dashboard Design</td>
-                                    <td class="bg"><span data-percent="60" data-waypoint-active="yes">Design</span></td>
-                                    <td>Completed</td>
-                                </tr>
-                                <tr class="cancel">
-                                    <td>ID</td>
-                                    <td>iOS Apps for DXSource</td>
-                                    <td class="bg"><span data-percent="160" data-waypoint-active="yes">Canceled</span></td>
-                                    <td>Cenceled</td>
-                                </tr>
-                                <tr class="testing">
-                                    <td>ID</td>
-                                    <td>BMW Re-Design</td>
-                                    <td class="bg"><span data-percent="60" data-waypoint-active="yes">Testing</span></td>
-                                    <td>PROGRESS</td>
-                                </tr>
-                            </tbody>
-                        </table><!-- /.scroll -->
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-project -->
-                <div class="box box-inbox right">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <h3>INBOX</h3>
-                            <span>47</span>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <i class="zmdi zmdi-more-vert waves-effect waves-teal"></i>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Support</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect" title="">Message</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.box-tools pull-right -->
-                        <div class="clearfix"></div>
-                    </div><!-- /.box-header -->
-                    <div class="box-content">
-                        <ul class="inbox-list">
-                            <li class="waves-effect">
-                                <a href="#" title="">
-                                    <div class="left">
-                                        <img src="/AdminAssets/images/avatar/inbox-01.png" alt="">
-                                        <div class="info">
-                                            <p class="name">John Alex</p>
-                                            <p>Hey! How are you?</p>
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        12:20 PM
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li class="waves-effect">
-                                <a href="#" title="">
-                                    <div class="left">
-                                        <img src="/AdminAssets/images/avatar/inbox-02.png" alt="">
-                                        <div class="info">
-                                            <p class="name">John Alex</p>
-                                            <p>Hey! How are you?</p>
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        12:20 PM
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li class="waves-effect">
-                                <a href="#" title="">
-                                    <div class="left">
-                                        <img src="/AdminAssets/images/avatar/inbox-03.png" alt="">
-                                        <div class="info">
-                                            <p class="name">John Alex</p>
-                                            <p>Hey! How are you?</p>
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        12:20 PM
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                            <li class="waves-effect">
-                                <a href="#" title="">
-                                    <div class="left">
-                                        <img src="/AdminAssets/images/avatar/inbox-04.png" alt="">
-                                        <div class="info">
-                                            <p class="name">John Alex</p>
-                                            <p>Hey! How are you?</p>
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        12:20 PM
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </a>
-                            </li>
-                        </ul><!-- /.inbox-list -->
-                    </div><!-- /.box-content -->
-                </div><!-- /.box box-inbox -->
-                <div class="clearfix"></div>
-            </div><!-- /.rows -->
-        </section><!-- /#dashboard -->
-
-        <section id="message">
-            <div class="box box-message">
-                <div class="box-header">
-                    <div class="header-title">
-                        <img src="/AdminAssets/images/icon/download.png" alt="">
-                        <span>INBOX</span>
-                    </div>
-                </div><!-- /.box-header -->
-                <div class="box-content">
-                    <ul class="message-list scroll">
-                        <li class="waves-effect waves-teal">
-                            <div class="left">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/message-01.png" alt="">
-                                    <div class="status-color blue style2 heartbit"></div>
-                                </div>
-                                <div class="content">
-                                    <div class="username">
-                                        <div class="name">
-                                            Jonathan Alex
-                                        </div>
-                                    </div>
-                                    <div class="text">
-                                        <p>Hi, please loock my last design</p>
-                                        <p>I hope you like it.</p>
-                                    </div>
-                                </div>
-                            </div><!-- /.left -->
-                            <div class="right">
-                                <div class="date">
-                                    Today, 10:15 PM
-                                </div>
-                            </div><!-- /.right -->
-                            <div class="clearfix"></div>
-                        </li><!-- /li.waves-effect -->
-                        <li class="waves-effect waves-teal">
-                            <div class="left">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/message-02.png" alt="">
-                                    <div class="status-color blue style2 heartbit"></div>
-                                </div>
-                                <div class="content">
-                                    <div class="username">
-                                        <div class="name">
-                                            Ricky Martin
-                                        </div>
-                                    </div>
-                                    <div class="text">
-                                        <p>Hi, please loock my last design</p>
-                                        <p>I hope you like it.</p>
-                                    </div>
-                                </div>
-                            </div><!-- /.left -->
-                            <div class="right">
-                                <div class="date">
-                                    Today, 10:15 PM
-                                </div>
-                            </div><!-- /.right -->
-                            <div class="clearfix"></div>
-                        </li><!-- /li.waves-effect -->
-                        <li class="waves-effect waves-teal">
-                            <div class="left">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/message-03.png" alt="">
-                                    <div class="status-color blue style2 heartbit"></div>
-                                </div>
-                                <div class="content">
-                                    <div class="username">
-                                        <div class="name">
-                                            Stuard James
-                                        </div>
-                                        <span>2</span>
-                                    </div>
-                                    <div class="text">
-                                        <p>Hi, please loock my last design</p>
-                                        <p>I hope you like it.</p>
-                                    </div>
-                                </div>
-                            </div><!-- /.left -->
-                            <div class="right">
-                                <div class="date">
-                                    June 15
-                                </div>
-                            </div><!-- /.right -->
-                            <div class="clearfix"></div>
-                        </li><!-- /li.waves-effect -->
-                        <li class="waves-effect waves-teal active">
-                            <div class="left">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/message-04.png" alt="">
-                                    <div class="status-color blue style2 heartbit"></div>
-                                </div>
-                                <div class="content">
-                                    <div class="username">
-                                        <div class="name">
-                                            John Alex
-                                        </div>
-                                    </div>
-                                    <div class="text">
-                                        <p>Hi, please loock my last design</p>
-                                        <p>I hope you like it.</p>
-                                    </div>
-                                </div>
-                            </div><!-- /.left -->
-                            <div class="right">
-                                <div class="date">
-                                    June 12
-                                </div>
-                            </div><!-- /.right -->
-                            <div class="clearfix"></div>
-                        </li><!-- /li.waves-effect -->
-                        <li class="waves-effect waves-teal">
-                            <div class="left">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/message-05.png" alt="">
-                                    <div class="status-color blue style2 heartbit"></div>
-                                </div>
-                                <div class="content">
-                                    <div class="username">
-                                        <div class="name">
-                                            Robart K
-                                        </div>
-                                    </div>
-                                    <div class="text">
-                                        <p>Hi, please loock my last design</p>
-                                        <p>I hope you like it.</p>
-                                    </div>
-                                </div>
-                            </div><!-- /.left -->
-                            <div class="right">
-                                <div class="date">
-                                    June 11
-                                </div>
-                            </div><!-- /.right -->
-                            <div class="clearfix"></div>
-                        </li><!-- /li.waves-effect -->
-                        <li class="waves-effect waves-teal">
-                            <div class="left">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/message-05.png" alt="">
-                                    <div class="status-color blue style2 heartbit"></div>
-                                </div>
-                                <div class="content">
-                                    <div class="username">
-                                        <div class="name">
-                                            Robart K
-                                        </div>
-                                    </div>
-                                    <div class="text">
-                                        <p>Hi, please loock my last design</p>
-                                        <p>I hope you like it.</p>
-                                    </div>
-                                </div>
-                            </div><!-- /.left -->
-                            <div class="right">
-                                <div class="date">
-                                    June 11
-                                </div>
-                            </div><!-- /.right -->
-                            <div class="clearfix"></div>
-                        </li><!-- /li.waves-effect -->
-                    </ul><!-- /.message-list scroll -->
-                    <div class="new-message">
-                        <a href="#" class="waves-effect" title="">Compose New</a>
-                    </div><!-- /.new-message -->
-                </div><!-- /.box-content -->
-            </div><!-- /.box box-message -->
-            <div class="message-info right">
-                <div class="message-header">
-                    <div class="move-message">
-                        <a href="#" title="">
-                            <span><img src="/AdminAssets/images/icon/bin.png" alt=""></span>
-                            MOVE TO TRASH
+                <ul class="collapse sw-links" id="sw-docs-nav" data-children=".sw-toc-item">
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" href="#">
+                            <span class="oi oi-dashboard"></span>
+                            <span class="text">Dashboard</span>
                         </a>
-                    </div><!-- /.move-message -->
-                    <div class="box-info-messager">
-                        <div class="message-pic">
-                            <img src="/AdminAssets/images/avatar/message-06.png" alt="">
-                            <div class="status-color purple"></div>
-                        </div>
-                        <div class="content">
-                            <div class="username">
-                                Ricky Martin
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseArticleSubMenus" role="button" aria-expanded="false"
+                           aria-controls="collapseArticleSubMenus">
+                            <span class="oi oi-document"></span>
+                            <span class="text">Blogs</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="location.href = '/Blogs/Create'" type="button" class="btn btn-light">
+                                    <span class="oi oi-plus"></span>
+                                </button>
+                                <button onclick="location.href = '/Blogs/Index'" type="button" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
                             </div>
-                            <div class="text">
-                                <p>Hi, please loock my last design</p>
-                                <p>I hope you like it.</p>
-                            </div>
-                        </div>
-                    </div><!-- /.box-info-messager -->
-                </div><!-- /.message-header -->
-                <div class="message-box scroll">
-                    <div class="message-in">
-                        <div class="message-pic">
-                            <img src="/AdminAssets/images/avatar/message-06.png" alt="">
-                            <div class="status-color purple"></div>
-                        </div>
-                        <div class="message-body">
-                            <div class="message-text">
-                                <p>Hi, John</p>
-                                <p>You have excellent dashboard design, I wanted to offer to cooprate. I can promote your design.</p>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div><!-- /.message-in -->
-                    <div class="clearfix"></div>
-                    <div class="message-out">
-                        <div class="message-pic">
-                            <img src="/AdminAssets/images/avatar/message-07.png" alt="">
-                            <div class="status-color purple"></div>
-                        </div>
-                        <div class="message-body">
-                            <div class="message-text">
-                                <p>Hi, Martin</p>
-                                <p>You have excellent dashboard design, I wanted to offer to cooprate. I can promote your design. to offer to cooprate</p>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div><!-- /.message-out -->
-                    <div class="clearfix"></div>
-                    <div class="message-in">
-                        <div class="message-pic">
-                            <img src="/AdminAssets/images/avatar/message-06.png" alt="">
-                            <div class="status-color purple"></div>
-                        </div>
-                        <div class="message-body">
-                            <div class="message-text">
-                                <p>Hi, John</p>
-                                <p>You have excellent dashboard design, I wanted to offer to cooprate. I can promote your design.</p>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div><!-- /.message-in -->
-                    <div class="clearfix"></div>
-                    <div class="message-out">
-                        <div class="message-pic">
-                            <img src="/AdminAssets/images/avatar/message-07.png" alt="">
-                            <div class="status-color purple"></div>
-                        </div>
-                        <div class="message-body">
-                            <div class="message-text">
-                                <p>Hi, Martin</p>
-                                <p>Here is some of my best work example for ux & ui design works. Reply me with your openion about my work</p>
-                            </div>
-                            <div class="message-image">
-                                <ul>
-                                    <li>
-                                        <img src="/AdminAssets/images/message/01.png" alt="">
-                                    </li>
-                                    <li>
-                                        <img src="/AdminAssets/images/message/02.png" alt="">
-                                    </li>
-                                    <li>
-                                        <img src="/AdminAssets/images/message/03.png" alt="">
-                                    </li>
-                                    <li>
-                                        <img src="/AdminAssets/images/message/04.png" alt="">
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div><!-- /.message-out -->
-                    <div class="clearfix"></div>
-                    <div class="message-in">
-                        <div class="message-pic">
-                            <img src="/AdminAssets/images/avatar/message-06.png" alt="">
-                            <div class="status-color purple"></div>
-                        </div>
-                        <div class="message-body">
-                            <div class="message-text">
-                                <p>Hi, John</p>
-                                <p>You have excellent dashboard design, I wanted to offer to cooprate. I can promote your design.</p>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div><!-- /.message-in -->
-                    <div class="clearfix"></div>
-                    <div class="message-out">
-                        <div class="message-pic">
-                            <img src="/AdminAssets/images/avatar/message-07.png" alt="">
-                            <div class="status-color purple"></div>
-                        </div>
-                        <div class="message-body">
-                            <div class="message-text">
-                                <p>Hi, Martin</p>
-                                <p>Here is some of my best work example for ux & ui design works. Reply me with your openion about my work</p>
-                            </div>
-                            <div class="message-image">
-                                <ul>
-                                    <li>
-                                        <img src="/AdminAssets/images/message/01.png" alt="">
-                                    </li>
-                                    <li>
-                                        <img src="/AdminAssets/images/message/04.png" alt="">
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div><!-- /.message-out -->
-                </div>
-                <div class="form-chat">
-                    <form action="#" method="get" accept-charset="utf-8">
-                        <div class="message-form-chat">
-                            <span class="pin">
-                                <a href="#" title="">
-                                    <img src="/AdminAssets/images/icon/pin.png" alt="">
-                                </a>
-                            </span><!-- /.pin -->
-                            <span class="message-text">
-                                <textarea name="message" placeholder="Type your message..." required="required"></textarea>
-                            </span><!-- /.message-text -->
-                            <span class="camera">
-                                <a href="#" title="">
-                                    <img src="/AdminAssets/images/icon/camera.png" alt="">
-                                </a>
-                            </span><!-- /.camera -->
-                            <span class="icon-message">
-                                <a href="#" title="">
-                                    <img src="/AdminAssets/images/icon/icon-message.png" alt="">
-                                </a>
-                            </span><!-- /.icon-right -->
-                            <span class="btn-send">
-                                <button class="waves-effect" type="submit">Send</button>
-                            </span><!-- /.btn-send -->
-                            <div class="icon-mobile">
-                                <ul>
-                                    <li>
-                                        <a href="#" title=""><img src="/AdminAssets/images/icon/pin.png" alt=""></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title=""><img src="/AdminAssets/images/icon/camera.png" alt=""></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title=""><img src="/AdminAssets/images/icon/icon-message.png" alt=""></a>
-                                    </li>
-                                </ul>
-                            </div><!-- /.icon-right -->
-                        </div><!-- /.message-form-chat -->
-                        <div class="clearfix"></div>
-                    </form><!-- /form -->
-                </div>
-            </div><!-- /.message-info -->
-            <div class="clearfix"></div>
-        </section><!-- /#message -->
 
-        <section id="calendar">
-            <div class="breadcrumbs">
-                <ul>
-                    <li><a href="index-2.html" title="">Home</a></li>
-                    <li>- Calendar</li>
+                        </a>
+                        <ul id="collapseArticleSubMenus" class="collapse list-unstyled" role="tabpanel">
+                            <li class="active sw-sidenav-active">
+                                <a href="/Blogs/Create">
+                                    <span class="oi oi-plus"></span>
+                                    <span class="text">New Blog</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Blogs/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">All Blogs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Blogs/Drafts">
+                                    <span class="oi oi-clipboard"></span>
+                                    <span class="text">Drafts</span>
+                                </a>
+                            </li>
+
+                            @*<li class="hide-on-sb-inactive">
+                                <a href="#">
+                                    <span class="oi oi-copywriting"></span>
+                                    <span class="text">Article...</span>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-plus"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-list"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-pencil"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="hide-on-sb-inactive">
+                                <a href="#">
+                                    <span class="oi oi-copywriting"></span>
+                                    <span class="text">Article...</span>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-plus"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-list"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-pencil"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="hide-on-sb-inactive">
+                                <a href="#">
+                                    <span class="oi oi-copywriting"></span>
+                                    <span class="text">Article...</span>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-plus"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-list"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-pencil"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="hide-on-sb-inactive">
+                                <a href="#">
+                                    <span class="oi oi-copywriting"></span>
+                                    <span class="text">Article...</span>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-plus"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-list"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link">
+                                            <span class="oi oi-pencil"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>*@
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapsePageSubMenus" role="button" aria-expanded="false"
+                           aria-controls="collapsePageSubMenus">
+                            <span class="oi oi-clipboard"></span>
+                            <span class="text">Products</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="location.href = '/Products/Create'" type="button" class="btn btn-light">
+                                    <span class="oi oi-plus"></span>
+                                </button>
+                                <button onclick="location.href = '/Products/Index'" type="button" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapsePageSubMenus" class="collapse list-unstyled" role="tabpanel">
+                            <li class="active sw-sidenav-active">
+                                <a href="/Products/Create">
+                                    <span class="oi oi-plus"></span>
+                                    <span class="text">New Product</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Products/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">All Products</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseModuleSubMenus" aria-expanded="false"
+                           aria-controls="collapseModuleSubMenus">
+                            <span class="oi oi-envelope-closed"></span>
+                            <span class="text">Messages</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="location.href = '/CustomerContactRequests/SendEmail'" type="button" class="btn btn-light">
+                                    <span class="oi oi-plus"></span>
+                                </button>
+                                <button onclick="location.href = '/CustomerContactRequests/Index'" type="button" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapseModuleSubMenus" class="collapse list-unstyled">
+                            <li class="active sw-sidenav-active">
+                                <a href="/CustomerContactRequests/SendEmail">
+                                    <span class="oi oi-plus"></span>
+                                    <span class="text">New Message</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/CustomerContactRequests/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">All Messages</span>
+                                </a>
+                            </li>
+                            <li class="hide-on-sb-inactive">
+                                <a href="#">
+                                    <span class="oi oi-puzzle-piece"></span>
+                                    <span class="text">Unread Messages</span>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button type="button" onclick="window.location = '/CustomerContactRequests/Index?state=2'" class="btn btn-link">
+                                            <span class="oi oi-list"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="hide-on-sb-inactive">
+                                <a href="#">
+                                    <span class="oi oi-puzzle-piece"></span>
+                                    <span class="text">Read Messages</span>
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button type="button" onclick="window.location = '/CustomerContactRequests/Index?state=1'" class="btn btn-link">
+                                            <span class="oi oi-list"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseAppearanceSubMenus" aria-expanded="false"
+                           aria-controls="collapseAppearanceSubMenus">
+                            <span class="oi oi-project"></span>
+                            <span class="text">Brands</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="location.href = '/Brands/Create'" type="button" class="btn btn-light">
+                                    <span class="oi oi-plus"></span>
+                                </button>
+                                <button onclick="location.href = '/Brands/Index'" type="button" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapseAppearanceSubMenus" class="collapse list-unstyled">
+                            <li class="active sw-sidenav-active">
+                                <a href="/Brands/Create">
+                                    <span class="oi oi-plus"></span>
+                                    <span class="text">New Brand</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Brands/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">All Brands</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseFileSubMenus" aria-expanded="false"
+                           aria-controls="collapseFileSubMenus">
+                            <span class="oi oi-list-rich"></span>
+                            <span class="text">Categories</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="location.href = '/Categories/Create'" class="btn btn-light">
+                                    <span class="oi oi-plus"></span>
+                                </button>
+                                <button onclick="location.href = '/Categories/Index'" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapseFileSubMenus" class="collapse list-unstyled">
+                            <li class="active sw-sidenav-active">
+                                <a href="/Categories/Create">
+                                    <span class="oi oi-image"></span>
+                                    <span class="text">New Category</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Categories/Index">
+                                    <span class="oi oi-file"></span>
+                                    <span class="text">All Categories</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseSubCategorySubMenus" aria-expanded="false"
+                           aria-controls="collapseSubCategorySubMenus">
+                            <span class="oi oi-list"></span>
+                            <span class="text">Sub Categories</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="window.location = '/SubCategories/Create'" class="btn btn-light">
+                                    <span class="oi oi-plus"></span>
+                                </button>
+                                <button onclick="window.location = '/SubCategories/Index'" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapseSubCategorySubMenus" class="collapse list-unstyled">
+                            <li class="active sw-sidenav-active">
+                                <a href="/SubCategories/Create">
+                                    <span class="oi oi-plus"></span>
+                                    <span class="text">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/SubCategories/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseSettingSubMenus" aria-expanded="false"
+                           aria-controls="collapseSettingSubMenus">
+                            <span class="oi oi-comment-square"></span>
+                            <span class="text">Reviews</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="window.location = '/ProductReviews/Index'" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapseSettingSubMenus" class="collapse list-unstyled">
+                            <li>
+                                <a href="/ProductReviews/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">All Reviews</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/ProductReviews/Index?type=0">
+                                    <span class="oi oi-delete"></span>
+                                    <span class="text">Disabled Reviews</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseOrdersSubMenus" aria-expanded="false"
+                           aria-controls="collapseOrdersSubMenus">
+                            <span class="oi oi-spreadsheet"></span>
+                            <span class="text">Orders</span>
+                        </a>
+                        <ul id="collapseOrdersSubMenus" class="collapse list-unstyled">
+                            <li class="active sw-sidenav-active">
+                                <a href="#">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">Configurations</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="oi oi-globe"></span>
+                                    <span class="text">Cultures</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-            <div class="box calendar">
-                <div class="box-header">
-                    <h2 class="title float-left">November <span>2018</span></h2>
-                    <ul class="date float-right">
-                        <li class="active">MONTH</li>
-                        <li>YEAR</li>
-                    </ul>
-                </div>
-                <div id="box-calendar"></div>
-            </div>
-            <div class="box" id="external-events">
-                <div class="external-event bg-purple">
-                    <div class="event-title">
-                        <span>9</span> EVENT ONE
-                    </div>
-                    <div class="event-content">
-                        <div class="date">
-                            Tuesday, 9 November, 2018
-                        </div>
-                        <div class="time">
-                            9:00 AM  :  Corporate Meeting
+
+                <div class="container-fluid sw-content">
+                    <div class="col-md-12">
+                        <div class="card" style="margin-top:20px">
+                            <div class="card-body">
+                                @RenderBody()
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="external-event bg-aqua">
-                    <div class="event-title">
-                        <span>11</span> EVENT TWO
-                    </div>
-                    <div class="event-content">
-                        <div class="date">
-                            Saturday, 11 November, 2018
-                        </div>
-                        <div class="time">
-                            10:00 AM  :  Business Meeting
-                        </div>
-                    </div>
-                </div>
-                <div class="external-event bg-blue">
-                    <div class="event-title">
-                        <span>11</span> EVENT THREE
-                    </div>
-                    <div class="event-content">
-                        <div class="date">
-                            Wednesday, 15 November, 2018
-                        </div>
-                        <div class="time">
-                            9:00 AM  :  Corporate Meeting
-                        </div>
-                    </div>
-                </div>
-                <div class="external-event bg-pink">
-                    <div class="event-title">
-                        <span>17</span> EVENT FOUR
-                    </div>
-                    <div class="event-content">
-                        <div class="date">
-                            Friday, 17 November, 2018
-                        </div>
-                        <div class="time">
-                            11:00 AM  :  Project Meeting
-                        </div>
-                    </div>
-                </div>
-                <div class="external-event bg-orange">
-                    <div class="event-title">
-                        <span>25</span> EVENT FIVE
-                    </div>
-                    <div class="event-content">
-                        <div class="date">
-                            Saturday, 25 November, 2018
-                        </div>
-                        <div class="time">
-                            10:00 AM  :  Corporate Meeting
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="footer">
-                <div class="copyright">
-                    <p>2018 © All Right Researved by Imran Hossain</p>
-                </div>
-                <ul class="menu-ft">
-                    <li>
-                        <a href="#" title="">About</a>
-                    </li>
-                    <li>
-                        <a href="#" title="">Privacy</a>
-                    </li>
-                    <li>
-                        <a href="#" title="">T&C</a>
-                    </li>
-                    <li>
-                        <a href="#" title="">Purchase</a>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-        </section><!-- /#calendar -->
+        </div>
+    </div>
 
-    </main><!-- /main -->
 
-    <section class="member-status right">
-        <div class="sidebar-member">
-            <ul class="member-tab">
-                <li>
-                    <i class="fa fa-users" aria-hidden="true"></i>
-                </li>
-                <li>
-                    <i class="fa fa-bell" aria-hidden="true"></i>
-                </li>
-            </ul><!-- /.member-tab -->
-            <div class="content-tab">
-                <div class="scroll content">
-                    <ul class="member-list online">
-                        <li class="member-header">ONLINE</li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/02.png" alt="">
-                                    <div class="status-color green heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Robart Alex</p>
-                                    <p class="options">Writer, Editor</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/03.png" alt="">
-                                    <div class="status-color green heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Anthony Gomes</p>
-                                    <p class="options">Designer</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/04.png" alt="">
-                                    <div class="status-color green heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Robarto Thuan</p>
-                                    <p class="options">UX Designer</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/05.png" alt="">
-                                    <div class="status-color pink heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Mogen Polshin</p>
-                                    <p class="options">UI Designer</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/06.png" alt="">
-                                    <div class="status-color green heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Mogen Pallak</p>
-                                    <p class="options">Writer, Editor</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/07.png" alt="">
-                                    <div class="status-color blue style2 heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Shawon Rox</p>
-                                    <p class="options">Writer, Editor</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/08.png" alt="">
-                                    <div class="status-color green heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Jonathan Doe</p>
-                                    <p class="options">UX Engineer</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/09.png" alt="">
-                                    <div class="status-color green heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Alex Morgan</p>
-                                    <p class="options">Writer, Editor</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                    </ul><!-- /.member-list online -->
-                    <ul class="member-list offline">
-                        <li class="member-header">OFFLINE</li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/10.png" alt="">
-                                    <div class="status-color grey heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Robart Alex</p>
-                                    <p class="options">Writer, Editor</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/11.png" alt="">
-                                    <div class="status-color grey heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Anthony Gomes</p>
-                                    <p class="options">Designer</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/12.png" alt="">
-                                    <div class="status-color grey heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Robarto Thuan</p>
-                                    <p class="options">UX Designer</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <div class="avatar">
-                                    <img src="/AdminAssets/images/avatar/13.png" alt="">
-                                    <div class="status-color grey heartbit"></div>
-                                </div>
-                                <div class="info-user">
-                                    <p class="name">Mogen Polshin</p>
-                                    <p class="options">UI Designer</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                    </ul><!-- /.member-list offline -->
-                </div><!-- /.content scroll -->
-                <div class="content scroll">
-                    <ul class="notify">
-                        <li>
-                            <div class="avatar">
-                                <img src="/AdminAssets/images/avatar/02.png" alt="">
-                            </div>
-                            <div class="notify-content">
-                                Robart Alex has a news post.
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="avatar">
-                                <img src="/AdminAssets/images/avatar/03.png" alt="">
-                            </div>
-                            <div class="notify-content">
-                                Anthony Gomes has a news post.
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="avatar">
-                                <img src="/AdminAssets/images/avatar/04.png" alt="">
-                            </div>
-                            <div class="notify-content">
-                                Robarto Thuan has comment post <a href="#" title="">pages</a>.
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div class="avatar">
-                                <img src="/AdminAssets/images/avatar/09.png" alt="">
-                            </div>
-                            <div class="notify-content">
-                                Alex Morgan liked your new image.
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                    </ul>
-                </div><!-- /.content scroll -->
-            </div><!-- /.cotnent-tab -->
-        </div><!-- /.sidebar-member -->
-    </section><!-- /.member-status -->
-    <!-- jQuery 3 -->
-    <script src="/AdminAssets/javascript/jquery.min.js"></script>
 
-    <!-- Bootstrap 4 -->
-    <script src="/AdminAssets/javascript/tether.min.js"></script>
-    <script src="/AdminAssets/javascript/bootstrap4-alpha3.min.js"></script>
-
-    <!-- Map chart  -->
-    <script src="/AdminAssets/javascript/ammap.js"></script>
-    <script src="/AdminAssets/javascript/worldLow.js"></script>
-
-    <!-- Morris.js charts -->
-    <script src="/AdminAssets/javascript/raphael.min.js"></script>
-    <script src="/AdminAssets/javascript/morris.min.js"></script>
-
-    <!-- Chart -->
-    <script src="/AdminAssets/javascript/Chart.min.js"></script>
-
-    <!-- Calendar -->
-    <script src="/AdminAssets/javascript/moment.min.js"></script>
-    <script src="/AdminAssets/javascript/jquery-ui.js"></script>
-    <script src="/AdminAssets/javascript/fullcalendar.min.js"></script>
-
-    <script type="text/javascript" src="/AdminAssets/javascript/jquery.mCustomScrollbar.js"></script>
-    <script src="/AdminAssets/javascript/smoothscroll.js"></script>
-    <script src="/AdminAssets/javascript/waypoints.min.js"></script>
-    <script src="/AdminAssets/javascript/jquery-countTo.js"></script>
-    <script src="/AdminAssets/javascript/waves.min.js"></script>
-    <script src="/AdminAssets/javascript/canvasjs.min.js"></script>
-
-    <script src="/AdminAssets/javascript/main.js"></script>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+    <script src="/AdminAssets/js/portal.white.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 
-<!-- Mirrored from corpthemes.com/html/oneadmin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Jan 2019 21:33:43 GMT -->
 </html>

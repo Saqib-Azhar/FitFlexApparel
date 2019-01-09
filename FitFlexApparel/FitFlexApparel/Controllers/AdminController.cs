@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitFlexApparel.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace FitFlexApparel.Controllers
 {
     public class AdminController : Controller
     {
+        private FitflexApparelEntities db = new FitflexApparelEntities();
         // GET: Admin
         public ActionResult Dashboard()
         {
@@ -16,7 +18,7 @@ namespace FitFlexApparel.Controllers
 
         public PartialViewResult _Users()
         {
-            return PartialView();
+            return PartialView("../AspNetUsers/Index", db.AspNetUsers.ToList());
         }
 
         public PartialViewResult _Categories()
