@@ -40,6 +40,7 @@ namespace FitFlexApparel.Models
         public Nullable<double> Average_Rating { get; set; }
         public Nullable<int> Total_Ratings { get; set; }
         public string Product_Slug { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Brand Brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

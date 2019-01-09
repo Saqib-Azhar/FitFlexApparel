@@ -20,6 +20,7 @@ namespace FitFlexApparel.Models
         public Nullable<int> Max { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> Discount { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Product Product { get; set; }
     }

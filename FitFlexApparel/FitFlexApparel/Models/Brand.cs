@@ -24,6 +24,7 @@ namespace FitFlexApparel.Models
         public string Brand_Name { get; set; }
         public string Brand_Logo { get; set; }
         public string Brand_Description { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

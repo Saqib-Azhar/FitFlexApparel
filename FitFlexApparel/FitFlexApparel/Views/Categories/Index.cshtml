@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -35,15 +35,16 @@
             @Html.DisplayFor(modelItem => item.Category_Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category_Image)
+            <img src="/UploadedImages/@item.Category_Image" style="height:50px;width:70px" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Category_Slug)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style="width:65px" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
+            @Html.ActionLink("Disable", "SoftDelete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" })
         </td>
     </tr>
 }

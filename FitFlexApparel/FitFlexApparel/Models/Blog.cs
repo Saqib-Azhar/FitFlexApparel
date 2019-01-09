@@ -22,5 +22,6 @@ namespace FitFlexApparel.Models
         public string Created_By { get; set; }
         public string Blogger_Name { get; set; }
         public string Blog1 { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     }
 }

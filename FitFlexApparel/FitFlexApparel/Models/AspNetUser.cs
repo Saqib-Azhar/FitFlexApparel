@@ -46,6 +46,7 @@ namespace FitFlexApparel.Models
         public string ProfilePictureUrl { get; set; }
         public string DisplayName { get; set; }
         public byte[] Profile_Picture { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

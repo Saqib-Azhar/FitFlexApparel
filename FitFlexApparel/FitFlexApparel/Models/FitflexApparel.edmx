@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -73,6 +73,7 @@
           <Property Name="ProfilePictureUrl" Type="nvarchar(max)" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
           <Property Name="Profile_Picture" Type="image" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Blogs">
           <Key>
@@ -86,6 +87,7 @@
           <Property Name="Created_By" Type="nvarchar" MaxLength="128" />
           <Property Name="Blogger_Name" Type="nvarchar(max)" />
           <Property Name="Blog" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Brands">
           <Key>
@@ -95,6 +97,7 @@
           <Property Name="Brand_Name" Type="nvarchar(max)" />
           <Property Name="Brand_Logo" Type="nvarchar(max)" />
           <Property Name="Brand_Description" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -105,6 +108,7 @@
           <Property Name="Product_Id" Type="int" />
           <Property Name="Product_Specifications_Id" Type="int" />
           <Property Name="Quantity" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -115,6 +119,7 @@
           <Property Name="Category_Description" Type="nvarchar(max)" />
           <Property Name="Category_Image" Type="nvarchar(max)" />
           <Property Name="Category_Slug" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="CustomerContactRequests">
           <Key>
@@ -126,6 +131,7 @@
           <Property Name="Customer_Phone" Type="nvarchar(max)" />
           <Property Name="Message" Type="nvarchar(max)" />
           <Property Name="Created_At" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="ProductPrices">
           <Key>
@@ -137,6 +143,7 @@
           <Property Name="Max" Type="int" />
           <Property Name="Price" Type="float" />
           <Property Name="Discount" Type="float" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="ProductReviews">
           <Key>
@@ -148,6 +155,7 @@
           <Property Name="Review" Type="nvarchar(max)" />
           <Property Name="Rating" Type="int" />
           <Property Name="Created_At" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -170,6 +178,7 @@
           <Property Name="Average_Rating" Type="float" />
           <Property Name="Total_Ratings" Type="int" />
           <Property Name="Product_Slug" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="ProductSpecifications">
           <Key>
@@ -180,6 +189,7 @@
           <Property Name="Color" Type="nvarchar(max)" />
           <Property Name="Size" Type="nvarchar(max)" />
           <Property Name="Total_Items" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="SubCategories">
           <Key>
@@ -191,6 +201,7 @@
           <Property Name="Subcategory_Image" Type="nvarchar(max)" />
           <Property Name="Category_Id" Type="int" />
           <Property Name="Subcategory_Slug" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="UserAddresses">
           <Key>
@@ -203,8 +214,9 @@
           <Property Name="City" Type="nvarchar(max)" />
           <Property Name="Country" Type="nvarchar(max)" />
           <Property Name="Zip_Code" Type="nvarchar(max)" />
-          <Property Name="IsEnabled" Type="bit" />
+          <Property Name="Active_Status" Type="bit" />
           <Property Name="Added_On" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Wishlist">
           <Key>
@@ -499,7 +511,8 @@
             <End Role="Wishlist" EntitySet="Wishlist" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -566,6 +579,7 @@
           <Property Name="ProfilePictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Profile_Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToAspNetUsers" FromRole="AspNetUsers" ToRole="Cart" />
@@ -573,6 +587,20 @@
           <NavigationProperty Name="UserAddresses" Relationship="Self.FK_UserAddresses_ToAspNetUsers" FromRole="AspNetUsers" ToRole="UserAddresses" />
           <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToAspNetUsers" FromRole="AspNetUsers" ToRole="Wishlist" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Blog_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Written_On" Type="DateTime" Precision="3" />
+          <Property Name="Edited_On" Type="DateTime" Precision="3" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Blogger_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Blog1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -582,6 +610,7 @@
           <Property Name="Brand_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Brand_Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Brand_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToBrand" FromRole="Brands" ToRole="Products" />
         </EntityType>
         <EntityType Name="Cart">
@@ -593,6 +622,7 @@
           <Property Name="Product_Id" Type="Int32" />
           <Property Name="Product_Specifications_Id" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Cart_ToAspNetUsers" FromRole="Cart" ToRole="AspNetUsers" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Cart_ToProducts" FromRole="Cart" ToRole="Products" />
           <NavigationProperty Name="ProductSpecification" Relationship="Self.FK_Cart_ToProductSpecifications" FromRole="Cart" ToRole="ProductSpecifications" />
@@ -606,6 +636,7 @@
           <Property Name="Category_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category_Slug" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategories_ToCategories" FromRole="Categories" ToRole="SubCategories" />
         </EntityType>
         <EntityType Name="CustomerContactRequest">
@@ -618,6 +649,7 @@
           <Property Name="Customer_Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created_At" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="ProductPrice">
           <Key>
@@ -629,6 +661,7 @@
           <Property Name="Max" Type="Int32" />
           <Property Name="Price" Type="Double" />
           <Property Name="Discount" Type="Double" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductPrices_ToProducts" FromRole="ProductPrices" ToRole="Products" />
         </EntityType>
         <EntityType Name="ProductReview">
@@ -641,6 +674,7 @@
           <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Rating" Type="Int32" />
           <Property Name="Created_At" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_ProductReviews_ToAspNetUsers" FromRole="ProductReviews" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Product">
@@ -664,6 +698,7 @@
           <Property Name="Average_Rating" Type="Double" />
           <Property Name="Total_Ratings" Type="Int32" />
           <Property Name="Product_Slug" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Products_ToBrand" FromRole="Products" ToRole="Brands" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToProducts" FromRole="Products" ToRole="Cart" />
           <NavigationProperty Name="ProductPrices" Relationship="Self.FK_ProductPrices_ToProducts" FromRole="Products" ToRole="ProductPrices" />
@@ -680,6 +715,7 @@
           <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Total_Items" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToProductSpecifications" FromRole="ProductSpecifications" ToRole="Cart" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductSpecifications_ToProducts" FromRole="ProductSpecifications" ToRole="Products" />
         </EntityType>
@@ -693,6 +729,7 @@
           <Property Name="Subcategory_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category_Id" Type="Int32" />
           <Property Name="Subcategory_Slug" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategories_ToCategories" FromRole="SubCategories" ToRole="Categories" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToSubCategories" FromRole="SubCategories" ToRole="Products" />
         </EntityType>
@@ -707,8 +744,9 @@
           <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Zip_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsEnabled" Type="Boolean" />
+          <Property Name="Active_Status" Type="Boolean" />
           <Property Name="Added_On" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserAddresses_ToAspNetUsers" FromRole="UserAddresses" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Wishlist">
@@ -904,6 +942,7 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Blogs" EntityType="Self.Blog" />
           <EntitySet Name="Brands" EntityType="Self.Brand" />
           <EntitySet Name="Carts" EntityType="Self.Cart" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -975,21 +1014,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Blogs" EntityType="Model.Blog" />
         </EntityContainer>
-        <EntityType Name="Blog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Blog_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Written_On" Type="DateTime" Precision="3" />
-          <Property Name="Edited_On" Type="DateTime" Precision="3" />
-          <Property Name="IsAvailable" Type="Boolean" />
-          <Property Name="Created_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Blogger_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Blog1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1056,6 +1081,22 @@
                 <ScalarProperty Name="ProfilePictureUrl" ColumnName="ProfilePictureUrl" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Profile_Picture" ColumnName="Profile_Picture" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="Model.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Blog_Name" ColumnName="Blog_Name" />
+                <ScalarProperty Name="Written_On" ColumnName="Written_On" />
+                <ScalarProperty Name="Edited_On" ColumnName="Edited_On" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Blogger_Name" ColumnName="Blogger_Name" />
+                <ScalarProperty Name="Blog1" ColumnName="Blog" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1066,6 +1107,7 @@
                 <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
                 <ScalarProperty Name="Brand_Logo" ColumnName="Brand_Logo" />
                 <ScalarProperty Name="Brand_Description" ColumnName="Brand_Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1077,6 +1119,7 @@
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
                 <ScalarProperty Name="Product_Specifications_Id" ColumnName="Product_Specifications_Id" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1088,6 +1131,7 @@
                 <ScalarProperty Name="Category_Description" ColumnName="Category_Description" />
                 <ScalarProperty Name="Category_Image" ColumnName="Category_Image" />
                 <ScalarProperty Name="Category_Slug" ColumnName="Category_Slug" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1100,6 +1144,7 @@
                 <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1112,6 +1157,7 @@
                 <ScalarProperty Name="Max" ColumnName="Max" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1124,6 +1170,7 @@
                 <ScalarProperty Name="Review" ColumnName="Review" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1147,6 +1194,7 @@
                 <ScalarProperty Name="Average_Rating" ColumnName="Average_Rating" />
                 <ScalarProperty Name="Total_Ratings" ColumnName="Total_Ratings" />
                 <ScalarProperty Name="Product_Slug" ColumnName="Product_Slug" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1158,6 +1206,7 @@
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="Total_Items" ColumnName="Total_Items" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1170,6 +1219,7 @@
                 <ScalarProperty Name="Subcategory_Image" ColumnName="Subcategory_Image" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Subcategory_Slug" ColumnName="Subcategory_Slug" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1183,8 +1233,9 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Zip_Code" ColumnName="Zip_Code" />
-                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="Active_Status" ColumnName="Active_Status" />
                 <ScalarProperty Name="Added_On" ColumnName="Added_On" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1206,20 +1257,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Blogs">
-            <EntityTypeMapping TypeName="Model.Blog">
-              <MappingFragment StoreEntitySet="Blogs">
-                <ScalarProperty Name="Blog1" ColumnName="Blog" />
-                <ScalarProperty Name="Blogger_Name" ColumnName="Blogger_Name" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
-                <ScalarProperty Name="Edited_On" ColumnName="Edited_On" />
-                <ScalarProperty Name="Written_On" ColumnName="Written_On" />
-                <ScalarProperty Name="Blog_Name" ColumnName="Blog_Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,146 +1,162 @@
 ﻿@model FitFlexApparel.Models.Product
 
 @{
-    ViewBag.Title = "Details";
+    Layout = null;
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Image1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Image1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Image2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Image2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Image3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Image3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Image4)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Image4)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Image5)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Image5)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Overview)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Overview)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Stock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Stock)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Company_Profile)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Company_Profile)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Original_Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Original_Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Average_Rating)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Average_Rating)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Total_Ratings)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Total_Ratings)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Slug)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Slug)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Brand.Brand_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Brand.Brand_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SubCategory.Subcategory_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SubCategory.Subcategory_Name)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Image1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Image1)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Image2)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Image2)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Image3)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Image3)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Image4)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Image4)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Image5)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Image5)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Overview)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Overview)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Stock)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Stock)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Company_Profile)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Company_Profile)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Original_Price)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Original_Price)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Average_Rating)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Average_Rating)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Total_Ratings)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Total_Ratings)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Slug)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product_Slug)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsDeleted)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Brand.Brand_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Brand.Brand_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SubCategory.Subcategory_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SubCategory.Subcategory_Name)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

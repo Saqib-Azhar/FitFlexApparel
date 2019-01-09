@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitFlexApparel.Models;
+using System.IO;
 
 namespace FitFlexApparel.Controllers
 {
@@ -17,7 +18,7 @@ namespace FitFlexApparel.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(db.Categories.Where(s => s.IsDeleted != true).ToList());
         }
 
         // GET: Categories/Details/5
@@ -46,16 +47,32 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Category_Name,Category_Description,Category_Image,Category_Slug")] Category category)
+        public ActionResult Create([Bind(Include = "Id,Category_Name,Category_Description,Category_Image,Category_Slug")] Category category, HttpPostedFileBase Category_Image)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    if (Category_Image != null && Category_Image.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(Category_Image.FileName);
+                        var path = Path.Combine(Server.MapPath("~/UploadedImages/"), fileName);
+                        Category_Image.SaveAs(path);
+                        category.Category_Image = fileName;
+                    }
+                    category.Category_Slug = category.Category_Name.Trim().Replace(' ', '-').Replace("\'", "");
+                    db.Categories.Add(category);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch(Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }
             return View(category);
+
         }
 
         // GET: Categories/Edit/5
@@ -89,6 +106,26 @@ namespace FitFlexApparel.Controllers
             return View(category);
         }
 
+
+        public ActionResult SoftDelete(int id)
+        {
+            try
+            {
+                Category category = db.Categories.Find(id);
+                category.IsDeleted = true;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+
+
         // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -103,7 +140,7 @@ namespace FitFlexApparel.Controllers
             }
             return View(category);
         }
-
+        
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

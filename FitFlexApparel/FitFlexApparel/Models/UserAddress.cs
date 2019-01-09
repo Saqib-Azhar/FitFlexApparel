@@ -21,8 +21,9 @@ namespace FitFlexApparel.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string Zip_Code { get; set; }
-        public Nullable<bool> IsEnabled { get; set; }
+        public Nullable<bool> Active_Status { get; set; }
         public Nullable<System.DateTime> Added_On { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

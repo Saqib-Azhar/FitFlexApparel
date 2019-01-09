@@ -20,6 +20,7 @@ namespace FitFlexApparel.Models
         public string Review { get; set; }
         public Nullable<int> Rating { get; set; }
         public Nullable<System.DateTime> Created_At { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

@@ -20,5 +20,6 @@ namespace FitFlexApparel.Models
         public string Customer_Phone { get; set; }
         public string Message { get; set; }
         public Nullable<System.DateTime> Created_At { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     }
 }

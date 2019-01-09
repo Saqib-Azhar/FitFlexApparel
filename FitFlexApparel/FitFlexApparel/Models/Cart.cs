@@ -19,6 +19,7 @@ namespace FitFlexApparel.Models
         public Nullable<int> Product_Id { get; set; }
         public Nullable<int> Product_Specifications_Id { get; set; }
         public Nullable<int> Quantity { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Product Product { get; set; }
