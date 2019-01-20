@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FitFlexApparel.Models.SubCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>SubCategory</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subcategory_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subcategory_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subcategory_Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subcategory_Slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Category_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategory_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategory_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategory_Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategory_Slug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Category_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" }) 
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
+            @Html.ActionLink("Disable", "SoftDelete", new { /* id=item.PrimaryKey */ }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 
+        </td>
+    </tr>
+}
+
+</table>
