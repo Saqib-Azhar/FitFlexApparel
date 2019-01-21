@@ -123,16 +123,17 @@
                             <div class="product-options">
                                 <ul class="size-option">
                                     <li><span class="text-uppercase">Size:</span></li>
-                                    <li class="sizeSelection"><a href="#" onclick="SelectThis(this, 'size')">S</a></li>
-                                    <li class="sizeSelection"><a href="#" onclick="SelectThis(this, 'size')">XL</a></li>
-                                    <li class="sizeSelection"><a href="#" onclick="SelectThis(this, 'size')">SL</a></li>
+                                    @foreach (var item in Model.Sizes.Split(','))
+                                    {
+                                        <li class="sizeSelection"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                    }
                                 </ul>
                                 <ul class="color-option">
                                     <li><span class="text-uppercase">Color:</span></li>
-                                    <li class="colorSelection"><a href="#" onclick="SelectThis(this,'color')" style="background-color:#475984;"></a></li>
-                                    <li class="colorSelection"><a href="#" onclick="SelectThis(this, 'color')" style="background-color:#8A2454;"></a></li>
-                                    <li class="colorSelection"><a href="#" onclick="SelectThis(this, 'color')" style="background-color:#BF6989;"></a></li>
-                                    <li class="colorSelection"><a href="#" onclick="SelectThis(this, 'color')" style="background-color:#9A54D8;"></a></li>
+                                    @foreach (var item in Model.Colors.Split(','))
+                                    {
+                                        <li class="colorSelection"><a onclick="SelectThis(this, 'color')" style="border:solid;cursor:pointer;background-color:#@item;"></a></li>
+                                    }
                                 </ul>
                             </div>
                             <script>
