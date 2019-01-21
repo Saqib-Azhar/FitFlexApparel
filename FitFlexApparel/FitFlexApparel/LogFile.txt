@@ -1,0 +1,15 @@
+21-Jan-19 9:12:08 PM | FitFlexApparel | at FitFlexApparel.Controllers.ProductsController.Create(Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\ProductsController.cs:line 238 | Object reference not set to an instance of an object.
+
+
+
+
+21-Jan-19 9:45:02 PM | FitFlexApparel | at FitFlexApparel.Controllers.ProductsController.Create(Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\ProductsController.cs:line 238 | Object reference not set to an instance of an object.
+
+
+
+
+21-Jan-19 11:51:42 PM | FitFlexApparel | at FitFlexApparel.Controllers.ProductsController.Create(Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5) | Object reference not set to an instance of an object.
+
+
+
+

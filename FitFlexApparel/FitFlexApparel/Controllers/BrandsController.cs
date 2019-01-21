@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitFlexApparel.Models;
+using System.IO;
 
 namespace FitFlexApparel.Controllers
 {
@@ -73,12 +74,31 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Brand_Name,Brand_Logo,Brand_Description,IsDeleted")] Brand brand)
+        public ActionResult Create([Bind(Include = "Id,Brand_Name,Brand_Logo,Brand_Description,IsDeleted")] Brand brand, HttpPostedFileBase Brand_Logo)
         {
 			try
 			{
 				if (ModelState.IsValid)
 				{
+
+                    if (Brand_Logo != null)
+                    {
+                        string pic = System.IO.Path.GetFileName(Brand_Logo.FileName);
+                        string path = System.IO.Path.Combine(
+                                               Server.MapPath("~/UploadedImages"), pic);
+
+                        Brand_Logo.SaveAs(path);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            Brand_Logo.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+                        brand.Brand_Logo = Brand_Logo.FileName;
+
+                    }
+                    
+					brand.IsDeleted = false;
 					db.Brands.Add(brand);
 					db.SaveChanges();
 					return RedirectToAction("Index");
@@ -125,12 +145,29 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Brand_Name,Brand_Logo,Brand_Description,IsDeleted")] Brand brand)
+        public ActionResult Edit([Bind(Include = "Id,Brand_Name,Brand_Logo,Brand_Description,IsDeleted")] Brand brand, HttpPostedFileBase Brand_Logo)
         {
 			try{
 				if (ModelState.IsValid)
-				{
-					db.Entry(brand).State = EntityState.Modified;
+                {
+                    if (Brand_Logo != null)
+                    {
+                        string pic = System.IO.Path.GetFileName(Brand_Logo.FileName);
+                        string path = System.IO.Path.Combine(
+                                               Server.MapPath("~/UploadedImages"), pic);
+
+                        Brand_Logo.SaveAs(path);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            Brand_Logo.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+                        brand.Brand_Logo = Brand_Logo.FileName;
+
+                    }
+                    brand.IsDeleted = false;
+                    db.Entry(brand).State = EntityState.Modified;
 					db.SaveChanges();
 					return RedirectToAction("Index");
 				}

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitFlexApparel.Models;
+using System.IO;
 
 namespace FitFlexApparel.Controllers
 {
@@ -75,12 +76,32 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Subcategory_Name,Subcategory_Description,Subcategory_Image,Category_Id,Subcategory_Slug,IsDeleted")] SubCategory subCategory)
+        public ActionResult Create([Bind(Include = "Id,Subcategory_Name,Subcategory_Description,Subcategory_Image,Category_Id,Subcategory_Slug,IsDeleted")] SubCategory subCategory, HttpPostedFileBase Subcategory_Image)
         {
 			try
 			{
 				if (ModelState.IsValid)
 				{
+
+                    if (Subcategory_Image != null)
+                    {
+                        string pic = System.IO.Path.GetFileName(Subcategory_Image.FileName);
+                        string path = System.IO.Path.Combine(
+                                               Server.MapPath("~/UploadedImages"), pic);
+
+                        Subcategory_Image.SaveAs(path);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            Subcategory_Image.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+                        subCategory.Subcategory_Image = Subcategory_Image.FileName;
+
+                    }
+
+                    subCategory.Subcategory_Slug = subCategory.Subcategory_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "");
+                    subCategory.IsDeleted = false;
 					db.SubCategories.Add(subCategory);
 					db.SaveChanges();
 					return RedirectToAction("Index");
@@ -129,12 +150,31 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Subcategory_Name,Subcategory_Description,Subcategory_Image,Category_Id,Subcategory_Slug,IsDeleted")] SubCategory subCategory)
+        public ActionResult Edit([Bind(Include = "Id,Subcategory_Name,Subcategory_Description,Subcategory_Image,Category_Id,Subcategory_Slug,IsDeleted")] SubCategory subCategory,HttpPostedFileBase Subcategory_Image)
         {
 			try{
 				if (ModelState.IsValid)
 				{
-					db.Entry(subCategory).State = EntityState.Modified;
+
+                    if (Subcategory_Image != null)
+                    {
+                        string pic = System.IO.Path.GetFileName(Subcategory_Image.FileName);
+                        string path = System.IO.Path.Combine(
+                                               Server.MapPath("~/UploadedImages"), pic);
+
+                        Subcategory_Image.SaveAs(path);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            Subcategory_Image.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+                        subCategory.Subcategory_Image = Subcategory_Image.FileName;
+
+                    }
+                    subCategory.Subcategory_Slug = subCategory.Subcategory_Name.ToLower().Trim().Replace(' ', '-').Replace("'","");
+                    subCategory.IsDeleted = false;
+                    db.Entry(subCategory).State = EntityState.Modified;
 					db.SaveChanges();
 					return RedirectToAction("Index");
 				}

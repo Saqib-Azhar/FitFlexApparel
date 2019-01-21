@@ -72,7 +72,7 @@ if (ReferenceScriptLibraries) {
 <#
 }
 #>
-@using (Html.BeginForm())
+@using (Html.BeginForm("<#= ViewName#>", "<#= ViewDataTypeShortName#>", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -93,6 +93,8 @@ if (ReferenceScriptLibraries) {
 		<div class="row">
 <#
 foreach (PropertyMetadata property in ModelMetadata.Properties) {
+	if (property.PropertyName == "IsDeleted" || property.PropertyName.Contains("Slug"))
+		continue;
     if (property.Scaffold && !property.IsAssociation) {
         if (property.IsPrimaryKey) {
 #>
@@ -110,7 +112,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 <#
             } else {
 #>
-            @Html.LabelFor(model => model.<#= property.PropertyName #>, htmlAttributes: new { @class = "control-label col-md-12" })
+			@Html.Label("","<#= property.PropertyName.Replace('_',' ') #>", htmlAttributes: new { @class = "control-label col-md-12" })
 <#
             }
 #>
@@ -139,6 +141,10 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
                     PushIndent("    ");
 #>
                 @Html.EditorFor(model => model.<#= property.PropertyName #>)
+<#
+                } else if (property.PropertyName.Contains("Image")) {
+#>
+                @Html.EditorFor(model => model.<#= property.PropertyName #>, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
 <#
                 } else if (property.IsEnum && !property.IsEnumFlags) {
 #>

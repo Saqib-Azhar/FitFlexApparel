@@ -12,22 +12,22 @@
 <table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Subcategory_Name)
+            @Html.DisplayName("Subcategory Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subcategory_Description)
+            @Html.DisplayName("Subcategory Description")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subcategory_Image)
+            @Html.DisplayName("Subcategory Image")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subcategory_Slug)
+            @Html.DisplayName("Subcategory Slug")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
+            @Html.DisplayName("IsDeleted")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Category_Name)
+            @Html.DisplayName("Category.Category Name")
         </th>
         <th></th>
     </tr>
@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.Subcategory_Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Subcategory_Image)
+            <img src="/UploadedImages/@item.Subcategory_Image" style="max-height:100px;width:100px" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Subcategory_Slug)
@@ -52,10 +52,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Category.Category_Name)
         </td>
-        <td>
+        <td style="width:175px!important">
             @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" }) 
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
-            @Html.ActionLink("Disable", "SoftDelete", new { /* id=item.PrimaryKey */ }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+            @Html.ActionLink("Disable", "SoftDelete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
             @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 
         </td>
     </tr>

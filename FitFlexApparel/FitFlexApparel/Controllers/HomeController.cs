@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FitFlexApparel.Models;
 
 namespace FitFlexApparel.Controllers
 {
@@ -25,6 +26,14 @@ namespace FitFlexApparel.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public PartialViewResult Header()
+        {
+            var db = new FitflexApparelEntities();
+            ViewBag.SubCategories = db.SubCategories.Where(s => s.IsDeleted != true).ToList();
+            ViewBag.Categories = db.Categories.Where(s => s.IsDeleted != true).ToList();
+            return PartialView();
         }
     }
 }

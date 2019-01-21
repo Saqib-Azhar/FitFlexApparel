@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "SubCategories", FormMethod.Post, new { @enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -15,7 +15,7 @@
 		<div class="row">
 		<div class="col-md-6">
         <div class="form-group">
-            @Html.LabelFor(model => model.Subcategory_Name, htmlAttributes: new { @class = "control-label col-md-12" })
+			@Html.Label("","Subcategory Name", htmlAttributes: new { @class = "control-label col-md-12" })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.Subcategory_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Subcategory_Name, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
 		</div>
 		<div class="col-md-6">
         <div class="form-group">
-            @Html.LabelFor(model => model.Subcategory_Description, htmlAttributes: new { @class = "control-label col-md-12" })
+			@Html.Label("","Subcategory Description", htmlAttributes: new { @class = "control-label col-md-12" })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.Subcategory_Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Subcategory_Description, "", new { @class = "text-danger" })
@@ -33,9 +33,9 @@
 		</div>
 		<div class="col-md-6">
         <div class="form-group">
-            @Html.LabelFor(model => model.Subcategory_Image, htmlAttributes: new { @class = "control-label col-md-12" })
+			@Html.Label("","Subcategory Image", htmlAttributes: new { @class = "control-label col-md-12" })
             <div class="col-md-12">
-                @Html.EditorFor(model => model.Subcategory_Image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Subcategory_Image, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
                 @Html.ValidationMessageFor(model => model.Subcategory_Image, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,26 +46,6 @@
             <div class="col-md-12">
                 @Html.DropDownList("Category_Id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Category_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Subcategory_Slug, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Subcategory_Slug, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Subcategory_Slug, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDeleted)
-                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
-                </div>
             </div>
         </div>
 		</div>

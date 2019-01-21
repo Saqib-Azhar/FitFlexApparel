@@ -11,7 +11,9 @@ namespace FitFlexApparel.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.Web.Mvc;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,28 +21,32 @@ namespace FitFlexApparel.Models
         {
             this.Carts = new HashSet<Cart>();
             this.ProductPrices = new HashSet<ProductPrice>();
-            this.ProductSpecifications = new HashSet<ProductSpecification>();
             this.Wishlists = new HashSet<Wishlist>();
         }
     
         public int Id { get; set; }
         public string Product_Name { get; set; }
+        [AllowHtml]
         public string Product_Description { get; set; }
         public string Product_Image1 { get; set; }
         public string Product_Image2 { get; set; }
         public string Product_Image3 { get; set; }
         public string Product_Image4 { get; set; }
         public string Product_Image5 { get; set; }
+        [AllowHtml]
         public string Product_Overview { get; set; }
         public Nullable<int> Subcategory_Id { get; set; }
         public Nullable<int> Brand_Id { get; set; }
         public Nullable<int> Product_Stock { get; set; }
+        [AllowHtml]
         public string Company_Profile { get; set; }
         public Nullable<double> Original_Price { get; set; }
         public Nullable<double> Average_Rating { get; set; }
         public Nullable<int> Total_Ratings { get; set; }
         public string Product_Slug { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public string Colors { get; set; }
+        public string Sizes { get; set; }
     
         public virtual Brand Brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -48,8 +54,6 @@ namespace FitFlexApparel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual SubCategory SubCategory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wishlist> Wishlists { get; set; }
     }

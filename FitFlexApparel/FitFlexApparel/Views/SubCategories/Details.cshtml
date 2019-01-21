@@ -12,7 +12,7 @@
 		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
 				<b>
-					@Html.DisplayNameFor(model => model.Subcategory_Name)
+					@Html.DisplayName("Subcategory Name")
 				</b>
 			</div>
 
@@ -24,7 +24,7 @@
 		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
 				<b>
-					@Html.DisplayNameFor(model => model.Subcategory_Description)
+					@Html.DisplayName("Subcategory Description")
 				</b>
 			</div>
 
@@ -36,19 +36,18 @@
 		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
 				<b>
-					@Html.DisplayNameFor(model => model.Subcategory_Image)
+					@Html.DisplayName("Subcategory Image")
 				</b>
 			</div>
 
 			<div class="col-md-12">
-				@Html.DisplayFor(model => model.Subcategory_Image)
+				<img src="/UploadedImages/@Model.Subcategory_Image" style="width:250px;height:250px;border:solid" />
 			</div>
 		</div>
-
 		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
 				<b>
-					@Html.DisplayNameFor(model => model.Subcategory_Slug)
+					@Html.DisplayName("Subcategory Slug")
 				</b>
 			</div>
 
@@ -60,7 +59,7 @@
 		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
 				<b>
-					@Html.DisplayNameFor(model => model.IsDeleted)
+					@Html.DisplayName("IsDeleted")
 				</b>
 			</div>
 
@@ -72,7 +71,7 @@
 		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
 				<b>
-					@Html.DisplayNameFor(model => model.Category.Category_Name)
+					@Html.DisplayName("Category.Category Name")
 				</b>
 			</div>
 

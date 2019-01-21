@@ -17,12 +17,12 @@ namespace FitFlexApparel.Models
         public int Id { get; set; }
         public string User_Id { get; set; }
         public Nullable<int> Product_Id { get; set; }
-        public Nullable<int> Product_Specifications_Id { get; set; }
+        public Nullable<int> Color { get; set; }
+        public Nullable<int> Size { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Product Product { get; set; }
-        public virtual ProductSpecification ProductSpecification { get; set; }
     }
 }

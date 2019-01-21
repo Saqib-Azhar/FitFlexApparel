@@ -2,181 +2,300 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>New Product</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		<div class="row">
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Name, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Name, "", new { @class = "text-danger" })
+<script src="/AdminAssets/colorpicker/jscolor.js"></script>
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+  //]]>
+</script>
+ 
+    @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>New Product</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.Label("", "Product Name", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Product_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Product_Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.Label("", "Product Description", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @*@Html.EditorFor(model => model.Product_Description, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <textarea id="Product_Description" name="Product_Description" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.Product_Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Description, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Description, "", new { @class = "text-danger" })
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Product Image1", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Product_Image1, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.Product_Image1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Product Image2", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Product_Image2, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.Product_Image2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Product Image3", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Product_Image3, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.Product_Image3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Product Image4", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Product_Image4, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.Product_Image4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Product Image5", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Product_Image5, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.Product_Image5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div><hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Product Overview", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @*@Html.EditorFor(model => model.Product_Overview, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <textarea id="Product_Overview" name="Product_Overview" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.Product_Overview, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Company Profile", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @*@Html.EditorFor(model => model.Company_Profile, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <textarea id="Company_Profile" name="Company_Profile" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.Company_Profile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Image1, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Image1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Image1, "", new { @class = "text-danger" })
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.Label("", "Prices", htmlAttributes: new { @class = "control-label col-md-10" })
+                            <a class="col-md-2 btn btn-sm pull-right right btn-info" style="color:white;" onclick="$('#NewPricePanel').removeAttr('hidden')">Add Price</a>
+                        </div>
+                    </div>
+                    <table class="table table-striped" style="padding:20px" border="1">
+                        <thead>
+                            <tr style="text-align:center">
+                                <td>Min Items</td>
+                                <td>Max Items</td>
+                                <td>Price</td>
+                                <td>Discount</td>
+                            </tr>
+                        </thead>
+                        <tbody id="PriceTableBody">
+                        </tbody>
+                    </table><input type="text" name="PricesListField" hidden value="" id="PricesListField"/>
+                    <div class="panel panel-default" style="border:solid" id="NewPricePanel" hidden>
+                        <div class="panel-body">
+                            Min Items<input type="number" id="newPriceMin" min="1" class="form-control" />
+                            Max Items<input type="number" id="newPriceMax" min="1" class="form-control" />
+                            Price<input type="number" id="newPrice" min="1" class="form-control" />
+                            Discount<input type="number" id="newPriceDiscount" min="0" value="0" class="form-control" />
+                            <a class="btn btn-sm pull-right right btn-success" style="color:white;"   onclick="AddNewPrice()">Add</a>
+                            <script>
+                                function AddNewPrice() {
+                                    var PriceMin = $("#newPriceMin").val();
+                                    var PriceMax = $("#newPriceMax").val();
+                                    var Price = $("#newPrice").val();
+                                    var PriceDiscount = $("#newPriceDiscount").val();
+                                    var priceHtml =  '<tr style="text-align:center">'
+                                                    + '<td>' + PriceMin + '</td>'
+                                                    + '<td>' + PriceMax + '</td>'
+                                                    + '<td>' + Price + '</td>'
+                                                    + '<td>' + PriceDiscount + '</td>'
+                                                    + '</tr>'
+                                    $("#PriceTableBody").append(priceHtml);
+                                    $("#newPriceMin").val(parseInt(PriceMax) + 1);
+                                    $("#newPriceMax").val(parseInt(PriceMax) + 2);
+                                    $("#newPriceMin").attr("min", parseInt(PriceMax) + 1);
+                                    $("#newPriceMax").attr("min", parseInt(PriceMax) + 2);
+
+                                    var prices = $("#PricesListField").val();
+                                    var pricesList = prices + 'Min:' + PriceMin + ',Max:' + PriceMax + ',Price:' + Price + ',Discount:' + PriceDiscount + '|';
+                                    $("#PricesListField").val(pricesList);
+                                    $("#NewPricePanel").attr("hidden", "hidden");
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.Label("", "Specifications", htmlAttributes: new { @class = "control-label col-md-10" })
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.Label("", "Select Colors", htmlAttributes: new { @class = "control-label col-md-6" })
+                                        <a class="btn btn-sm pull-right right btn-info" style="color:white;"  onclick="$('#NewColorPanel').removeAttr('hidden')">New Color</a>
+                                        @Html.DropDownList("ColorsAvailable", null, htmlAttributes: new { @class = "form-control col-md-12", @multiple = "multiple" })
+                                        <div class="panel panel-default" style="border:solid" id="NewColorPanel" hidden>
+                                            <div class="panel-body">
+                                                Color Name<input type="text" id="newColorName" placeholder="Color Name" class="form-control" />
+                                                Select Color<input  id="newColorCode" class="jscolor form-control" value="ff2500">
+                                                <a class="btn btn-sm pull-right right btn-success" style="color:white;"  onclick="AddNewColor()">Add</a>
+                                                <script>
+                                                    function AddNewColor()
+                                                    {
+                                                        var colorName = $("#newColorName").val();
+                                                        var colorCode = $("#newColorCode").val();
+
+                                                        $.ajax({
+                                                            url: "/Products/AddColor",
+                                                            type: 'POST',
+                                                            data: { colorCode: colorCode, colorName: colorName },
+                                                            success: function (result) {
+                                                                $("#ColorsAvailable").append('<option value="'+colorCode+'">'+colorName+'</option>')
+                                                            },
+                                                            error: function () {
+                                                                alert("Error adding new color! (please make sure you are connected with Internet & your browser is compatible)");
+                                                            }
+                                                        });
+
+                                                        $("#NewColorPanel").attr("hidden","hidden");
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.Label("", "Select Sizes", htmlAttributes: new { @class = "control-label col-md-6" })
+                                        <a class="btn btn-sm pull-right right btn-info" style="color:white;"  onclick="$('#NewSizePanel').removeAttr('hidden')">New Size</a>
+                                        @Html.DropDownList("SizesAvailable", null, htmlAttributes: new { @class = "form-control", @multiple = "multiple" })
+                                        <div class="panel panel-default" style="border:solid" id="NewSizePanel" hidden>
+                                            <div class="panel-body">
+                                                Size Name<input type="text" id="newSizeName" placeholder="Size Name" class="form-control" />
+                                                Size Code<input id="newSizeCode" class="form-control" placeholder="Size Code">
+                                                <a class="btn btn-sm pull-right right btn-success" style="color:white;"  onclick="AddNewSize()">Add</a>
+                                                <script>
+                                                    function AddNewSize()
+                                                    {
+                                                        var SizeName = $("#newSizeName").val();
+                                                        var SizeCode = $("#newSizeCode").val();
+
+                                                        $.ajax({
+                                                            url: "/Products/AddSize",
+                                                            type: 'POST',
+                                                            data: { SizeCode: SizeCode, SizeName: SizeName },
+                                                            success: function (result) {
+                                                                $("#SizesAvailable").append('<option value="'+SizeCode+'">'+SizeName+'</option>')
+                                                            },
+                                                            error: function () {
+                                                                alert("Error adding new Size! (please make sure you are connected with Internet & your browser is compatible)");
+                                                            }
+                                                        });
+
+                                                        $("#NewSizePanel").attr("hidden","hidden");
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Image2, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Image2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Image2, "", new { @class = "text-danger" })
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Subcategory_Id, "Subcategory", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("Subcategory_Id", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Subcategory_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Brand_Id, "Brand", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("Brand_Id", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Brand_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Product Stock", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Product_Stock, new { htmlAttributes = new { @class = "form-control", @min = "1", @value = "1" } })
+                            @Html.ValidationMessageFor(model => model.Product_Stock, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Unit Price", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Original_Price, new { htmlAttributes = new { @class = "form-control", @min = "1", @value = "1" } })
+                            @Html.ValidationMessageFor(model => model.Original_Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Image3, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Image3, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Image3, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Image4, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Image4, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Image4, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Image5, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Image5, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Image5, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Overview, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Overview, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Overview, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Subcategory_Id, "Subcategory_Id", htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.DropDownList("Subcategory_Id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Subcategory_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Brand_Id, "Brand_Id", htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.DropDownList("Brand_Id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Brand_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Stock, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Stock, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Stock, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Company_Profile, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Company_Profile, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Company_Profile, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Original_Price, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Original_Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Original_Price, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Average_Rating, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Average_Rating, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Average_Rating, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Total_Ratings, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Total_Ratings, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Total_Ratings, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Product_Slug, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Product_Slug, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product_Slug, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDeleted)
-                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                    @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
                 </div>
             </div>
         </div>
-		</div>
-		</div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-				@Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
-            </div>
-        </div>
-    </div>
-}
+    }
 
-<div>
-</div>
+    <div>
+    </div>

@@ -181,6 +181,7 @@ namespace <#= Namespace #>
 <# if(!String.IsNullOrEmpty(primaryKeyType) && String.Equals("System.Guid", primaryKeyType, StringComparison.OrdinalIgnoreCase)) { #>
 					<#= ModelVariable #>.<#= primaryKeyName #> = Guid.NewGuid();
 <# } #>
+					<#= ModelVariable #>.IsDeleted = false;
 					db.<#= entitySetName #>.Add(<#= ModelVariable #>);
 <# if (UseAsync) {#>
 					await db.SaveChangesAsync();
@@ -258,6 +259,7 @@ namespace <#= Namespace #>
 				if (ModelState.IsValid)
 				{
 					db.Entry(<#= ModelVariable #>).State = EntityState.Modified;
+					<#= ModelVariable #>.IsDeleted = false;
 <# if (UseAsync) { #>
 					await db.SaveChangesAsync();
 <# } else { #>

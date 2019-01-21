@@ -57,11 +57,26 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
         if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
             continue;
         }
+		if(property.PropertyName.Contains("Image")){
 #>
 		<div class="col-md-6" style="padding:15px;">
 			<div class="col-md-12">
 				<b>
-					@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+					@Html.DisplayName("<#= GetValueExpression(property).Replace('_',' ') #>")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				<img src="/UploadedImages/@Model.<#= GetValueExpression(property) #>" style="width:250px;height:250px;border:solid" />
+			</div>
+		</div>
+<#}
+else{
+#>
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("<#= GetValueExpression(property).Replace('_',' ') #>")
 				</b>
 			</div>
 
@@ -70,7 +85,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 			</div>
 		</div>
 
-<#
+<#		}
     }
 }
 #>

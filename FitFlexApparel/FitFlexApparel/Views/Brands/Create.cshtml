@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Brands", FormMethod.Post, new { @enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -15,7 +15,7 @@
 		<div class="row">
 		<div class="col-md-6">
         <div class="form-group">
-            @Html.LabelFor(model => model.Brand_Name, htmlAttributes: new { @class = "control-label col-md-12" })
+			@Html.Label("","Brand Name", htmlAttributes: new { @class = "control-label col-md-12" })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.Brand_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Brand_Name, "", new { @class = "text-danger" })
@@ -24,30 +24,19 @@
 		</div>
 		<div class="col-md-6">
         <div class="form-group">
-            @Html.LabelFor(model => model.Brand_Logo, htmlAttributes: new { @class = "control-label col-md-12" })
+			@Html.Label("","Brand Logo", htmlAttributes: new { @class = "control-label col-md-12" })
             <div class="col-md-12">
-                @Html.EditorFor(model => model.Brand_Logo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Brand_Logo, new { htmlAttributes = new { @class = "form-control", @type="file" } })
                 @Html.ValidationMessageFor(model => model.Brand_Logo, "", new { @class = "text-danger" })
             </div>
         </div>
 		</div>
 		<div class="col-md-6">
         <div class="form-group">
-            @Html.LabelFor(model => model.Brand_Description, htmlAttributes: new { @class = "control-label col-md-12" })
+			@Html.Label("","Brand Description", htmlAttributes: new { @class = "control-label col-md-12" })
             <div class="col-md-12">
                 @Html.EditorFor(model => model.Brand_Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Brand_Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-		</div>
-		<div class="col-md-6">
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDeleted)
-                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
-                </div>
             </div>
         </div>
 		</div>

@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div>
     <h4>Category</h4>
@@ -42,7 +41,7 @@
 			</div>
 
 			<div class="col-md-12">
-				@Html.DisplayFor(model => model.Category_Image)
+                <img src="/UploadedImages/@Model.Category_Image" style="width:250px;height:250px;border:solid" />
 			</div>
 		</div>
 
