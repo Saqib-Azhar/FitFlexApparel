@@ -1,4 +1,9 @@
 ﻿@model FitFlexApparel.Models.Product
+    @{ 
+
+        var ReviewsList = ViewBag.Reviews as IEnumerable<FitFlexApparel.Models.ProductReview>;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
     <!-- /NAVIGATION -->
     <!-- BREADCRUMB -->
@@ -106,7 +111,7 @@
                                         <i class="fa fa-star-o empty"></i>
                                      }
                                 </div>
-                                <a href="#">@Model.Total_Ratings Review(s) / Add Review</a>
+                                <a data-toggle="tab" href="#tab3">@Model.Total_Ratings Review(s) / Add Review</a>
                             </div>
                             @if (Model.Product_Stock > 0)
                             {
@@ -198,86 +203,55 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="product-reviews">
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
+                                                
+                                                @foreach (var item in ReviewsList)
+                                                {
+                                                    <div class="single-review">
+                                                        <div class="review-heading">
+                                                            <div><a href="#"><i class="fa fa-user-o"></i> @item.AspNetUser.DisplayName</a></div>
+                                                            <div><a href="#"><i class="fa fa-clock-o"></i> @item.Created_At</a></div>
+                                                            <div class="review-rating pull-right">
+                                                                @for (int star = 0; star < item.Rating; star = star + 1)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (double? star = (item.Rating == null) ? 0 : item.Rating; star < 5; star++)
+                                                                {
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div class="review-body">
+                                                            <p>
+                                                                @item.Review
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                    <div class="review-body">
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                }
+                                                
 
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                
 
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <p>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <ul class="reviews-pages">
+                                                @*<ul class="reviews-pages">
                                                     <li class="active">1</li>
                                                     <li><a href="#">2</a></li>
                                                     <li><a href="#">3</a></li>
                                                     <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-                                                </ul>
+                                                </ul>*@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <h4 class="text-uppercase">Write Your Review</h4>
                                             <p>Your email address will not be published.</p>
-                                            <form class="review-form">
+                                            <form class="review-form" action="/Products/NewReview" method="post">
                                                 <div class="form-group">
-                                                    <input class="input" type="text" placeholder="Your Name" />
+                                                    <input class="input" type="text" name="Name" placeholder="Your Name" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <input class="input" type="email" placeholder="Email Address" />
+                                                    <input class="input" type="email" name="Email" placeholder="Email Address" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <textarea class="input" placeholder="Your review"></textarea>
+                                                    <textarea class="input" name="Review" placeholder="Your review"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-rating">
@@ -291,6 +265,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <input type="text" value="@Model.Id" name="ProductId" hidden />
                                                 <button class="primary-btn">Submit</button>
                                             </form>
                                         </div>

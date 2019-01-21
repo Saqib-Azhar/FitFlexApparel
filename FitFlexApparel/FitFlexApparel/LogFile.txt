@@ -13,3 +13,12 @@
 
 
 
+22-Jan-19 1:50:36 AM | EntityFramework | at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   at System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   at FitFlexApparel.Controllers.ProductsController.NewReview(FormCollection fc) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\ProductsController.cs:line 79 | The type of one of the primary key values did not match the type defined in the entity. See inner exception for details.
+Parameter name: keyValues
+
+
+
+

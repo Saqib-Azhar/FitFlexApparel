@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitFlexApparel.Models;
+using Microsoft.AspNet.Identity;
 using System.IO;
 
 namespace FitFlexApparel.Controllers
@@ -54,7 +55,43 @@ namespace FitFlexApparel.Controllers
 				return RedirectToAction("Error","Home");
 			}
         }
+        [HttpPost]
+        public ActionResult NewReview(FormCollection fc)
+        {
+                var ProductId = fc["ProductId"];
+            try
+            {
+                var Name = fc["Name"];
+                var Email = fc["Email"];
+                var UserId = User.Identity.GetUserId();
+                var Review = fc["Review"];
+                var Rating = fc["rating"];
 
+                ProductReview reviewObj = new ProductReview();
+                reviewObj.Created_At = DateTime.Now;
+                reviewObj.IsDeleted = false;
+                reviewObj.Rating = Convert.ToInt32(Rating);
+                reviewObj.Review = Review;
+                reviewObj.User_Id = UserId;
+                reviewObj.Product_Id = Convert.ToInt32(ProductId);
+                db.ProductReviews.Add(reviewObj);
+                db.SaveChanges();
+
+                var product = db.Products.Find(Convert.ToInt32(ProductId));
+                product.Average_Rating = ((product.Average_Rating * product.Total_Ratings) + Convert.ToInt32(Rating)) / (product.Total_Ratings + 1);
+                product.Total_Ratings++;
+                db.SaveChanges();
+                return Redirect("/Products/Display/" + ProductId);
+
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+
+            }
+                return Redirect("/Products/Display/"+ProductId);
+        }
 
         public ActionResult Display(int? id)
         {
@@ -64,6 +101,7 @@ namespace FitFlexApparel.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                ViewBag.Reviews = db.ProductReviews.Where(s => s.Product_Id == id).ToList();
                 Product product = db.Products.Find(id);
                 if (product == null)
                 {
