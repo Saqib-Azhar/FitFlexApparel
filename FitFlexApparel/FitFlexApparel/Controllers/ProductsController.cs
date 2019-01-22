@@ -102,6 +102,7 @@ namespace FitFlexApparel.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 ViewBag.Reviews = db.ProductReviews.Where(s => s.Product_Id == id).ToList();
+                ViewBag.ProductPrices = db.ProductPrices.Where(s => s.Product_Id == id).ToList();
                 Product product = db.Products.Find(id);
                 if (product == null)
                 {
@@ -539,5 +540,144 @@ namespace FitFlexApparel.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #region CartManagement
+        [HttpPost]
+        public JsonResult AddToCart(int productId, int selectedQuantity, string selectedColor, string selectedSize)
+        {
+            try
+            {
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return Json("LoginError", JsonRequestBehavior.AllowGet);
+                }
+                var userId = User.Identity.GetUserId();
+                var findObj = db.Carts.FirstOrDefault(s => s.Product_Id == productId && s.User_Id == userId && s.Color == selectedColor && s.Size == selectedSize);
+                if(findObj != null)
+                {
+                    findObj.Quantity = findObj.Quantity + selectedQuantity;
+                    var productPriceObj1 = db.ProductPrices.FirstOrDefault(s => s.Product_Id == productId && s.Min <= findObj.Quantity && (s.Max >= findObj.Quantity || s.Max == null));
+                    findObj.Price_Per_Item = productPriceObj1.Price;
+                    findObj.Total_Price = findObj.Price_Per_Item * findObj.Quantity;
+                    db.SaveChanges();
+                    var res1 = SyncCart();
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+                var cart = new Cart();
+                cart.Product_Id = productId;
+                cart.Quantity = selectedQuantity;
+                cart.Size = selectedSize;
+                cart.Color = selectedColor;
+                cart.User_Id = userId;
+                var productPriceObj = db.ProductPrices.FirstOrDefault(s => s.Product_Id == productId && s.Min <= selectedQuantity && (s.Max >= selectedQuantity || s.Max == null));
+                cart.Price_Per_Item = productPriceObj.Price;
+                cart.Total_Price = cart.Price_Per_Item * selectedQuantity;
+                cart.Added_At = DateTime.Now;
+                var productObj = db.Products.FirstOrDefault(s => s.Id == productId);
+                if (productObj.Product_Image1 != null)
+                    cart.Image = productObj.Product_Image1;
+                else if (productObj.Product_Image2 != null)
+                    cart.Image = productObj.Product_Image2;
+                else if (productObj.Product_Image3 != null)
+                    cart.Image = productObj.Product_Image3;
+                else if (productObj.Product_Image4 != null)
+                    cart.Image = productObj.Product_Image4;
+                else if (productObj.Product_Image5 != null)
+                    cart.Image = productObj.Product_Image5;
+                db.Carts.Add(cart);
+                db.SaveChanges();
+                var res = SyncCart();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public bool SyncCart()
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                var cartItems = db.Carts.Where(s => s.User_Id == userId);
+                double? totalPrice = 0;
+                foreach(var item in cartItems)
+                {
+                    totalPrice = totalPrice + item.Total_Price;
+                }
+                var totalItems = cartItems.Count();
+
+
+                string objCartListString = "TotalItems:" + totalItems + ",TotalPrice:" + totalPrice;
+
+
+                Response.Cookies["CartCookie"].Value = objCartListString;
+
+                Response.Cookies["CartCookie"].Expires = DateTime.Now.AddYears(30);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+                return false;
+            }
+        }
+
+
+
+        public ActionResult RemoveFromCart(int? id)
+        {
+            string url = Request.UrlReferrer.AbsoluteUri;
+            try
+            {
+                var cartItem = db.Carts.FirstOrDefault(s => s.Id == id);
+                db.Carts.Remove(cartItem);
+                db.SaveChanges();
+                var res = SyncCart();
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }
+            return Redirect(url);
+        }
+
+
+
+        [HttpPost]
+        public JsonResult UpdateCartQuantity(int? id, int? quantity)
+        {
+            try
+            {
+                var cartItem = db.Carts.FirstOrDefault(s => s.Id == id);
+                cartItem.Quantity = quantity;
+
+                var priceObj = db.ProductPrices.FirstOrDefault(s => s.Product_Id == cartItem.Product_Id && s.Min <= cartItem.Quantity && (s.Max == null || s.Max >= cartItem.Quantity));
+                cartItem.Price_Per_Item = priceObj.Price;
+                cartItem.Total_Price = cartItem.Price_Per_Item * cartItem.Quantity;
+
+                db.SaveChanges();
+                var res = SyncCart();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+
+
+
     }
 }

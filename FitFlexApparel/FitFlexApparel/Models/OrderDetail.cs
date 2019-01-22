@@ -12,22 +12,18 @@ namespace FitFlexApparel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cart
+    public partial class OrderDetail
     {
         public int Id { get; set; }
-        public string User_Id { get; set; }
+        public Nullable<int> Order_Id { get; set; }
         public Nullable<int> Product_Id { get; set; }
         public string Product_Name { get; set; }
-        public string Color { get; set; }
-        public string Size { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<double> Price_Per_Item { get; set; }
+        public string Product_Color { get; set; }
+        public string Product_Size { get; set; }
+        public string Product_Quantity { get; set; }
+        public Nullable<double> Product_Price { get; set; }
         public Nullable<double> Total_Price { get; set; }
-        public Nullable<System.DateTime> Added_At { get; set; }
-        public string Image { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

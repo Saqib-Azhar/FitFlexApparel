@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ExceptionManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -260,6 +261,18 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderActionHistory.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>FitflexApparel.tt</DependentUpon>
     </Compile>
@@ -518,6 +531,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bootstrap-wysiwyg.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\FitflexApparel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FitflexApparel.Designer.cs</LastGenOutput>
@@ -525,9 +541,6 @@
     <Content Include="Models\FitflexApparel.edmx.diagram">
       <DependentUpon>FitflexApparel.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\bootstrap-wysiwyg.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -600,10 +613,12 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Products\Display.cshtml" />
+    <Content Include="Views\Home\AccountAndCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\" />
     <Folder Include="Views\ExceptionManager\" />
+    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -19,3 +19,18 @@ Parameter name: keyValues
 
 
 
+22-Jan-19 11:04:53 AM: Object reference not set to an instance of an object.
+
+
+
+
+22-Jan-19 2:56:19 PM: LINQ to Entities does not recognize the method 'System.String GetUserId(System.Security.Principal.IIdentity)' method, and this method cannot be translated into a store expression.
+
+
+
+
+22-Jan-19 2:57:59 PM: LINQ to Entities does not recognize the method 'System.String GetUserId(System.Security.Principal.IIdentity)' method, and this method cannot be translated into a store expression.
+
+
+
+

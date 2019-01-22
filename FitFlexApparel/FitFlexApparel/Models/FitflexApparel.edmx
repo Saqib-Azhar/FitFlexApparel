@@ -106,10 +106,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
           <Property Name="Product_Id" Type="int" />
-          <Property Name="Color" Type="int" />
-          <Property Name="Size" Type="int" />
+          <Property Name="Product_Name" Type="nvarchar(max)" />
+          <Property Name="Color" Type="nvarchar(max)" />
+          <Property Name="Size" Type="nvarchar(max)" />
           <Property Name="Quantity" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Price_Per_Item" Type="float" />
+          <Property Name="Total_Price" Type="float" />
+          <Property Name="Added_At" Type="datetime" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -140,6 +145,52 @@
           <Property Name="Customer_Phone" Type="nvarchar(max)" />
           <Property Name="Message" Type="nvarchar(max)" />
           <Property Name="Created_At" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderActionHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_Id" Type="int" />
+          <Property Name="Order_Status" Type="int" />
+          <Property Name="Updated_At" Type="datetime" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="128" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_Id" Type="int" />
+          <Property Name="Product_Id" Type="int" />
+          <Property Name="Product_Name" Type="nvarchar(max)" />
+          <Property Name="Product_Color" Type="nvarchar(max)" />
+          <Property Name="Product_Size" Type="nvarchar(max)" />
+          <Property Name="Product_Quantity" Type="nvarchar(max)" />
+          <Property Name="Product_Price" Type="float" />
+          <Property Name="Total_Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_No" Type="nvarchar(max)" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="Order_Time" Type="datetime" />
+          <Property Name="Order_Status" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Total_Amount" Type="float" />
+          <Property Name="Total_Products" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_Status" Type="nvarchar(max)" />
           <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="ProductPrices">
@@ -315,6 +366,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderActionHistory_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderActionHistory">
+              <PropertyRef Name="Updated_By" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderActionHistory_ToOrders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderActionHistory">
+              <PropertyRef Name="Order_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderActionHistory_ToOrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
+          <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderActionHistory">
+              <PropertyRef Name="Order_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ToOrders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="Order_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToOrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Order_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductPrices_ToProducts">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="ProductPrices" Type="Self.ProductPrices" Multiplicity="*" />
@@ -424,6 +547,10 @@
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerContactRequests" EntityType="Self.CustomerContactRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderActionHistory" EntityType="Self.OrderActionHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPrices" EntityType="Self.ProductPrices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductReviews" EntityType="Self.ProductReviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -454,6 +581,30 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderActionHistory_ToAspNetUsers" Association="Self.FK_OrderActionHistory_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="OrderActionHistory" EntitySet="OrderActionHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderActionHistory_ToOrders" Association="Self.FK_OrderActionHistory_ToOrders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderActionHistory" EntitySet="OrderActionHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderActionHistory_ToOrderStatus" Association="Self.FK_OrderActionHistory_ToOrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="OrderActionHistory" EntitySet="OrderActionHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ToOrders" Association="Self.FK_OrderDetails_ToOrders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToAspNetUsers" Association="Self.FK_Orders_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToOrderStatus" Association="Self.FK_Orders_ToOrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductPrices_ToProducts" Association="Self.FK_ProductPrices_ToProducts">
             <End Role="Products" EntitySet="Products" />
@@ -560,6 +711,8 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToAspNetUsers" FromRole="AspNetUsers" ToRole="Cart" />
+          <NavigationProperty Name="OrderActionHistories" Relationship="Self.FK_OrderActionHistory_ToAspNetUsers" FromRole="AspNetUsers" ToRole="OrderActionHistory" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_ToAspNetUsers" FromRole="AspNetUsers" ToRole="Orders" />
           <NavigationProperty Name="ProductReviews" Relationship="Self.FK_ProductReviews_ToAspNetUsers" FromRole="AspNetUsers" ToRole="ProductReviews" />
           <NavigationProperty Name="UserAddresses" Relationship="Self.FK_UserAddresses_ToAspNetUsers" FromRole="AspNetUsers" ToRole="UserAddresses" />
           <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToAspNetUsers" FromRole="AspNetUsers" ToRole="Wishlist" />
@@ -597,10 +750,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Product_Id" Type="Int32" />
-          <Property Name="Color" Type="Int32" />
-          <Property Name="Size" Type="Int32" />
+          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Price_Per_Item" Type="Double" />
+          <Property Name="Total_Price" Type="Double" />
+          <Property Name="Added_At" Type="DateTime" Precision="3" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Cart_ToAspNetUsers" FromRole="Cart" ToRole="AspNetUsers" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Cart_ToProducts" FromRole="Cart" ToRole="Products" />
         </EntityType>
@@ -635,6 +793,62 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created_At" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="OrderActionHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_Id" Type="Int32" />
+          <Property Name="Order_Status" Type="Int32" />
+          <Property Name="Updated_At" Type="DateTime" Precision="3" />
+          <Property Name="Updated_By" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_OrderActionHistory_ToAspNetUsers" FromRole="OrderActionHistory" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderActionHistory_ToOrders" FromRole="OrderActionHistory" ToRole="Orders" />
+          <NavigationProperty Name="OrderStatu" Relationship="Self.FK_OrderActionHistory_ToOrderStatus" FromRole="OrderActionHistory" ToRole="OrderStatus" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_Id" Type="Int32" />
+          <Property Name="Product_Id" Type="Int32" />
+          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Quantity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Price" Type="Double" />
+          <Property Name="Total_Price" Type="Double" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_ToOrders" FromRole="OrderDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_No" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Order_Time" Type="DateTime" Precision="3" />
+          <Property Name="Order_Status" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Total_Amount" Type="Double" />
+          <Property Name="Total_Products" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Orders_ToAspNetUsers" FromRole="Orders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="OrderActionHistories" Relationship="Self.FK_OrderActionHistory_ToOrders" FromRole="Orders" ToRole="OrderActionHistory" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_ToOrders" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderStatu" Relationship="Self.FK_Orders_ToOrderStatus" FromRole="Orders" ToRole="OrderStatus" />
+        </EntityType>
+        <EntityType Name="OrderStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="OrderActionHistories" Relationship="Self.FK_OrderActionHistory_ToOrderStatus" FromRole="OrderStatus" ToRole="OrderActionHistory" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_ToOrderStatus" FromRole="OrderStatus" ToRole="Orders" />
         </EntityType>
         <EntityType Name="ProductPrice">
           <Key>
@@ -781,6 +995,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderActionHistory_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderActionHistory">
+              <PropertyRef Name="Updated_By" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToAspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductReviews_ToAspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
           <End Role="ProductReviews" Type="Self.ProductReview" Multiplicity="*" />
@@ -853,6 +1091,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderActionHistory_ToOrders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderActionHistory">
+              <PropertyRef Name="Order_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderActionHistory_ToOrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="0..1" />
+          <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderActionHistory">
+              <PropertyRef Name="Order_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ToOrders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="Order_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToOrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Order_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductPrices_ToProducts">
           <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
           <End Role="ProductPrices" Type="Self.ProductPrice" Multiplicity="*" />
@@ -905,6 +1191,10 @@
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Colors" EntityType="Self.Color" />
           <EntitySet Name="CustomerContactRequests" EntityType="Self.CustomerContactRequest" />
+          <EntitySet Name="OrderActionHistories" EntityType="Self.OrderActionHistory" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
           <EntitySet Name="ProductPrices" EntityType="Self.ProductPrice" />
           <EntitySet Name="ProductReviews" EntityType="Self.ProductReview" />
           <EntitySet Name="Products" EntityType="Self.Product" />
@@ -923,6 +1213,14 @@
           <AssociationSet Name="FK_Cart_ToAspNetUsers" Association="Self.FK_Cart_ToAspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderActionHistory_ToAspNetUsers" Association="Self.FK_OrderActionHistory_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="OrderActionHistory" EntitySet="OrderActionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToAspNetUsers" Association="Self.FK_Orders_ToAspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductReviews_ToAspNetUsers" Association="Self.FK_ProductReviews_ToAspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -947,6 +1245,22 @@
           <AssociationSet Name="FK_SubCategories_ToCategories" Association="Self.FK_SubCategories_ToCategories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="SubCategories" EntitySet="SubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderActionHistory_ToOrders" Association="Self.FK_OrderActionHistory_ToOrders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderActionHistory" EntitySet="OrderActionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderActionHistory_ToOrderStatus" Association="Self.FK_OrderActionHistory_ToOrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="OrderActionHistory" EntitySet="OrderActionHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ToOrders" Association="Self.FK_OrderDetails_ToOrders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToOrderStatus" Association="Self.FK_Orders_ToOrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductPrices_ToProducts" Association="Self.FK_ProductPrices_ToProducts">
             <End Role="Products" EntitySet="Products" />
@@ -1067,10 +1381,15 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Price_Per_Item" ColumnName="Price_Per_Item" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Added_At" ColumnName="Added_At" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1104,6 +1423,56 @@
                 <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderActionHistories">
+            <EntityTypeMapping TypeName="Model.OrderActionHistory">
+              <MappingFragment StoreEntitySet="OrderActionHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="Model.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Product_Color" ColumnName="Product_Color" />
+                <ScalarProperty Name="Product_Size" ColumnName="Product_Size" />
+                <ScalarProperty Name="Product_Quantity" ColumnName="Product_Quantity" />
+                <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Order_Time" ColumnName="Order_Time" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+                <ScalarProperty Name="Total_Products" ColumnName="Total_Products" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="Model.OrderStatu">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>

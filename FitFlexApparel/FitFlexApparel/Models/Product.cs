@@ -23,7 +23,7 @@ namespace FitFlexApparel.Models
             this.ProductPrices = new HashSet<ProductPrice>();
             this.Wishlists = new HashSet<Wishlist>();
         }
-    
+
         public int Id { get; set; }
         public string Product_Name { get; set; }
         [AllowHtml]
@@ -47,7 +47,7 @@ namespace FitFlexApparel.Models
         public Nullable<bool> IsDeleted { get; set; }
         public string Colors { get; set; }
         public string Sizes { get; set; }
-    
+
         public virtual Brand Brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }

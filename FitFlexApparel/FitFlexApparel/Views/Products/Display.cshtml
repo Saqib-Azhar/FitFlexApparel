@@ -2,6 +2,8 @@
     @{ 
 
         var ReviewsList = ViewBag.Reviews as IEnumerable<FitFlexApparel.Models.ProductReview>;
+        var ProductPricesList = ViewBag.ProductPrices as IEnumerable<FitFlexApparel.Models.ProductPrice>;
+        
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
@@ -99,7 +101,22 @@
                                 <span class="sale">-20%</span>
                             </div>*@
                             <h2 class="product-name">@Model.Product_Name</h2>
-                            <h3 class="product-price">$@Model.Original_Price @*<del class="product-old-price">$45.00</del>*@</h3>
+                            <table class="table table-responsive table-hover" style="border:double" border="1">
+                                <tr>
+                                    @foreach (var item in ProductPricesList.OrderBy(s=>s.Min))
+                                    {
+                                        if (item.Max != null)
+                                        {
+                                            <td><div>@item.Min - @item.Max Piece/Pieces<br /><b>US $@item.Price</b></div></td>
+                                        }
+                                        else
+                                        {
+                                            <td><div>@item.Min < Piece/Pieces<br /><b>US $@item.Price</b></div></td>
+                                        }
+                                    }
+                                </tr>
+                            </table>
+                            @*<h3 class="product-price">$@Model.Original_Price <del class="product-old-price">$45.00</del></h3>*@
                             <div>
                                 <div class="product-rating">
                                     @for (int star = 0; star < Model.Average_Rating; star = star + 1)
@@ -115,41 +132,78 @@
                             </div>
                             @if (Model.Product_Stock > 0)
                             {
-                                <p><strong>Availability:</strong> In Stock</p>
+                                <p><strong>Availability:</strong> In Stock <strong style="padding-left:30px;">Brand:</strong> @Model.Brand.Brand_Name</p>
                             }
                             else
                             {
-                                <p><strong>Availability:</strong> Out of Stock</p>
+                                <p><strong>Availability:</strong> Out of Stock <strong style="padding-left:30px;">Brand:</strong> @Model.Brand.Brand_Name</p>
                             }
-                            <p><strong>Brand:</strong> @Model.Brand.Brand_Name</p>
+                            <hr />
                             
                             @Html.Raw(Model.Product_Description)
-                            
+
                             <div class="product-options">
                                 <ul class="size-option">
                                     <li><span class="text-uppercase">Size:</span></li>
                                     @foreach (var item in Model.Sizes.Split(','))
                                     {
-                                        <li class="sizeSelection"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                        <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
                                     }
                                 </ul>
                                 <ul class="color-option">
                                     <li><span class="text-uppercase">Color:</span></li>
                                     @foreach (var item in Model.Colors.Split(','))
                                     {
-                                        <li class="colorSelection"><a onclick="SelectThis(this, 'color')" style="border:solid;cursor:pointer;background-color:#@item;"></a></li>
+                                        <li class="colorSelection" value="@item"><a onclick="SelectThis(this, 'color')" alt="@item" style="border:solid;cursor:pointer;background-color:#@item;"></a></li>
                                     }
                                 </ul>
                             </div>
                             <script>
                                 function SelectThis(obj,attr)
                                 {
-                                    debugger
                                     if(attr == 'color')
                                         $(".colorSelection").removeClass("active");
                                     else if(attr == 'size')
                                         $(".sizeSelection").removeClass("active");
                                 $(obj).parent().addClass('active')
+                                }
+                                function AddToCart()
+                                {
+                                    debugger;
+                                    var selectedSize = $(".sizeSelection.active").children().text();
+                                    var selectedColor = $(".colorSelection.active").children().attr('alt');
+                                    var selectedQuantity = $("#SelectedQuantity").val();
+                                    var productId = '@Model.Id';
+                                    if(selectedColor == null || selectedSize == null || selectedQuantity == null)
+                                    {
+                                        alert("Please select valid color size and quantity!");
+                                        return 0;
+
+                                    }
+                                    $.ajax({
+                                        url: "/Products/AddToCart",
+                                        type: 'POST',
+                                        data: { productId: productId, selectedQuantity: selectedQuantity, selectedColor:selectedColor, selectedSize:selectedSize },
+                                        success: function (result) {
+                                            if (result == "Success")
+                                            {
+                                                alert("Successfully added in Cart!");
+                                                window.location.reload();
+                                            }
+                                            else if(result == "LoginError")
+                                            {
+                                                alert("Please create an account or login to your account to add this product!");
+                                                window.location = "/Account/Login?url="+window.location.href;
+                                            }
+                                            else 
+                                            {
+                                                alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)")
+                                            }
+                                        },
+                                        error: function () {
+                                            alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
+                                        }
+                                    });
                                 }
                             </script>
                             @if (Model.Product_Stock > 0)

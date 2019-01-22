@@ -36,6 +36,10 @@ namespace FitFlexApparel.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<CustomerContactRequest> CustomerContactRequests { get; set; }
+        public virtual DbSet<OrderActionHistory> OrderActionHistories { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderStatu> OrderStatus { get; set; }
         public virtual DbSet<ProductPrice> ProductPrices { get; set; }
         public virtual DbSet<ProductReview> ProductReviews { get; set; }
         public virtual DbSet<Product> Products { get; set; }
