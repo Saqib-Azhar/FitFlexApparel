@@ -1,0 +1,89 @@
+﻿@model FitFlexApparel.Models.CustomerContactRequest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h4>CustomerContactRequest</h4>
+    <hr />
+    <div class="row">
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Customer Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Customer_Name)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Customer Email")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Customer_Email)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Customer Phone")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Customer_Phone)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Message")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Message)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Created At")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Created_At)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("IsDeleted")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.IsDeleted)
+			</div>
+		</div>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" }) 
+    @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+</p>

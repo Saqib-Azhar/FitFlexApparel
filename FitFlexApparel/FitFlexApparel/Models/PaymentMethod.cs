@@ -11,19 +11,20 @@ namespace FitFlexApparel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
-
-    public partial class Blog
+    
+    public partial class PaymentMethod
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PaymentMethod()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int Id { get; set; }
-        public string Blog_Name { get; set; }
-        public Nullable<System.DateTime> Written_On { get; set; }
-        public Nullable<System.DateTime> Edited_On { get; set; }
-        public Nullable<bool> IsAvailable { get; set; }
-        public string Created_By { get; set; }
-        public string Blogger_Name { get; set; }
-        [AllowHtml]
-        public string Blog1 { get; set; }
+        public string Payment_Method { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

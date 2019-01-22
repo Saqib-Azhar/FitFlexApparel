@@ -1,0 +1,114 @@
+﻿@model FitFlexApparel.Models.OrderDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div>
+    <h4>OrderDetail</h4>
+    <hr />
+    <div class="row">
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product Id")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product_Id)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product_Name)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product Color")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product_Color)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product Size")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product_Size)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product Quantity")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product_Quantity)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product Price")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product_Price)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Total Price")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Total_Price)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Order.Order No")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Order.Order_No)
+			</div>
+		</div>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" }) 
+    @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+</p>

@@ -199,12 +199,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CustomerContactRequestsController.cs" />
     <Compile Include="Controllers\ExceptionManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductReviewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -273,9 +276,13 @@
     <Compile Include="Models\OrderStatu.cs">
       <DependentUpon>FitflexApparel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaymentMethod.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>FitflexApparel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductClass.cs" />
     <Compile Include="Models\ProductPrice.cs">
       <DependentUpon>FitflexApparel.tt</DependentUpon>
     </Compile>
@@ -614,11 +621,29 @@
     <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Products\Display.cshtml" />
     <Content Include="Views\Home\AccountAndCart.cshtml" />
+    <Content Include="Views\Orders\Cart.cshtml" />
+    <Content Include="Views\Orders\Checkout.cshtml" />
+    <Content Include="Views\Orders\PreCheckout.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Blogs\Create.cshtml" />
+    <Content Include="Views\Blogs\Delete.cshtml" />
+    <Content Include="Views\Blogs\Details.cshtml" />
+    <Content Include="Views\Blogs\Edit.cshtml" />
+    <Content Include="Views\Blogs\Index.cshtml" />
+    <Content Include="Views\CustomerContactRequests\Create.cshtml" />
+    <Content Include="Views\CustomerContactRequests\Delete.cshtml" />
+    <Content Include="Views\CustomerContactRequests\Details.cshtml" />
+    <Content Include="Views\CustomerContactRequests\Edit.cshtml" />
+    <Content Include="Views\CustomerContactRequests\Index.cshtml" />
+    <Content Include="Views\ProductReviews\Create.cshtml" />
+    <Content Include="Views\ProductReviews\Delete.cshtml" />
+    <Content Include="Views\ProductReviews\Details.cshtml" />
+    <Content Include="Views\ProductReviews\Edit.cshtml" />
+    <Content Include="Views\ProductReviews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\" />
     <Folder Include="Views\ExceptionManager\" />
-    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

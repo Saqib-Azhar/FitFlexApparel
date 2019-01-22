@@ -115,3 +115,11 @@ Parameter name: keyValues
 
 
 
+22-Jan-19 9:04:18 PM | EntityFramework | at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at FitFlexApparel.Controllers.OrdersController.ConfirmOrder(FormCollection fc) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\OrdersController.cs:line 106 | An error occurred while updating the entries. See the inner exception for details.
+
+
+
+

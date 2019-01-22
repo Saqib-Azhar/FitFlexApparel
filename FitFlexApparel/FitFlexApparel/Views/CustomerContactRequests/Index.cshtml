@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FitFlexApparel.Models.CustomerContactRequest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>CustomerContactRequest</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
+    <tr>
+        <th>
+            @Html.DisplayName("Customer Name")
+        </th>
+        <th>
+            @Html.DisplayName("Customer Email")
+        </th>
+        <th>
+            @Html.DisplayName("Customer Phone")
+        </th>
+        <th>
+            @Html.DisplayName("Message")
+        </th>
+        <th>
+            @Html.DisplayName("Created At")
+        </th>
+        <th>
+            @Html.DisplayName("IsDeleted")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created_At)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td style="width:175px!important">
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" }) 
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
+            @Html.ActionLink("Disable", "SoftDelete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 
+        </td>
+    </tr>
+}
+
+</table>

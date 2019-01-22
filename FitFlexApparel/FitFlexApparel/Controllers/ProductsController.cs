@@ -342,9 +342,12 @@ namespace FitFlexApparel.Controllers
 				{
 					return HttpNotFound();
 				}
-				ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name", product.Brand_Id);
-				ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name", product.Subcategory_Id);
-				return View(product);
+
+                ViewBag.ColorsAvailable = new SelectList(db.Colors, "Color_Code", "Color_Name");
+                ViewBag.SizesAvailable = new SelectList(db.Sizes, "Size_Code", "Size_Name");
+                ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name");
+                ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name");
+                return View(product);
 				
 			}
 			catch(Exception ex)
@@ -650,9 +653,9 @@ namespace FitFlexApparel.Controllers
 
 
 
-        [HttpPost]
-        public JsonResult UpdateCartQuantity(int? id, int? quantity)
+        public ActionResult UpdateCartQuantity(int? id, int? quantity)
         {
+            string url = Request.UrlReferrer.AbsoluteUri;
             try
             {
                 var cartItem = db.Carts.FirstOrDefault(s => s.Id == id);
@@ -664,14 +667,13 @@ namespace FitFlexApparel.Controllers
 
                 db.SaveChanges();
                 var res = SyncCart();
-                return Json("Success", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-                return Json("Failed", JsonRequestBehavior.AllowGet);
             }
+            return Redirect(url);
         }
 
         #endregion

@@ -29,6 +29,15 @@ namespace FitFlexApparel.Models
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<double> Total_Amount { get; set; }
         public Nullable<int> Total_Products { get; set; }
+        public string User_Name { get; set; }
+        public string Shipping_Address_Line1 { get; set; }
+        public string Shipping_Address_Line2 { get; set; }
+        public string Shipping_Address_PostCode { get; set; }
+        public string Shipping_Address_City { get; set; }
+        public string Shipping_Address_Country { get; set; }
+        public string Shipping_Address_PhoneNo { get; set; }
+        public string Shipping_Address_Email { get; set; }
+        public Nullable<int> Payment_Method { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -36,5 +45,6 @@ namespace FitFlexApparel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
     }
 }
