@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace FitFlexApparel.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

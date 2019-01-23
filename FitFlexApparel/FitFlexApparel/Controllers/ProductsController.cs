@@ -363,7 +363,7 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Product_Name,Product_Description,Product_Image1,Product_Image2,Product_Image3,Product_Image4,Product_Image5,Product_Overview,Subcategory_Id,Brand_Id,Product_Stock,Company_Profile,Original_Price,Average_Rating,Total_Ratings,Product_Slug,IsDeleted")] Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5)
+        public ActionResult Edit([Bind(Include = "Id,Product_Name,Product_Description,Product_Overview,Subcategory_Id,Brand_Id,Product_Stock,Company_Profile,Original_Price,Average_Rating,Total_Ratings,Product_Slug,IsDeleted")] Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5)
         {
 			try{
 				if (ModelState.IsValid)
@@ -678,6 +678,53 @@ namespace FitFlexApparel.Controllers
 
         #endregion
 
+
+        #region Search
+
+        public ActionResult Search(FormCollection fc)
+        {
+            List<Product> productsList = new List<Product>();
+            try
+            {
+                string searchedString = fc["Query"];
+                var queries = searchedString.Split(' ');
+                var selectedCategory = Convert.ToInt32(fc["SelectedCategory"]);
+                ViewBag.SearchedQuery = searchedString;
+                if (selectedCategory == 0)
+                {
+                    productsList = db.Products.Where(s => s.Product_Name.Contains(searchedString) && s.IsDeleted != true).ToList();
+                    if(productsList.Count == 0)
+                    {
+                        foreach(var item in queries)
+                        {
+                            productsList.AddRange(db.Products.Where(s => s.Product_Name.Contains(item) && s.IsDeleted != true).ToList());
+                        }
+                    }
+                }
+
+                else
+                {
+                    productsList = db.Products.Where(s => s.Product_Name.Contains(searchedString) && s.SubCategory.Category_Id == selectedCategory && s.IsDeleted != true).ToList();
+                    if (productsList.Count == 0)
+                    {
+                        foreach (var item in queries)
+                        {
+                            productsList.AddRange(db.Products.Where(s => s.Product_Name.Contains(item) && s.SubCategory.Category_Id == selectedCategory && s.IsDeleted != true).ToList());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+
+            }
+            return View(productsList);
+        }
+
+
+        #endregion
 
 
 

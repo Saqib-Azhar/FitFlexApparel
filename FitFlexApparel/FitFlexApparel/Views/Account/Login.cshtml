@@ -3,10 +3,44 @@
 @{
     ViewBag.Title = "Log in";
 }
+<link rel="stylesheet" href="/Assets/Login/css/style.css">
+<div class="row" style="padding:25px">
+    <div class="container">
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+        <div class="container-login">
+            <section id="content">
+
+                <form-login>
+                    <h1>LOGIN</h1><hr />
+                    <div>
+                        <input type="text" placeholder="Username" required name="Email" id="Email" />
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Password" required name="Password" id="Password" />
+                    </div>
+                <div class="row">
+                    <h5>Remember me? <input type="checkbox" class="" name="RememberMe" id="RememberMe" /></h5>
+                </div>
+                    <div style="text-align:center">
+                        <input style="float:none!important; padding-bottom:0px;margin:0px!important;background:#E41D38 !important;color:wheat" type="submit" value="Log in" /><br />
+                    </div>
+                </form-login><!-- form -->
+                <div class="button">
+                    <a href="#">FITFLEX APPAREL</a>
+                </div><!-- button -->
+            </section><!-- content -->
+        </div><!-- container -->
+}
+    </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-12">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -41,25 +75,16 @@
                         <input type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+
+<script src="/Assets/Login/js/index.js"></script>

@@ -1,72 +1,10 @@
 ﻿@{
-
+    var CategoriesList = ViewBag.Categories as IEnumerable<FitFlexApparel.Models.Category>;
     var CartItemsList = ViewBag.CartItems as IEnumerable<FitFlexApparel.Models.Cart>;
     double? totalPrice = 0;
-    foreach(var item in CartItemsList)
+    foreach (var item in CartItemsList)
     {
         totalPrice = totalPrice + item.Total_Price;
     }
 }
-<ul class="header-btns">
-    <!-- Account -->
-    <li class="header-account dropdown default-dropdown">
-        <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
-            <div class="header-btns-icon">
-                <i class="fa fa-user-o"></i>
-            </div>
-            <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
-        </div>
-        <a href="#" class="text-uppercase">Login</a> / <a href="#" class="text-uppercase">Join</a>
-        <ul class="custom-menu">
-            <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-            <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-            <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-            <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-            <li><a href="#"><i class="fa fa-unlock-alt"></i> Login</a></li>
-            <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
-        </ul>
-    </li>
-    <!-- /Account -->
-    <!-- Cart -->
-    <li class="header-cart dropdown default-dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-            <div class="header-btns-icon">
-                <i class="fa fa-shopping-cart"></i>
-                <span class="qty">@CartItemsList.Count()</span>
-            </div>
-            <strong class="text-uppercase">My Cart:</strong>
-            <br>
-            <span>@totalPrice$</span>
-        </a>
-        <div class="custom-menu">
-            <div id="shopping-cart">
-                <div class="shopping-cart-list">
-                    @foreach (var item in CartItemsList)
-                    {
-                        <div class="product product-widget">
-                            <div class="product-thumb">
-                                <img src="/UploadedImages/@item.Image" alt="">
-                            </div>
-                            <div class="product-body">
-                                <h3 class="product-price">$@item.Price_Per_Item <span class="qty">x @item.Quantity</span></h3>
-                                <h2 class="product-name"><a href="/Products/Display/@item.Product_Id">@item.Product.Product_Name</a></h2>
-                            </div>
-                            <a href="/Products/RemoveFromCart?id=@item.Id" class="cancel-btn"><i class="fa fa-trash"></i></a>
-                        </div>
-                    }
 
-                </div>
-                <div class="shopping-cart-btns">
-                    <button class="main-btn">View Cart</button>
-                    <a href="/Orders/Checkout" class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </li>
-    <!-- /Cart -->
-    <!-- Mobile nav toggle-->
-    <li class="nav-toggle">
-        <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
-    </li>
-    <!-- / Mobile nav toggle -->
-</ul>

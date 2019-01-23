@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>E-SHOP HTML Template</title>
+    <title>Fitflex Apparel</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -38,177 +38,12 @@
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header>
-        <!-- top Header -->
-        @*<div id="top-header">
-            <div class="container">
-                <div class="pull-left">
-                    <span>Welcome to E-shop!</span>
-                </div>
-                <div class="pull-right">
-                    <ul class="header-top-links">
-                        <li><a href="#">Store</a></li>
-                        <li><a href="#">Newsletter</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li class="dropdown default-dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">ENG <i class="fa fa-caret-down"></i></a>
-                            <ul class="custom-menu">
-                                <li><a href="#">English (ENG)</a></li>
-                                <li><a href="#">Russian (Ru)</a></li>
-                                <li><a href="#">French (FR)</a></li>
-                                <li><a href="#">Spanish (Es)</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown default-dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
-                            <ul class="custom-menu">
-                                <li><a href="#">USD ($)</a></li>
-                                <li><a href="#">EUR (€)</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
-        <!-- /top Header -->
-        <!-- header -->
-        <div id="header">
-            <div class="container">
-                <div class="pull-left">
-                    <!-- Logo -->
-                    <div class="header-logo">
-                        <a class="logo" href="#">
-                            <img src="/Assets/img/logo.png" alt="" style="width:200px;max-height:50px">
-                        </a>
-                    </div>
-                    <!-- /Logo -->
-                    <!-- Search -->
-                    <div class="header-search">
-                        <form>
-                            <input class="input search-input" type="text" placeholder="Enter your keyword">
-                            <select class="input search-categories">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
-                            </select>
-                            <button class="search-btn"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                    <!-- /Search -->
-                </div>
-                <div class="pull-right">
-                    @Html.Action("AccountAndCart","Home")
-                </div>
-            </div>
-            <!-- header -->
-        </div>
-        <!-- container -->
-    </header>
-    <!-- /HEADER -->
-    <!-- NAVIGATION -->
+    
     @Html.Action("Header", "Home")
 
     @RenderBody()
 
-
-
-    <!-- FOOTER -->
-    <footer id="footer" class="section section-grey">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- footer widget -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <!-- footer logo -->
-                        <div class="footer-logo">
-                            <a class="logo" href="#">
-                                <img src="/Assets/img/logo.png" alt="">
-                            </a>
-                        </div>
-                        <!-- /footer logo -->
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-
-                        <!-- footer social -->
-                        <ul class="footer-social">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        </ul>
-                        <!-- /footer social -->
-                    </div>
-                </div>
-                <!-- /footer widget -->
-                <!-- footer widget -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-header">My Account</h3>
-                        <ul class="list-links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Compare</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Login</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /footer widget -->
-
-                <div class="clearfix visible-sm visible-xs"></div>
-
-                <!-- footer widget -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-header">Customer Service</h3>
-                        <ul class="list-links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Shiping & Return</a></li>
-                            <li><a href="#">Shiping Guide</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /footer widget -->
-                <!-- footer subscribe -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-header">Stay Connected</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                        <form>
-                            <div class="form-group">
-                                <input class="input" placeholder="Enter Email Address">
-                            </div>
-                            <button class="primary-btn">Join Newslatter</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /footer subscribe -->
-            </div>
-            <!-- /row -->
-            <hr>
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 text-center">
-                    <!-- footer copyright -->
-                    <div class="footer-copyright">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                    <!-- /footer copyright -->
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </footer>
-    <!-- /FOOTER -->
+    @Html.Action("Footer","Home")
     <!-- jQuery Plugins -->
     <script src="/Assets/js/jquery.min.js"></script>
     <script src="/Assets/js/bootstrap.min.js"></script>
@@ -216,9 +51,59 @@
     <script src="/Assets/js/nouislider.min.js"></script>
     <script src="/Assets/js/jquery.zoom.min.js"></script>
     <script src="/Assets/js/main.js"></script>
-    @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)*@
+   
+    <script>
+        function AddToWishlist(id) {
+
+            $.ajax({
+                url: "/Wishlists/AddToWishlist",
+                type: 'POST',
+                data: { id:id },
+                success: function (result) {
+                    if (result == "Success") {
+                        alert("Successfully added in Wishlist!");
+                    }
+                    else if (result == "LoginError") {
+                        alert("Please create an account or login to existing account to add this product!");
+                        window.location = "/Account/Login?url=" + window.location.href;
+                    }
+                    else
+                    {
+                        alert(result);
+                    }
+                },
+                error: function () {
+                    alert("Something went wrong! (please make sure you are connected with Internet OR Reload this page)");
+                }
+            });
+
+        }
+        function RemoveFromWishlist(id) {
+
+            $.ajax({
+                url: "/Wishlists/RemoveFromWishlist",
+                type: 'POST',
+                data: { id: id },
+                success: function (result) {
+                    if (result == "Success") {
+                        alert("Successfully Removed from Wishlist!");
+                    }
+                    else if (result == "LoginError") {
+                        alert("Please create an account or login to existing account to add this product!");
+                        window.location = "/Account/Login?url=" + window.location.href;
+                    }
+                    else {
+                        alert(result)
+                    }
+                },
+                error: function () {
+                    alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
+                }
+            });
+
+        }
+    </script>
+
     @RenderSection("scripts", required: false)
 
 </body>

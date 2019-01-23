@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FitFlexApparel.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FitFlexApparel.Controllers
 {
@@ -137,7 +138,7 @@ namespace FitFlexApparel.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(int? isRoleAdmin = 0)
         {
             return View();
         }
@@ -147,7 +148,7 @@ namespace FitFlexApparel.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, int? isRoleAdmin = 0)
         {
             var db = new FitflexApparelEntities();
             if (ModelState.IsValid)
@@ -164,8 +165,69 @@ namespace FitFlexApparel.Controllers
                     registeredUser.DisplayName = model.Name;
                     registeredUser.PostalCode = model.PostalCode;
                     db.SaveChanges();
+
+                    var context = new ApplicationDbContext();
+                    var roleStore = new RoleStore<IdentityRole>(context);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+                    userManager.AddToRole(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult AdminRegister(int? isRoleAdmin = 1)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminRegister(RegisterViewModel model, int? isRoleAdmin = 1)
+        {
+            var db = new FitflexApparelEntities();
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNo };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var registeredUser = db.AspNetUsers.Find(user.Id);
+                    registeredUser.Address1 = model.Address1;
+                    registeredUser.Address2 = model.Address2;
+                    registeredUser.City = model.City;
+                    registeredUser.Country = model.Country;
+                    registeredUser.DisplayName = model.Name;
+                    registeredUser.PostalCode = model.PostalCode;
+                    db.SaveChanges();
+
+                    var context = new ApplicationDbContext();
+                    var roleStore = new RoleStore<IdentityRole>(context);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+                    userManager.AddToRole(user.Id, "Admin");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace FitFlexApparel.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

@@ -210,6 +210,7 @@
     <Compile Include="Controllers\ProductReviewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\WishlistsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -367,6 +368,7 @@
     <Content Include="Assets\img\banner13.jpg" />
     <Content Include="Assets\img\banner14.jpg" />
     <Content Include="Assets\img\banner15.jpg" />
+    <Content Include="Assets\img\BlogIcon.png" />
     <Content Include="Assets\img\logo.png" />
     <Content Include="Assets\img\main-product01.jpg" />
     <Content Include="Assets\img\main-product02.jpg" />
@@ -390,6 +392,8 @@
     <Content Include="Assets\js\main.js" />
     <Content Include="Assets\js\nouislider.min.js" />
     <Content Include="Assets\js\slick.min.js" />
+    <Content Include="Assets\Login\css\style.css" />
+    <Content Include="Assets\Login\js\index.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -640,6 +644,16 @@
     <Content Include="Views\ProductReviews\Details.cshtml" />
     <Content Include="Views\ProductReviews\Edit.cshtml" />
     <Content Include="Views\ProductReviews\Index.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
+    <Content Include="Views\Products\Search.cshtml" />
+    <Content Include="Views\Wishlists\Create.cshtml" />
+    <Content Include="Views\Wishlists\Delete.cshtml" />
+    <Content Include="Views\Wishlists\Details.cshtml" />
+    <Content Include="Views\Wishlists\Edit.cshtml" />
+    <Content Include="Views\Wishlists\Index.cshtml" />
+    <Content Include="Views\Blogs\Read.cshtml" />
+    <Content Include="Views\Blogs\AllBlogs.cshtml" />
+    <Content Include="Views\Account\AdminRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\" />

@@ -1,0 +1,29 @@
+﻿@model FitFlexApparel.Models.Blog
+
+@{
+    ViewBag.Title = "Read";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Index">Home</a></li>
+            <li><a href="/Blogs/AllBlogs">Blogs</a></li>
+            <li class="active"><a href="/Blogs/Read/@Model.Id">@Model.Blog_Name</a></li>
+        </ul>
+    </div>
+</div>
+<section id="main" style="padding-top:50px">
+    <div class="row">
+        <div class="container">
+            <h1 style="text-align:center">
+                <u>@Model.Blog_Name</u>
+            </h1>
+            <h5 style="text-align:center"><i>@Model.Blogger_Name - @Model.Written_On.Value.ToString("dd/MM/yyyy")</i></h5>
+            <hr />
+            <div>
+                @Html.Raw(Model.Blog1)
+            </div>
+        </div>
+    </div>
+</section>

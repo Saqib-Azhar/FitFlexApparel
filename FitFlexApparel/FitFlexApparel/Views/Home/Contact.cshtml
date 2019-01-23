@@ -1,17 +1,83 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<link rel="stylesheet" href="/Assets/Login/css/style.css">
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Index">Home</a></li>
+            <li class="active"><a href="/Home/Contact">Contact</a></li>
+        </ul>
+    </div>
+</div>
+
+<section style="padding-top:50px;min-height:400px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="container-login" style="max-width:560px">
+                    <section id="content" style="width:500px;">
+                        <form class="form-horizontal" style="margin-left:35px;width:400px;padding-bottom:10px;">
+
+                            <h2>@ViewBag.Title</h2>
+
+                            <address>
+                                One Microsoft Way<br />
+                                Redmond, WA 98052-6399<br />
+                                <abbr title="Phone">P:</abbr>
+                                425.555.0100
+                            </address>
+
+                            <address>
+                                <strong>Support:</strong>   <a href="mailto:Support@fitflexapparel.com">Support@fitflexapparel.com</a><br />
+                                <strong>Marketing:</strong> <a href="mailto:Info@fitflexapparel.com">Info@fitflexapparel.com</a>
+                            </address>
+
+                        </form>
+                    </section>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="container-login" style="max-width:560px">
+                    <section id="content" style="width:500px;">
+                        <form method="post" action="/Home/ContactForm" class="form-horizontal" style="margin-left:35px;width:400px;padding-bottom:10px;">
+                            <div class="form-group">
+                                @Html.Label("", "Name", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    <input type="text" name="Name" id="Name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("", "Email", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    <input type="email" name="Email" id="Email" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("", "Phone Number", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    <input type="text" name="PhoneNo" id="PhoneNo" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("", "Message", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    <textarea name="Message" id="Message" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+
+                        </form>
+                    </section>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+<script src="/Assets/Login/js/index.js"></script>

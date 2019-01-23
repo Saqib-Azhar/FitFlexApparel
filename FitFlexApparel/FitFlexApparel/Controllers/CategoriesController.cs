@@ -55,6 +55,7 @@ namespace FitFlexApparel.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Categories/Create
         public ActionResult Create()
         {
@@ -117,6 +118,7 @@ namespace FitFlexApparel.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -185,6 +187,7 @@ namespace FitFlexApparel.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -230,6 +233,7 @@ namespace FitFlexApparel.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         public ActionResult SoftDelete(int id)
         {
             try

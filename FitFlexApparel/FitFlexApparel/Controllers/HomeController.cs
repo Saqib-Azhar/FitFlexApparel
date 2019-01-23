@@ -32,17 +32,30 @@ namespace FitFlexApparel.Controllers
         public PartialViewResult Header()
         {
             var db = new FitflexApparelEntities();
-            ViewBag.SubCategories = db.SubCategories.Where(s => s.IsDeleted != true).ToList();
-            ViewBag.Categories = db.Categories.Where(s => s.IsDeleted != true).ToList();
-            return PartialView();
-        }
-
-        public PartialViewResult AccountAndCart()
-        {
-            var db = new FitflexApparelEntities();
+            ViewBag.Categories = db.Categories.Where(s => s.IsDeleted != true).OrderBy(s => s.Category_Name).ToList();
             var userId = User.Identity.GetUserId();
             ViewBag.CartItems = db.Carts.Where(s => s.User_Id == userId).ToList();
             return PartialView();
+        }
+
+        public PartialViewResult Footer()
+        {
+            return PartialView();
+        }
+
+        public ActionResult ContactForm(FormCollection fc)
+        {
+            var db = new FitflexApparelEntities();
+            var contact = new CustomerContactRequest();
+            contact.Created_At = DateTime.Now;
+            contact.Customer_Email = fc["Email"];
+            contact.Customer_Name = fc["Name"];
+            contact.Customer_Phone = fc["PhoneNo"];
+            contact.Message = fc["Message"];
+            contact.IsDeleted = false;
+            db.CustomerContactRequests.Add(contact);
+            db.SaveChanges();
+            return RedirectToAction("Contact");
         }
     }
 }

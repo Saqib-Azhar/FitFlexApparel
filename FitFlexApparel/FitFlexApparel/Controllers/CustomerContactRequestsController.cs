@@ -10,6 +10,7 @@ using FitFlexApparel.Models;
 
 namespace FitFlexApparel.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CustomerContactRequestsController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

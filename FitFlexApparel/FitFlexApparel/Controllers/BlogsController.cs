@@ -7,17 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FitFlexApparel.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FitFlexApparel.Controllers
 {
     public class BlogsController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();
+        [Authorize(Roles = "Admin")]
 
-        // GET: Blogs
         public ActionResult Index()
         {
-			try{
+			try
+            {
 				return View(db.Blogs.Where(s => s.IsDeleted != true).ToList());
 			}
 			catch(Exception ex)
@@ -28,6 +30,22 @@ namespace FitFlexApparel.Controllers
 			}
 		}
 
+        [AllowAnonymous]
+        public ActionResult AllBlogs()
+        {
+            try
+            {
+                return View(db.Blogs.Where(s => s.IsDeleted != true).ToList());
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        [Authorize(Roles ="Admin")]
         // GET: Blogs/Details/5
         public ActionResult Details(int? id)
         {
@@ -53,6 +71,7 @@ namespace FitFlexApparel.Controllers
 			}
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Blogs/Create
         public ActionResult Create()
         {
@@ -68,6 +87,7 @@ namespace FitFlexApparel.Controllers
 			}
         }
 
+
         // POST: Blogs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -79,6 +99,9 @@ namespace FitFlexApparel.Controllers
 			{
 				if (ModelState.IsValid)
 				{
+                    var userId = User.Identity.GetUserId();
+                    blog.Written_On = DateTime.Now;
+                    blog.Created_By = userId;
 					blog.IsDeleted = false;
 					db.Blogs.Add(blog);
 					db.SaveChanges();
@@ -96,6 +119,7 @@ namespace FitFlexApparel.Controllers
 			}
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Blogs/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -126,11 +150,12 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Blog_Name,Written_On,Edited_On,IsAvailable,Created_By,Blogger_Name,Blog1,IsDeleted")] Blog blog)
+        public ActionResult Edit([Bind(Include = "Id,Blog_Name,Edited_On,IsAvailable,Blogger_Name,Blog1,IsDeleted")] Blog blog)
         {
 			try{
 				if (ModelState.IsValid)
 				{
+                    blog.Edited_On = DateTime.Now;
 					db.Entry(blog).State = EntityState.Modified;
 					blog.IsDeleted = false;
 					db.SaveChanges();
@@ -146,6 +171,7 @@ namespace FitFlexApparel.Controllers
 			}
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Blogs/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -190,7 +216,7 @@ namespace FitFlexApparel.Controllers
 			}
         }
 
-		
+        [Authorize(Roles = "Admin")]
         public ActionResult SoftDelete(int id)
         {
             try
@@ -206,6 +232,13 @@ namespace FitFlexApparel.Controllers
                 ExceptionManagerController.writeErrorLog(ex);
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+        [AllowAnonymous]
+        public ActionResult Read(int? id)
+        {
+            var blog = db.Blogs.FirstOrDefault(s => s.Id == id);
+            return View(blog);
         }
 
 
