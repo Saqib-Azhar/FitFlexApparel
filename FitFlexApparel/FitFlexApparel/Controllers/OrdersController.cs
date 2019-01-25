@@ -21,7 +21,7 @@ namespace FitFlexApparel.Controllers
         {
             try
             {
-                var orderDetails = db.OrderDetails.Include(o => o.Order);
+                var orderDetails = db.Orders.Include(o => o.OrderDetails);
                 return View(orderDetails.ToList());
             }
             catch (Exception ex)
@@ -80,7 +80,7 @@ namespace FitFlexApparel.Controllers
                 var userId = User.Identity.GetUserId();
                 var userObj = db.AspNetUsers.FirstOrDefault(s => s.Id == userId);
                 var prevOrders = db.Orders.Where(s => s.User_Id == userId);
-                order.Order_No = "Order:"+(prevOrders.Count()+1)+"|User:"+userId;
+                order.Order_No = "o"+(prevOrders.Count()+1)+":"+userId;
                 order.IsDeleted = false;
                 order.Order_Status = 1;
                 order.Order_Time = DateTime.Now;
@@ -155,5 +155,124 @@ namespace FitFlexApparel.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #region OrderStages
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult OrderProcessed(int? id)
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                var order = db.Orders.Find(id);
+                order.Order_Status = 2;
+
+
+                OrderActionHistory orderAction = new OrderActionHistory();
+                orderAction.Order_Id = order.Id;
+                orderAction.Order_Status = 2;
+                orderAction.Updated_At = DateTime.Now;
+                orderAction.Updated_By = userId;
+                db.OrderActionHistories.Add(orderAction);
+                db.SaveChanges();
+                
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+
+            }
+            return RedirectToAction("AllOrders");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult OrderDispatched(int? id)
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                var order = db.Orders.Find(id);
+                order.Order_Status = 3;
+
+
+                OrderActionHistory orderAction = new OrderActionHistory();
+                orderAction.Order_Id = order.Id;
+                orderAction.Order_Status = 3;
+                orderAction.Updated_At = DateTime.Now;
+                orderAction.Updated_By = userId;
+                db.OrderActionHistories.Add(orderAction);
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+
+            }
+            return RedirectToAction("AllOrders");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult OrderCompleted(int? id)
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                var order = db.Orders.Find(id);
+                order.Order_Status = 4;
+
+
+                OrderActionHistory orderAction = new OrderActionHistory();
+                orderAction.Order_Id = order.Id;
+                orderAction.Order_Status = 4;
+                orderAction.Updated_At = DateTime.Now;
+                orderAction.Updated_By = userId;
+                db.OrderActionHistories.Add(orderAction);
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+
+            }
+            return RedirectToAction("AllOrders");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult RejectOrder(int? id)
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+
+                var order = db.Orders.Find(id);
+                order.Order_Status = 5;
+
+
+                OrderActionHistory orderAction = new OrderActionHistory();
+                orderAction.Order_Id = order.Id;
+                orderAction.Order_Status = 5;
+                orderAction.Updated_At = DateTime.Now;
+                orderAction.Updated_By = userId;
+                db.OrderActionHistories.Add(orderAction);
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+
+            }
+            return RedirectToAction("AllOrders");
+        }
+        #endregion
     }
 }

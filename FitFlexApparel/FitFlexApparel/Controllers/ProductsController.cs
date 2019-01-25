@@ -101,7 +101,7 @@ namespace FitFlexApparel.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                ViewBag.Reviews = db.ProductReviews.Where(s => s.Product_Id == id).ToList();
+                ViewBag.Reviews = db.ProductReviews.Where(s => s.Product_Id == id && s.IsDeleted != true).ToList();
                 ViewBag.ProductPrices = db.ProductPrices.Where(s => s.Product_Id == id).ToList();
                 Product product = db.Products.Find(id);
                 if (product == null)
@@ -574,6 +574,7 @@ namespace FitFlexApparel.Controllers
                 cart.User_Id = userId;
                 var productPriceObj = db.ProductPrices.FirstOrDefault(s => s.Product_Id == productId && s.Min <= selectedQuantity && (s.Max >= selectedQuantity || s.Max == null));
                 cart.Price_Per_Item = productPriceObj.Price;
+                cart.Product_Name = productPriceObj.Product.Product_Name;
                 cart.Total_Price = cart.Price_Per_Item * selectedQuantity;
                 cart.Added_At = DateTime.Now;
                 var productObj = db.Products.FirstOrDefault(s => s.Id == productId);

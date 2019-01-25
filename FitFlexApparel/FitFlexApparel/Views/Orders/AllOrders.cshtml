@@ -1,0 +1,171 @@
+﻿@model IEnumerable<FitFlexApparel.Models.Order>
+
+@{
+    ViewBag.Title = "AllOrders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Orders</h2>
+<div style="min-height:700px">
+    <table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
+        <tr>
+            <th>
+                @Html.DisplayName("Order No")
+            </th>
+            <th>
+                @Html.DisplayName("Ordered At")
+            </th>
+            <th>
+                @Html.DisplayName("Ordered By")
+            </th>
+            <th>
+                @Html.DisplayName("Total Amount")
+            </th>
+            <th>
+                @Html.DisplayName("Total Products")
+            </th>
+            <th>
+                @Html.DisplayName("Shipping City")
+            </th>
+            <th>
+                @Html.DisplayName("PhoneNo")
+            </th>
+            <th>
+                @Html.DisplayName("Order  Status")
+            </th>
+            <th>
+                @Html.DisplayName("Payment Method")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="#" style="color:darkblue" data-toggle="modal" data-target="#emailModel_@item.Id">@Html.DisplayFor(modelItem => item.Order_No)</a>
+
+                    <div id="emailModel_@item.Id" style="position:absolute!important" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content" style="min-width:700px">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Order Details <small style="color:darkslateblue;">(Status: @item.OrderStatu.Order_Status)</small></h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="text-align:left">
+                                        <div class="col-md-6"><b>Buyer Name:</b> @item.User_Name</div>
+                                        <div class="col-md-6"><b>Phone No:</b> @item.Shipping_Address_PhoneNo</div>
+                                        <div class="col-md-6"><b>Email:</b> @item.Shipping_Address_Email</div>
+                                        <div class="col-md-6"><b>Payment Method:</b> @item.PaymentMethod.Payment_Method</div>
+                                        <div class="col-md-12"><b>Shipping Address:</b> @Html.DisplayFor(modelItem => item.Shipping_Address_Line1) , @Html.DisplayFor(modelItem => item.Shipping_Address_PostCode), @Html.DisplayFor(modelItem => item.Shipping_Address_City), @Html.DisplayFor(modelItem => item.Shipping_Address_Country)</div>
+                                        <div class="col-md-12">
+                                        <b>Product Details:</b>
+                                            <table class="table table-responsive table-striped form-control" border="1">
+                                                <tr>
+                                                    <td><b>Product</b></td>
+                                                    <td><b>Color</b></td>
+                                                    <td><b>Size</b></td>
+                                                    <td><b>Quantity</b></td>
+                                                    <td><b>Price</b></td>
+                                                    <td><b>Total Price</b></td>
+                                                </tr>
+                                                @foreach (var orderDetail in item.OrderDetails)
+                                                {
+                                                    <tr>
+                                                        <td><a href="/Products/Display/@orderDetail.Product_Id" target="_blank">@orderDetail.Product_Name</a></td>
+                                                        <td>@orderDetail.Product_Color</td>
+                                                        <td>@orderDetail.Product_Size</td>
+                                                        <td>@orderDetail.Product_Quantity</td>
+                                                        <td>@orderDetail.Product_Price</td>
+                                                        <td>@orderDetail.Total_Price</td>
+                                                    </tr>
+
+                                                }
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+
+
+                                    @if (item.Order_Status == 1)
+                                    {
+                                        @Html.ActionLink("Process", "OrderProcessed", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" })
+                                        @Html.ActionLink("Reject", "RejectOrder", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+                                    }
+                                    else if (item.Order_Status == 2)
+                                    {
+                                        @Html.ActionLink("Dispatch", "OrderDispatched", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" })
+                                        @Html.ActionLink("Reject", "RejectOrder", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+                                    }
+                                    else if (item.Order_Status == 3)
+                                    {
+                                        @Html.ActionLink("Completed", "OrderCompleted", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" })
+                                        @Html.ActionLink("Reject", "RejectOrder", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+                                    }
+                                    else if (item.Order_Status == 5)
+                                    {
+                                        @Html.ActionLink("Process", "OrderProcessed", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" })
+                                    }
+                                    <button type="button" class="btn emailFormButton btn-default" data-dismiss="modal">Close</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total_Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total_Products)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shipping_Address_City), @Html.DisplayFor(modelItem => item.Shipping_Address_Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shipping_Address_PhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatu.Order_Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod.Payment_Method)
+                </td>
+                <td>
+                    @if (item.Order_Status == 1)
+                    {
+                        @Html.ActionLink("Process", "OrderProcessed", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" })
+                        @Html.ActionLink("Reject", "RejectOrder", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+                    }
+                    else if (item.Order_Status == 2)
+                    {
+                        @Html.ActionLink("Dispatch", "OrderDispatched", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" })
+                        @Html.ActionLink("Reject", "RejectOrder", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+                    }
+                    else if (item.Order_Status == 3)
+                    {
+                        @Html.ActionLink("Completed", "OrderCompleted", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" })
+                        @Html.ActionLink("Reject", "RejectOrder", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+                    }
+                    else if (item.Order_Status == 5)
+                    {
+                        @Html.ActionLink("Process", "OrderProcessed", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,45 +1,4 @@
-21-Jan-19 9:12:08 PM: Object reference not set to an instance of an object.
-
-
-
-
-21-Jan-19 9:45:02 PM: Object reference not set to an instance of an object.
-
-
-
-
-21-Jan-19 11:51:42 PM: Object reference not set to an instance of an object.
-
-
-
-
-22-Jan-19 1:50:36 AM: The type of one of the primary key values did not match the type defined in the entity. See inner exception for details.
-Parameter name: keyValues
-
-
-
-
-22-Jan-19 11:04:53 AM: Object reference not set to an instance of an object.
-
-
-
-
-22-Jan-19 2:56:19 PM: LINQ to Entities does not recognize the method 'System.String GetUserId(System.Security.Principal.IIdentity)' method, and this method cannot be translated into a store expression.
-
-
-
-
-22-Jan-19 2:57:59 PM: LINQ to Entities does not recognize the method 'System.String GetUserId(System.Security.Principal.IIdentity)' method, and this method cannot be translated into a store expression.
-
-
-
-
-22-Jan-19 9:04:18 PM: An error occurred while updating the entries. See the inner exception for details.
-
-
-
-
-23-Jan-19 2:10:06 PM: Object reference not set to an instance of an object.
+25-Jan-19 4:45:32 PM: Object reference not set to an instance of an object.
 
 
 

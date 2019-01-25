@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>ProductReview</h2>
+<h2>Product Reviews</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
-</p>
 <table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
     <tr>
         <th>
@@ -24,10 +21,10 @@
             @Html.DisplayName("Created At")
         </th>
         <th>
-            @Html.DisplayName("IsDeleted")
+            @Html.DisplayName("Active Status")
         </th>
         <th>
-            @Html.DisplayName("AspNetUser.Email")
+            @Html.DisplayName("User Email")
         </th>
         <th></th>
     </tr>

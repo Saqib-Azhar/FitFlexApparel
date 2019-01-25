@@ -12,7 +12,19 @@ namespace FitFlexApparel.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var db = new FitflexApparelEntities();
+            List<Product> products = new List<Models.Product>();
+            try
+            {
+                products = db.Products.Where(s=>s.IsDeleted != true).ToList();
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+
+            }
+            return View(products);
         }
 
         public ActionResult About()

@@ -18,7 +18,7 @@ namespace FitFlexApparel.Controllers
         public ActionResult Index()
         {
 			try{
-				var productReviews = db.ProductReviews.Include(p => p.AspNetUser).Where(s => s.IsDeleted != true);
+				var productReviews = db.ProductReviews.Include(p => p.AspNetUser);
 				return View(productReviews.ToList());
 			}
 			catch(Exception ex)

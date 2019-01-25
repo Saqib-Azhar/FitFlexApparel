@@ -32,11 +32,11 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    @Html.Label("", "Availablility", htmlAttributes: new { @class = "control-label col-md-12" })
+                    @Html.Label("", "Draft", htmlAttributes: new { @class = "control-label col-md-12" })
                     <div class="col-md-12">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.IsAvailable, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.IsDeleted, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

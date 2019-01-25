@@ -29,9 +29,6 @@
         <th>
             @Html.DisplayName("Blogger Name")
         </th>
-        <th>
-            @Html.DisplayName("IsDeleted")
-        </th>
         <th></th>
     </tr>
 
@@ -55,13 +52,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Blogger_Name)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
         <td style="width:175px!important">
             @Html.ActionLink("Details", "Read", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" }) 
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
-            @Html.ActionLink("Disable", "SoftDelete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+            @Html.ActionLink("Draft", "SoftDelete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
             @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 
         </td>
     </tr>
