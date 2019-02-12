@@ -14,7 +14,7 @@
             <div class="pull-left">
                 <!-- Logo -->
                 <div class="header-logo">
-                    <a class="logo" href="#">
+                    <a class="logo" href="/Home/Index">
                         <img src="/Assets/img/logo.png" alt="" style="width:200px;max-height:50px">
                     </a>
                 </div>
@@ -55,7 +55,10 @@
                                 <a href="javascript:document.getElementById('logoutForm').submit()" class="text-uppercase">Logout</a> @*/ <a href="#" class="text-uppercase">Join</a>*@
                             }
                             <ul class="custom-menu">
-                                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a href="/Admin/Dashboard"><i class="fa fa-user-o"></i> Dashboard</a></li>
+                                }
                                 <li><a href="/Wishlists/Index"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
                                 <li><a href="/Products/Checkout"><i class="fa fa-check"></i> Checkout</a></li>
                             </ul>

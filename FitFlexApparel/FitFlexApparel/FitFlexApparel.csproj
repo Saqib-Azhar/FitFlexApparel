@@ -398,7 +398,7 @@
     <Content Include="Assets\img\banner10.jpg" />
     <Content Include="Assets\img\banner11.jpg" />
     <Content Include="Assets\img\banner12.jpg" />
-    <Content Include="Assets\img\banner13.jpg" />
+    <Content Include="AdminAssets\banner13.jpg" />
     <Content Include="Assets\img\banner14.jpg" />
     <Content Include="Assets\img\banner15.jpg" />
     <Content Include="Assets\img\BlogIcon.png" />
@@ -415,6 +415,12 @@
     <Content Include="Assets\img\product06.jpg" />
     <Content Include="Assets\img\product07.jpg" />
     <Content Include="Assets\img\product08.jpg" />
+    <Content Include="Assets\img\request images %281%29.jpg" />
+    <Content Include="Assets\img\request images %281%29.png" />
+    <Content Include="Assets\img\request images %282%29.jpg" />
+    <Content Include="Assets\img\request images %283%29.jpg" />
+    <Content Include="Assets\img\request images 2.jpg" />
+    <Content Include="Assets\img\request images.png" />
     <Content Include="Assets\img\thumb-product01.jpg" />
     <Content Include="Assets\img\thumb-product02.jpg" />
     <Content Include="Assets\img\thumb-product03.jpg" />
@@ -445,6 +451,10 @@
       <DependentUpon>FitflexApparel.edmx</DependentUpon>
       <LastGenOutput>FitflexApparel.cs</LastGenOutput>
     </Content>
+    <Content Include="request images %281%29.jpg" />
+    <Content Include="request images %281%29.png" />
+    <Content Include="request images %282%29.jpg" />
+    <Content Include="request images %283%29.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="ApplicationInsights.config">

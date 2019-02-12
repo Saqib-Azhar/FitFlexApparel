@@ -248,6 +248,7 @@
                             <ul class="tab-nav">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Overview</a></li>
                                 <li><a data-toggle="tab" href="#tab2">Company Profiles</a></li>
+                                <li><a data-toggle="tab" href="#tab4">Terms & Conditions</a></li>
                                 <li><a data-toggle="tab" href="#tab3">Reviews (@Model.Total_Ratings)</a></li>
                             </ul>
                             <div class="tab-content">
@@ -256,6 +257,9 @@
                                 </div>
                                 <div id="tab2" class="tab-pane fade in">
                                     @Html.Raw(Model.Company_Profile)
+                                </div>
+                                <div id="tab4" class="tab-pane fade in">
+                                    @Html.Raw(Model.Terms_And_Conditions)
                                 </div>
                                 <div id="tab3" class="tab-pane fade in">
 

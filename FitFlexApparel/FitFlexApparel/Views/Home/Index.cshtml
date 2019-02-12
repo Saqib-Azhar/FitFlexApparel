@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<FitFlexApparel.Models.Product>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var NewArrivals = ViewBag.NewArrivals as IEnumerable<FitFlexApparel.Models.Product>;
 }
 <!-- HOME -->
 <div id="home">
@@ -57,7 +58,7 @@
                     <a class="banner banner-1" href="#">
                         <img src="/Assets/img/banner10.jpg" alt="">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">NEW COLLECTION</h2>
+                            <h2 class="white-color">LEATHER COLLECTION</h2>
                         </div>
                     </a>
                 </div>
@@ -67,7 +68,7 @@
                     <a class="banner banner-1" href="#">
                         <img src="/Assets/img/banner11.jpg" alt="">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">NEW COLLECTION</h2>
+                            <h2 class="white-color">SPORTS COLLECTION</h2>
                         </div>
                     </a>
                 </div>
@@ -77,7 +78,7 @@
                     <a class="banner banner-1" href="#">
                         <img src="/Assets/img/banner12.jpg" alt="">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">NEW COLLECTION</h2>
+                            <h2 class="white-color">APPAREL COLLECTION</h2>
                         </div>
                     </a>
                 </div>
@@ -98,7 +99,7 @@
                 <!-- section-title -->
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2 class="title">Deals Of The Day</h2>
+                        <h2 class="title">New Arrivals</h2>
                         <div class="pull-right">
                             <div class="product-slick-dots-1 custom-dots"></div>
                         </div>
@@ -174,7 +175,7 @@
                 <!-- section title -->
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2 class="title">Deals Of The Day</h2>
+                        <h2 class="title">OUR TOP PRODUCTS</h2>
                         <div class="pull-right">
                             <div class="product-slick-dots-2 custom-dots">
                             </div>
@@ -221,107 +222,46 @@
                     <div class="row">
                         <div id="product-slick-2" class="product-slick">
                             <!-- Product Single -->
-                            <div class="product product-single">
-                                <div class="product-thumb">
-                                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-                                    <img src="/Assets/img/product06.jpg" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <h3 class="product-price">$32.50</h3>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
+                            @foreach (var item in NewArrivals)
+                            {
+                                <div class="product product-single">
+                                    <div class="product-thumb">
+                                        @*<div class="product-label">
+                                                <span>New</span>
+                                                <span class="sale">-20%</span>
+                                            </div>
+                                            <ul class="product-countdown">
+                                                <li><span>00 H</span></li>
+                                                <li><span>00 M</span></li>
+                                                <li><span>00 S</span></li>
+                                            </ul>*@
+                                        @*<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>*@
+                                        <img src="/UploadedImages/@item.Product_Image1" alt="">
                                     </div>
-                                    <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                    <div class="product-btns">
-                                        <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                        <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Product Single -->
-                            <!-- Product Single -->
-                            <div class="product product-single">
-                                <div class="product-thumb">
-                                    <div class="product-label">
-                                        <span class="sale">-20%</span>
-                                    </div>
-                                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-                                    <img src="/Assets/img/product05.jpg" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                    </div>
-                                    <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                    <div class="product-btns">
-                                        <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                        <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                    <div class="product-body">
+                                        <h3 class="product-price">$@item.Original_Price @*<del class="product-old-price">$45.00</del>*@</h3>
+                                        <div class="product-rating">
+                                            @for (int star = 0; star < item.Average_Rating; star = star + 1)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            @for (double? star = (item.Average_Rating == null) ? 0 : item.Average_Rating; star < 5; star++)
+                                            {
+                                                <i class="fa fa-star-o empty"></i>
+                                            }
+                                        </div>
+                                        <h2 class="product-name"><a href="#">@item.Product_Name</a></h2>
+                                        <div class="product-btns">
+                                            @*<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>*@
+                                            @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
+                                            <button onclick="AddToWishlist(@item.Id)" class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                            <a href="/Products/Display/@item.Id" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> View</a>
+
+                                            @*<a href="/Products/Display/@item.Id" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> View</a>*@
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /Product Single -->
-                            <!-- Product Single -->
-                            <div class="product product-single">
-                                <div class="product-thumb">
-                                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-                                    <img src="/Assets/img/product04.jpg" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <h3 class="product-price">$32.50</h3>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                    </div>
-                                    <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                    <div class="product-btns">
-                                        <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                        <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Product Single -->
-                            <!-- Product Single -->
-                            <div class="product product-single">
-                                <div class="product-thumb">
-                                    <div class="product-label">
-                                        <span>New</span>
-                                        <span class="sale">-20%</span>
-                                    </div>
-                                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-                                    <img src="/Assets/img/product03.jpg" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                    </div>
-                                    <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                    <div class="product-btns">
-                                        <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                        <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                    </div>
-                                </div>
-                            </div>
+                            }
                             <!-- /Product Single -->
 
                         </div>
@@ -335,3 +275,62 @@
     </div>
     <!-- /section -->
     <!-- section -->
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">Grow with us</h2>
+                    <div class="pull-right">
+                        <div class="product-slick-dots-2 custom-dots">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- banner -->
+            <div class="col-md-3 col-sm-6">
+                <a class="banner banner-1" href="/ContributionRequests/Create?type=1">
+                    <img style="width:260px;height:140px;" src="/Assets/img/request images (2).jpg" alt="">
+                    <div class="banner-caption text-center">
+                        <h2 class="white-color">BULK IMPORTERS</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a class="banner banner-1" href="/ContributionRequests/Create?type=2">
+                    <img style="width:260px;height:140px;" src="/Assets/img/request images 2.jpg" alt="">
+                    <div class="banner-caption text-center">
+                        <h2 class="white-color">BRAND OWNERS</h2>
+                    </div>
+                </a>
+            </div>
+            <!-- /banner -->
+            <!-- banner -->
+            <div class="col-md-3 col-sm-6">
+                <a class="banner banner-1" href="/ContributionRequests/Create?type=3">
+                    <img style="width:260px;height:140px;" src="/Assets/img/request images.png" alt="">
+                    <div class="banner-caption text-center">
+                        <h2 class="white-color">ONLINE STORES</h2>
+                    </div>
+                </a>
+            </div>
+            <!-- /banner -->
+            <!-- banner -->
+            <div class="col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-3">
+                <a class="banner banner-1" href="/ContributionRequests/Create?type=4">
+                    <img style="width:260px;height:140px;" src="/Assets/img/request images (3).jpg" alt="">
+                    <div class="banner-caption text-center">
+                        <h2 class="white-color">SPORTS CLUBS</h2>
+                    </div>
+                </a>
+            </div>
+            <!-- /banner -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

@@ -24,7 +24,14 @@
                     <div class="col-md-6" style="padding:20px;">
                         <div class="row">
                             <div class="col-md-2">
-                                <a href="/Blogs/Read/@item.Id"><img style="border:solid;width:50px;height:50px;" src="/Assets/img/BlogIcon.png"/></a>
+                                @if (item.Image != null)
+                                {                                
+                                    <a href="/Blogs/Read/@item.Id"><img style="border:solid;width:50px;height:50px;" src="/UploadedImages/@item.Image" /></a>
+                                }
+                                else
+                                {
+                                    <a href="/Blogs/Read/@item.Id"><img style="border:solid;width:50px;height:50px;" src="/Assets/img/BlogIcon.png" /></a>
+                                }
                             </div>
                             <div class="col-md-10">
                                 <h3><a href="/Blogs/Read/@item.Id">@item.Blog_Name</a></h3>

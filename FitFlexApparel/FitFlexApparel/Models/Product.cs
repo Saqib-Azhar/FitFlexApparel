@@ -48,6 +48,7 @@ namespace FitFlexApparel.Models
         public string Sizes { get; set; }
         [AllowHtml]
         public string Terms_And_Conditions { get; set; }
+        public Nullable<System.DateTime> Added_On { get; set; }
     
         public virtual Brand Brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

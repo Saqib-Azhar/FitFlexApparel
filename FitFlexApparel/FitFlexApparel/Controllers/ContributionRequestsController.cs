@@ -44,11 +44,20 @@ namespace FitFlexApparel.Controllers
                 {
                     return HttpNotFound();
                 }
+                contributionRequest.Is_Read = true;
+                db.SaveChanges();
                 return View(contributionRequest);
 
             }
             catch (Exception ex)
             {
+
+                ContributionRequest contributionRequest = db.ContributionRequests.Find(id);
+                if (contributionRequest == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(contributionRequest);
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
                 return RedirectToAction("Error", "Home");
@@ -99,9 +108,11 @@ namespace FitFlexApparel.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    contributionRequest.Is_Read = false;
+                    contributionRequest.Requested_At = DateTime.Now;
                     db.ContributionRequests.Add(contributionRequest);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Create");
                 }
 
                 ViewBag.Request_Type_Id = new SelectList(db.ContributionRequestsTypes, "Id", "Request_Type", contributionRequest.Request_Type_Id);

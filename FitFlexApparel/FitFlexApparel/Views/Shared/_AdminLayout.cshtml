@@ -115,7 +115,7 @@
 
                 <ul class="collapse sw-links" id="sw-docs-nav" data-children=".sw-toc-item">
                     <li class="sw-toc-item">
-                        <a class="sw-toc-link" href="#">
+                        <a class="sw-toc-link" href="/Admin/Dashboard">
                             <span class="oi oi-dashboard"></span>
                             <span class="text">Dashboard</span>
                         </a>
@@ -424,6 +424,32 @@
                         <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseOrdersSubMenus" aria-expanded="false"
                            aria-controls="collapseOrdersSubMenus">
                             <span class="oi oi-spreadsheet"></span>
+                            <span class="text">Join Requests</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="window.location = '/ContributionRequests/Index'" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapseOrdersSubMenus" class="collapse list-unstyled">
+                            <li class="active sw-sidenav-active">
+                                <a href="/ContributionRequests/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">All Requests</span>
+                                </a>
+                            </li>
+                            @*<li>
+                    <a href="#">
+                        <span class="oi oi-globe"></span>
+                        <span class="text">Cultures</span>
+                    </a>
+                </li>*@
+                        </ul>
+                    </li>
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseOrdersSubMenus" aria-expanded="false"
+                           aria-controls="collapseOrdersSubMenus">
+                            <span class="oi oi-spreadsheet"></span>
                             <span class="text">Orders</span>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 <button onclick="window.location = '/Orders/AllOrders'" class="btn btn-light">
@@ -439,11 +465,11 @@
                                 </a>
                             </li>
                             @*<li>
-                                <a href="#">
-                                    <span class="oi oi-globe"></span>
-                                    <span class="text">Cultures</span>
-                                </a>
-                            </li>*@
+                    <a href="#">
+                        <span class="oi oi-globe"></span>
+                        <span class="text">Cultures</span>
+                    </a>
+                </li>*@
                         </ul>
                     </li>
                 </ul>

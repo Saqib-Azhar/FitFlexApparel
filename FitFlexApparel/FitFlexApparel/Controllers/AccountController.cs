@@ -58,7 +58,8 @@ namespace FitFlexApparel.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ReturnUrl = Request.UrlReferrer.AbsoluteUri.ToString();
+            
             return View();
         }
 
@@ -81,6 +82,21 @@ namespace FitFlexApparel.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        if(returnUrl == null || returnUrl == "http://localhost:50829/" || returnUrl== "http://fitflexapparel.com/")
+                        {
+                            if (User.IsInRole("Admin"))
+                                return RedirectToAction("Dashboard", "Admin");
+                            else
+                                return RedirectToAction("Index", "Home");
+
+                        }
+                        if (returnUrl.ToString().Contains("Account/Login"))
+                        {
+                            if(User.IsInRole("Admin"))
+                                return RedirectToAction("Dashboard", "Admin");
+
+                            return RedirectToAction("Index", "Home");
+                        }
                         var returnUrls = ViewBag.ReturnUrl;
                         return RedirectToLocal(returnUrl);
                     }

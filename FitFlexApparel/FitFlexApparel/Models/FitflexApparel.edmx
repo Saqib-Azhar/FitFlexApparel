@@ -283,6 +283,7 @@
           <Property Name="Colors" Type="nvarchar(max)" />
           <Property Name="Sizes" Type="nvarchar(max)" />
           <Property Name="Terms_And_Conditions" Type="nvarchar(max)" />
+          <Property Name="Added_On" Type="datetime" />
         </EntityType>
         <EntityType Name="Sizes">
           <Key>
@@ -1038,6 +1039,7 @@
           <NavigationProperty Name="ProductPrices" Relationship="Self.FK_ProductPrices_ToProducts" FromRole="Products" ToRole="ProductPrices" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Products_ToSubCategories" FromRole="Products" ToRole="SubCategories" />
           <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToProducts" FromRole="Products" ToRole="Wishlist" />
+          <Property Name="Added_On" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -1729,6 +1731,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="Model.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Added_On" ColumnName="Added_On" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />

@@ -113,7 +113,7 @@ namespace FitFlexApparel.Controllers
                             Image.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        blog.Image = "Products/" + Image.FileName;
+                        blog.Image = "Blogs/" + Image.FileName;
 
                     }
                     var userId = User.Identity.GetUserId();
@@ -185,7 +185,7 @@ namespace FitFlexApparel.Controllers
                             Image.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        blog.Image = "Products/" + Image.FileName;
+                        blog.Image = "Blogs/" + Image.FileName;
 
                     }
                     blog.Edited_On = DateTime.Now;

@@ -13,10 +13,11 @@ namespace FitFlexApparel.Controllers
         public ActionResult Index()
         {
             var db = new FitflexApparelEntities();
-            List<Product> products = new List<Models.Product>();
+            List<Product> topProducts = new List<Models.Product>();
             try
             {
-                products = db.Products.Where(s=>s.IsDeleted != true).ToList();
+                topProducts = db.Products.Where(s=>s.IsDeleted != true).OrderByDescending(s=>s.Added_On).Take(10).ToList();
+                ViewBag.NewArrivals = db.Products.Where(s => s.IsDeleted != true).OrderByDescending(s => s.Average_Rating).Take(10).ToList();
             }
             catch (Exception ex)
             {
@@ -24,7 +25,7 @@ namespace FitFlexApparel.Controllers
                 ExceptionManagerController.writeErrorLog(ex);
 
             }
-            return View(products);
+            return View(topProducts);
         }
 
         public ActionResult About()

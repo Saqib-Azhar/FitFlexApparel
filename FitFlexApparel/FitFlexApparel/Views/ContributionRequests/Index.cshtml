@@ -4,18 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>ContributionRequest</h2>
+<h2>Contribution Requests</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
-</p>
 <table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
     <tr>
         <th>
-            @Html.DisplayName("Requested At")
-        </th>
-        <th>
-            @Html.DisplayName("Is Read")
+            @Html.DisplayName("Submitted At")
         </th>
         <th>
             @Html.DisplayName("Name")
@@ -30,45 +24,69 @@
             @Html.DisplayName("Country")
         </th>
         <th>
-            @Html.DisplayName("Message")
+            @Html.DisplayName("Request Type")
         </th>
         <th>
-            @Html.DisplayName("ContributionRequestsType.Request Type")
+            @Html.DisplayName("Status")
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Requested_At)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Is_Read)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contact_No)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Message)
-        </td>
+        @if (item.Is_Read == false)
+        {
+            <td>
+                <a href="/ContributionRequests/Details/@item.Id" style="color:blue;" ><b>@Html.DisplayFor(modelItem => item.Requested_At)</b></a>
+            </td>                                                
+            <td>                                                 
+                <a href="/ContributionRequests/Details/@item.Id" style="color:blue;" ><b>@Html.DisplayFor(modelItem => item.Name)</b></a>
+            </td>                                                
+            <td>                                                 
+                <a href="/ContributionRequests/Details/@item.Id" style="color:blue;" ><b>@Html.DisplayFor(modelItem => item.Email)</b></a>
+            </td>                                                
+            <td>                                                 
+                <a href="/ContributionRequests/Details/@item.Id" style="color:blue;" ><b>@Html.DisplayFor(modelItem => item.Contact_No)</b></a>
+            </td>                                                
+            <td>                                                 
+                <a href="/ContributionRequests/Details/@item.Id" style="color:blue;" ><b>@Html.DisplayFor(modelItem => item.Country)</b></a>
+            </td>
+        }
+        else
+        {
+            <td>
+                <a style="color:blue;" href="/ContributionRequests/Details/@item.Id">@Html.DisplayFor(modelItem => item.Requested_At)</a>
+            </td>
+            <td>
+                <a style="color:blue;" href="/ContributionRequests/Details/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                <a style="color:blue;" href="/ContributionRequests/Details/@item.Id">@Html.DisplayFor(modelItem => item.Email)</a>
+            </td>
+            <td>
+                <a style="color:blue;" href="/ContributionRequests/Details/@item.Id">@Html.DisplayFor(modelItem => item.Contact_No)</a>
+            </td>
+            <td>
+                <a style="color:blue;" href="/ContributionRequests/Details/@item.Id">@Html.DisplayFor(modelItem => item.Country)</a>
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.ContributionRequestsType.Request_Type)
         </td>
-        <td style="width:175px!important">
-            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" }) 
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
-            @Html.ActionLink("Disable", "SoftDelete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 
+        <td>
+            @if(item.Is_Read == false)
+            {
+                <p style="color:orangered">Unread</p>
+            }
+            else
+            {
+                <p style="color:lawngreen">Read</p>
+            }
+        </td>
+        <td style="">
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success" }) 
+            @Html.ActionLink("Mark Unread", "MarkUnread", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary" }) 
         </td>
     </tr>
 }

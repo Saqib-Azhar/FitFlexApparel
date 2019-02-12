@@ -44,6 +44,8 @@
                 <div class="container-login" style="max-width:560px">
                     <section id="content" style="width:500px;">
                         <form method="post" action="/Home/ContactForm" class="form-horizontal" style="margin-left:35px;width:400px;padding-bottom:10px;">
+
+                            @Html.AntiForgeryToken()
                             <div class="form-group">
                                 @Html.Label("", "Name", new { @class = "col-md-2 control-label" })
                                 <div class="col-md-10">
