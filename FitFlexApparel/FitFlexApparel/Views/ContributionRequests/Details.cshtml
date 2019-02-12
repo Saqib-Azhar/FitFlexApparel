@@ -1,0 +1,113 @@
+﻿@model FitFlexApparel.Models.ContributionRequest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h4>ContributionRequest</h4>
+    <hr />
+    <div class="row">
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Requested At")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Requested_At)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Is Read")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Is_Read)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Name)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Email")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Email)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Contact No")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Contact_No)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Country")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Country)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Message")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Message)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("ContributionRequestsType.Request Type")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.ContributionRequestsType.Request_Type)
+			</div>
+		</div>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" }) 
+    @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+</p>

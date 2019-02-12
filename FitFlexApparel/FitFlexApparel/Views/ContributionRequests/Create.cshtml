@@ -1,0 +1,101 @@
+﻿@model FitFlexApparel.Models.ContributionRequest
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "ContributionRequest", FormMethod.Post, new { @enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>New ContributionRequest</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="row">
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Requested At", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Requested_At, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Requested_At, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Is Read", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Is_Read)
+                    @Html.ValidationMessageFor(model => model.Is_Read, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Name", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Email", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Contact No", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Contact_No, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contact_No, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Country", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Message", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request_Type_Id, "Request_Type_Id", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.DropDownList("Request_Type_Id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Request_Type_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		</div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+				@Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+</div>

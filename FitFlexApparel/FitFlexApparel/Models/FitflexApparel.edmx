@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -88,6 +88,9 @@
           <Property Name="Blogger_Name" Type="nvarchar(max)" />
           <Property Name="Blog" Type="nvarchar(max)" />
           <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Tags" Type="nvarchar(max)" />
+          <Property Name="Views" Type="int" />
         </EntityType>
         <EntityType Name="Brands">
           <Key>
@@ -134,6 +137,27 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Color_Name" Type="nvarchar(max)" />
           <Property Name="Color_Code" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ContributionRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Requested_At" Type="datetime" />
+          <Property Name="Is_Read" Type="bit" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Contact_No" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Request_Type_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ContributionRequestsTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Request_Type" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerContactRequests">
           <Key>
@@ -258,6 +282,7 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="Colors" Type="nvarchar(max)" />
           <Property Name="Sizes" Type="nvarchar(max)" />
+          <Property Name="Terms_And_Conditions" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Sizes">
           <Key>
@@ -278,6 +303,16 @@
           <Property Name="Category_Id" Type="int" />
           <Property Name="Subcategory_Slug" Type="nvarchar(max)" />
           <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email_Id" Type="nvarchar(max)" />
+          <Property Name="Subscribed_On" Type="datetime" />
+          <Property Name="Is_Deleted" Type="bit" />
+          <Property Name="Updated_At" Type="datetime" />
         </EntityType>
         <EntityType Name="UserAddresses">
           <Key>
@@ -324,6 +359,18 @@
             </Principal>
             <Dependent Role="Cart">
               <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContributionRequests_ToContributionRequestsTypes">
+          <End Role="ContributionRequestsTypes" Type="Self.ContributionRequestsTypes" Multiplicity="0..1" />
+          <End Role="ContributionRequests" Type="Self.ContributionRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContributionRequestsTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContributionRequests">
+              <PropertyRef Name="Request_Type_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -575,6 +622,8 @@
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContributionRequests" EntityType="Self.ContributionRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContributionRequestsTypes" EntityType="Self.ContributionRequestsTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerContactRequests" EntityType="Self.CustomerContactRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderActionHistory" EntityType="Self.OrderActionHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
@@ -586,6 +635,7 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sizes" EntityType="Self.Sizes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategories" EntityType="Self.SubCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAddresses" EntityType="Self.UserAddresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_ToAspNetUsers" Association="Self.FK_Cart_ToAspNetUsers">
@@ -595,6 +645,10 @@
           <AssociationSet Name="FK_Cart_ToProducts" Association="Self.FK_Cart_ToProducts">
             <End Role="Products" EntitySet="Products" />
             <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContributionRequests_ToContributionRequestsTypes" Association="Self.FK_ContributionRequests_ToContributionRequestsTypes">
+            <End Role="ContributionRequestsTypes" EntitySet="ContributionRequestsTypes" />
+            <End Role="ContributionRequests" EntitySet="ContributionRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -673,8 +727,7 @@
             <End Role="Wishlist" EntitySet="Wishlist" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -765,6 +818,9 @@
           <Property Name="Blogger_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Blog1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Views" Type="Int32" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -815,6 +871,29 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Color_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Color_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContributionRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Requested_At" Type="DateTime" Precision="3" />
+          <Property Name="Is_Read" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_No" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Request_Type_Id" Type="Int32" />
+          <NavigationProperty Name="ContributionRequestsType" Relationship="Self.FK_ContributionRequests_ToContributionRequestsTypes" FromRole="ContributionRequests" ToRole="ContributionRequestsTypes" />
+        </EntityType>
+        <EntityType Name="ContributionRequestsType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Request_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ContributionRequests" Relationship="Self.FK_ContributionRequests_ToContributionRequestsTypes" FromRole="ContributionRequestsTypes" ToRole="ContributionRequests" />
         </EntityType>
         <EntityType Name="CustomerContactRequest">
           <Key>
@@ -953,6 +1032,7 @@
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="Colors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Sizes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Terms_And_Conditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Products_ToBrand" FromRole="Products" ToRole="Brands" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToProducts" FromRole="Products" ToRole="Cart" />
           <NavigationProperty Name="ProductPrices" Relationship="Self.FK_ProductPrices_ToProducts" FromRole="Products" ToRole="ProductPrices" />
@@ -1144,6 +1224,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ContributionRequests_ToContributionRequestsTypes">
+          <End Role="ContributionRequestsTypes" Type="Self.ContributionRequestsType" Multiplicity="0..1" />
+          <End Role="ContributionRequests" Type="Self.ContributionRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContributionRequestsTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContributionRequests">
+              <PropertyRef Name="Request_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderActionHistory_ToOrders">
           <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
           <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
@@ -1255,6 +1347,8 @@
           <EntitySet Name="Carts" EntityType="Self.Cart" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Colors" EntityType="Self.Color" />
+          <EntitySet Name="ContributionRequests" EntityType="Self.ContributionRequest" />
+          <EntitySet Name="ContributionRequestsTypes" EntityType="Self.ContributionRequestsType" />
           <EntitySet Name="CustomerContactRequests" EntityType="Self.CustomerContactRequest" />
           <EntitySet Name="OrderActionHistories" EntityType="Self.OrderActionHistory" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
@@ -1312,6 +1406,10 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="SubCategories" EntitySet="SubCategories" />
           </AssociationSet>
+          <AssociationSet Name="FK_ContributionRequests_ToContributionRequestsTypes" Association="Self.FK_ContributionRequests_ToContributionRequestsTypes">
+            <End Role="ContributionRequestsTypes" EntitySet="ContributionRequestsTypes" />
+            <End Role="ContributionRequests" EntitySet="ContributionRequests" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderActionHistory_ToOrders" Association="Self.FK_OrderActionHistory_ToOrders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderActionHistory" EntitySet="OrderActionHistories" />
@@ -1348,7 +1446,18 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Subscriptions" EntityType="Model.Subscription" />
         </EntityContainer>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Subscribed_On" Type="DateTime" Precision="3" />
+          <Property Name="Is_Deleted" Type="Boolean" />
+          <Property Name="Updated_At" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1422,6 +1531,7 @@
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="Model.Blog">
               <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="Views" ColumnName="Views" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Blog_Name" ColumnName="Blog_Name" />
                 <ScalarProperty Name="Written_On" ColumnName="Written_On" />
@@ -1431,6 +1541,8 @@
                 <ScalarProperty Name="Blogger_Name" ColumnName="Blogger_Name" />
                 <ScalarProperty Name="Blog1" ColumnName="Blog" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1481,6 +1593,29 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Color_Name" ColumnName="Color_Name" />
                 <ScalarProperty Name="Color_Code" ColumnName="Color_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContributionRequests">
+            <EntityTypeMapping TypeName="Model.ContributionRequest">
+              <MappingFragment StoreEntitySet="ContributionRequests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Requested_At" ColumnName="Requested_At" />
+                <ScalarProperty Name="Is_Read" ColumnName="Is_Read" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Request_Type_Id" ColumnName="Request_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContributionRequestsTypes">
+            <EntityTypeMapping TypeName="Model.ContributionRequestsType">
+              <MappingFragment StoreEntitySet="ContributionRequestsTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Request_Type" ColumnName="Request_Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1614,6 +1749,7 @@
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Colors" ColumnName="Colors" />
                 <ScalarProperty Name="Sizes" ColumnName="Sizes" />
+                <ScalarProperty Name="Terms_And_Conditions" ColumnName="Terms_And_Conditions" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1673,6 +1809,17 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="Model.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Subscribed_On" ColumnName="Subscribed_On" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

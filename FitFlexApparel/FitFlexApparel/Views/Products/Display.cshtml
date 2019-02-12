@@ -145,16 +145,21 @@
                             <div class="product-options">
                                 <ul class="size-option">
                                     <li><span class="text-uppercase">Size:</span></li>
-                                    @foreach (var item in Model.Sizes.Split(','))
+                                    @if (Model.Sizes != null)
                                     {
-                                        <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                        foreach (var item in Model.Sizes.Split(','))
+                                        {
+                                            <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                        }
                                     }
                                 </ul>
                                 <ul class="color-option">
                                     <li><span class="text-uppercase">Color:</span></li>
-                                    @foreach (var item in Model.Colors.Split(','))
-                                    {
+                                    @if (Model.Colors != null)
+                                    { foreach (var item in Model.Colors.Split(','))
+                                        {
                                         <li class="colorSelection" value="@item"><a onclick="SelectThis(this, 'color')" alt="@item" style="border:solid;cursor:pointer;background-color:#@item;"></a></li>
+                                        }
                                     }
                                 </ul>
                             </div>

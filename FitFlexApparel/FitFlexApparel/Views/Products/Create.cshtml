@@ -31,13 +31,48 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+            </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.Label("", "Product Description", htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @*@Html.EditorFor(model => model.Product_Description, new { htmlAttributes = new { @class = "form-control" } })*@
+                                <textarea id="Product_Description" name="Product_Description" class="form-control"></textarea>
+                                @Html.ValidationMessageFor(model => model.Product_Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="col-md-6">
                     <div class="form-group">
-                        @Html.Label("", "Product Description", htmlAttributes: new { @class = "control-label col-md-12" })
+                        @Html.Label("", "Product Overview", htmlAttributes: new { @class = "control-label col-md-12" })
                         <div class="col-md-12">
-                            @*@Html.EditorFor(model => model.Product_Description, new { htmlAttributes = new { @class = "form-control" } })*@
-                            <textarea id="Product_Description" name="Product_Description" class="form-control"></textarea>
-                            @Html.ValidationMessageFor(model => model.Product_Description, "", new { @class = "text-danger" })
+                            @*@Html.EditorFor(model => model.Product_Overview, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <textarea id="Product_Overview" name="Product_Overview" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.Product_Overview, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Company Profile", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @*@Html.EditorFor(model => model.Company_Profile, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <textarea id="Company_Profile" name="Company_Profile" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.Company_Profile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.Label("", "Terms & Conditions", htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            <textarea id="Terms_And_Conditions" name="Terms_And_Conditions" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.Terms_And_Conditions, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -90,30 +125,6 @@
                     </div>
                 </div>
             </div><hr />
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.Label("", "Product Overview", htmlAttributes: new { @class = "control-label col-md-12" })
-                        <div class="col-md-12">
-                            @*@Html.EditorFor(model => model.Product_Overview, new { htmlAttributes = new { @class = "form-control" } })*@
-                            <textarea id="Product_Overview" name="Product_Overview" class="form-control"></textarea>
-                            @Html.ValidationMessageFor(model => model.Product_Overview, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.Label("", "Company Profile", htmlAttributes: new { @class = "control-label col-md-12" })
-                        <div class="col-md-12">
-                            @*@Html.EditorFor(model => model.Company_Profile, new { htmlAttributes = new { @class = "form-control" } })*@
-                            <textarea id="Company_Profile" name="Company_Profile" class="form-control"></textarea>
-                            @Html.ValidationMessageFor(model => model.Company_Profile, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr />
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<FitFlexApparel.Models.ContributionRequest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>ContributionRequest</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
+    <tr>
+        <th>
+            @Html.DisplayName("Requested At")
+        </th>
+        <th>
+            @Html.DisplayName("Is Read")
+        </th>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Contact No")
+        </th>
+        <th>
+            @Html.DisplayName("Country")
+        </th>
+        <th>
+            @Html.DisplayName("Message")
+        </th>
+        <th>
+            @Html.DisplayName("ContributionRequestsType.Request Type")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Requested_At)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Is_Read)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContributionRequestsType.Request_Type)
+        </td>
+        <td style="width:175px!important">
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" }) 
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
+            @Html.ActionLink("Disable", "SoftDelete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-danger", @style = "width:65px" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 
+        </td>
+    </tr>
+}
+
+</table>

@@ -25,5 +25,8 @@ namespace FitFlexApparel.Models
         [AllowHtml]
         public string Blog1 { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public string Image { get; set; }
+        public string Tags { get; set; }
+        public Nullable<int> Views { get; set; }
     }
 }
