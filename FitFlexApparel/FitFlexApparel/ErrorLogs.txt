@@ -1,14 +1,4 @@
-25-Jan-19 4:45:32 PM: Object reference not set to an instance of an object.
-
-
-
-
-28-Jan-19 6:44:08 PM: Input string was not in a correct format.
-
-
-
-
-12-Feb-19 4:05:19 PM: Could not find a part of the path 'C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Uploadedimages\Blogs\request images 2.jpg'.
+13-Feb-19 9:09:10 PM: Input string was not in a correct format.
 
 
 

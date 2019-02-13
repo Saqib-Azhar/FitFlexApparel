@@ -181,7 +181,7 @@ namespace FitFlexApparel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Product_Name,Product_Description,Product_Image1,Product_Image2,Product_Image3,Product_Image4,Product_Image5,Product_Overview,Subcategory_Id,Brand_Id,Product_Stock,Company_Profile,Original_Price,Average_Rating,Total_Ratings,Product_Slug,IsDeleted")] Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5)
+        public ActionResult Create([Bind(Include = "Id,Product_Name,Product_Description,Product_Image1,Product_Image2,Product_Image3,Product_Image4,Product_Image5,Product_Overview,Subcategory_Id,Brand_Id,Product_Stock,Company_Profile,Original_Price,Average_Rating,Total_Ratings,Product_Slug,IsDeleted,Product_Overview")] Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5)
         {
 			try
 			{
@@ -201,7 +201,12 @@ namespace FitFlexApparel.Controllers
                                 if (objProp[0] == "Min")
                                     priceObj.Min = Convert.ToInt32(objProp[1]);
                                 if (objProp[0] == "Max")
-                                    priceObj.Max = Convert.ToInt32(objProp[1]);
+                                {
+                                    if (objProp[1] == null || objProp[1] == "")
+                                        priceObj.Max = null;
+                                    else
+                                        priceObj.Max = Convert.ToInt32(objProp[1]);
+                                }
                                 if (objProp[0] == "Price")
                                     priceObj.Price = Convert.ToInt32(objProp[1]);
                                 if (objProp[0] == "Discount")

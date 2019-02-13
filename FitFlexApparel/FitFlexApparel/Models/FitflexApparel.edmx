@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -728,7 +728,8 @@
             <End Role="Wishlist" EntitySet="Wishlist" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1034,12 +1035,12 @@
           <Property Name="Colors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Sizes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Terms_And_Conditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Added_On" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Products_ToBrand" FromRole="Products" ToRole="Brands" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToProducts" FromRole="Products" ToRole="Cart" />
           <NavigationProperty Name="ProductPrices" Relationship="Self.FK_ProductPrices_ToProducts" FromRole="Products" ToRole="ProductPrices" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Products_ToSubCategories" FromRole="Products" ToRole="SubCategories" />
           <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToProducts" FromRole="Products" ToRole="Wishlist" />
-          <Property Name="Added_On" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -1062,6 +1063,16 @@
           <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Category" Relationship="Self.FK_SubCategories_ToCategories" FromRole="SubCategories" ToRole="Categories" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToSubCategories" FromRole="SubCategories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Subscribed_On" Type="DateTime" Precision="3" />
+          <Property Name="Is_Deleted" Type="Boolean" />
+          <Property Name="Updated_At" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="UserAddress">
           <Key>
@@ -1362,6 +1373,7 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Sizes" EntityType="Self.Size" />
           <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
           <EntitySet Name="UserAddresses" EntityType="Self.UserAddress" />
           <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -1448,18 +1460,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Subscriptions" EntityType="Model.Subscription" />
         </EntityContainer>
-        <EntityType Name="Subscription">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email_Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Subscribed_On" Type="DateTime" Precision="3" />
-          <Property Name="Is_Deleted" Type="Boolean" />
-          <Property Name="Updated_At" Type="DateTime" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1533,7 +1534,6 @@
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="Model.Blog">
               <MappingFragment StoreEntitySet="Blogs">
-                <ScalarProperty Name="Views" ColumnName="Views" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Blog_Name" ColumnName="Blog_Name" />
                 <ScalarProperty Name="Written_On" ColumnName="Written_On" />
@@ -1545,6 +1545,7 @@
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1731,7 +1732,6 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="Model.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Added_On" ColumnName="Added_On" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />
@@ -1753,6 +1753,7 @@
                 <ScalarProperty Name="Colors" ColumnName="Colors" />
                 <ScalarProperty Name="Sizes" ColumnName="Sizes" />
                 <ScalarProperty Name="Terms_And_Conditions" ColumnName="Terms_And_Conditions" />
+                <ScalarProperty Name="Added_On" ColumnName="Added_On" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1775,6 +1776,17 @@
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Subcategory_Slug" ColumnName="Subcategory_Slug" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="Model.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Subscribed_On" ColumnName="Subscribed_On" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1812,17 +1824,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Subscriptions">
-            <EntityTypeMapping TypeName="Model.Subscription">
-              <MappingFragment StoreEntitySet="Subscriptions">
-                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Subscribed_On" ColumnName="Subscribed_On" />
-                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

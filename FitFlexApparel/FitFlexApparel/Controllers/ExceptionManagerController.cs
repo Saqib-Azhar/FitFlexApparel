@@ -33,6 +33,9 @@ namespace FitFlexApparel.Controllers
             {
                 sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now.ToString() + " | " + ex.Source.ToString().Trim() + " | " + ex.StackTrace.ToString().Trim() + " | " + ex.Message.ToString().Trim() + "\n\n\n\n");
+                if(ex.InnerException != null)
+                    sw.WriteLine(DateTime.Now.ToString() + " | " + ex.Source.ToString().Trim() + " | " + ex.InnerException.Message.ToString().Trim() + " | " + ex.InnerException.StackTrace.ToString().Trim() + "\n\n\n\n");
+
                 sw.Flush();
                 sw.Close();
             }

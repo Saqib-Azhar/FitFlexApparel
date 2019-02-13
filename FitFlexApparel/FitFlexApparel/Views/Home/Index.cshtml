@@ -222,8 +222,10 @@
                     <div class="row">
                         <div id="product-slick-2" class="product-slick">
                             <!-- Product Single -->
-                            @foreach (var item in NewArrivals)
+                            @if (NewArrivals != null)
                             {
+                                foreach (var item in NewArrivals)
+                                {
                                 <div class="product product-single">
                                     <div class="product-thumb">
                                         @*<div class="product-label">
@@ -261,6 +263,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                }
                             }
                             <!-- /Product Single -->
 

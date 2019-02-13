@@ -451,10 +451,6 @@
       <DependentUpon>FitflexApparel.edmx</DependentUpon>
       <LastGenOutput>FitflexApparel.cs</LastGenOutput>
     </Content>
-    <Content Include="request images %281%29.jpg" />
-    <Content Include="request images %281%29.png" />
-    <Content Include="request images %282%29.jpg" />
-    <Content Include="request images %283%29.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="ApplicationInsights.config">

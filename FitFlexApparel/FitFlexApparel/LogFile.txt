@@ -1,23 +1,7 @@
-25-Jan-19 4:45:32 PM | FitFlexApparel | at FitFlexApparel.Controllers.OrdersController.ConfirmOrder(FormCollection fc) | Object reference not set to an instance of an object.
-
-
-
-
-28-Jan-19 6:44:08 PM | mscorlib | at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+13-Feb-19 9:09:10 PM | mscorlib | at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
    at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
    at System.Convert.ToInt32(String value)
    at FitFlexApparel.Controllers.ProductsController.Create(Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\ProductsController.cs:line 204 | Input string was not in a correct format.
-
-
-
-
-12-Feb-19 4:05:19 PM | mscorlib | at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
-   at System.IO.FileStream..ctor(String path, FileMode mode)
-   at System.Web.HttpPostedFile.SaveAs(String filename)
-   at System.Web.HttpPostedFileWrapper.SaveAs(String filename)
-   at FitFlexApparel.Controllers.BlogsController.Create(Blog blog, HttpPostedFileBase Image) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\BlogsController.cs:line 109 | Could not find a part of the path 'C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Uploadedimages\Blogs\request images 2.jpg'.
 
 
 
