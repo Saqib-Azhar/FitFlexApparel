@@ -56,6 +56,11 @@ namespace FitFlexApparel.Controllers
             return PartialView();
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
+
         public ActionResult ContactForm(FormCollection fc)
         {
             var db = new FitflexApparelEntities();

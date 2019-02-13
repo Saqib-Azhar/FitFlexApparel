@@ -702,6 +702,7 @@
     <Content Include="Views\ContributionRequests\Details.cshtml" />
     <Content Include="Views\ContributionRequests\Edit.cshtml" />
     <Content Include="Views\ContributionRequests\Index.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\" />
