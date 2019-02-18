@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using FitFlexApparel.Models;
 using Microsoft.AspNet.Identity;
+using FitFlexApparel.Controllers;
 
 namespace FitFlexApparel.Controllers
 {
@@ -135,6 +136,32 @@ namespace FitFlexApparel.Controllers
 
                 TransactionObj.Commit();
 
+
+                try
+                {
+                    string message = "Your Order is Confirmed.<br>Order Details: ";
+                    message = message + "<br><b>Order #:</b>" + order.Order_No;
+                    message = message + "<br><b>Order Status:</b>" + order.OrderStatu.Order_Status;
+                    message = message + "<br><b>Updated At:</b>" + orderAction.Updated_At;
+                    message = message + "<br><b>Total Items:</b>" + order.Total_Products;
+                    message = message + "<br><b>Total Price:</b>" + order.Total_Amount;
+                    message = message + "<br><b>Items:</b>";
+                    message = message + "<br><table border='1'><tr><td><b>Product Name</b></td><td><b>Quantity</b></td><td><b>Price</b></td></tr>";
+                    foreach (var item in orderProducts)
+                    {
+                        message = message + "<tr><td>" + item.Product_Name + "</td><td>" + item.Quantity + "</td><td>" + item.Total_Price + "</td></tr>";
+                    }
+                    message = message + "</table><br><b>Thankyou for using our services, For any further query you can contact at info@fitflexapparel.com</b>";
+                    MessagingController messagingController = new MessagingController();
+                    messagingController.SendEmail("Order Update | Fitflex", message, order.Shipping_Address_Email, order.User_Name);
+
+                }
+                catch (Exception ex)
+                {
+                    ExceptionManagerController.infoMessage(ex.Message);
+                    ExceptionManagerController.writeErrorLog(ex);
+                }
+
             }
             catch (Exception ex)
             {
@@ -176,7 +203,31 @@ namespace FitFlexApparel.Controllers
                 orderAction.Updated_By = userId;
                 db.OrderActionHistories.Add(orderAction);
                 db.SaveChanges();
-                
+
+                try
+                {
+                    string message = "Your Order is Processed.<br>Order Details: ";
+                    message = message + "<br><b>Order #:</b>" + order.Order_No;
+                    message = message + "<br><b>Order Status:</b>" + order.OrderStatu.Order_Status;
+                    message = message + "<br><b>Updated At:</b>" + orderAction.Updated_At;
+                    message = message + "<br><b>Total Items:</b>" + order.Total_Products;
+                    message = message + "<br><b>Total Price:</b>" + order.Total_Amount;
+                    message = message + "<br><b>Items:</b>";
+                    message = message + "<br><table border='1'><tr><td><b>Product Name</b></td><td><b>Quantity</b></td><td><b>Price</b></td></tr>";
+                    foreach (var item in order.OrderDetails)
+                    {
+                        message = message + "<tr><td>" + item.Product_Name + "</td><td>" + item.Product_Quantity + "</td><td>" + item.Total_Price + "</td></tr>";
+                    }
+                    message = message + "</table><br><b>Thankyou for using our services, For any further query you can contact at info@fitflexapparel.com</b>";
+                    MessagingController messagingController = new MessagingController();
+                    messagingController.SendEmail("Order Update | Fitflex", message, order.Shipping_Address_Email, order.User_Name);
+
+                }
+                catch (Exception ex)
+                {
+                    ExceptionManagerController.infoMessage(ex.Message);
+                    ExceptionManagerController.writeErrorLog(ex);
+                }
             }
             catch (Exception ex)
             {
@@ -205,7 +256,30 @@ namespace FitFlexApparel.Controllers
                 orderAction.Updated_By = userId;
                 db.OrderActionHistories.Add(orderAction);
                 db.SaveChanges();
+                try
+                {
+                    string message = "Your Order is Dispatched.<br>Order Details: ";
+                    message = message + "<br><b>Order #:</b>" + order.Order_No;
+                    message = message + "<br><b>Order Status:</b>" + order.OrderStatu.Order_Status;
+                    message = message + "<br><b>Updated At:</b>" + orderAction.Updated_At;
+                    message = message + "<br><b>Total Items:</b>" + order.Total_Products;
+                    message = message + "<br><b>Total Price:</b>" + order.Total_Amount;
+                    message = message + "<br><b>Items:</b>";
+                    message = message + "<br><table border='1'><tr><td><b>Product Name</b></td><td><b>Quantity</b></td><td><b>Price</b></td></tr>";
+                    foreach (var item in order.OrderDetails)
+                    {
+                        message = message + "<tr><td>" + item.Product_Name + "</td><td>" + item.Product_Quantity + "</td><td>" + item.Total_Price + "</td></tr>";
+                    }
+                    message = message + "</table><br><b>Thankyou for using our services, For any further query you can contact at info@fitflexapparel.com</b>";
+                    MessagingController messagingController = new MessagingController();
+                    messagingController.SendEmail("Order Update | Fitflex", message, order.Shipping_Address_Email, order.User_Name);
 
+                }
+                catch (Exception ex)
+                {
+                    ExceptionManagerController.infoMessage(ex.Message);
+                    ExceptionManagerController.writeErrorLog(ex);
+                }
             }
             catch (Exception ex)
             {
@@ -234,7 +308,30 @@ namespace FitFlexApparel.Controllers
                 orderAction.Updated_By = userId;
                 db.OrderActionHistories.Add(orderAction);
                 db.SaveChanges();
+                try
+                {
+                    string message = "Your Order is Completed.<br>Order Details: ";
+                    message = message + "<br><b>Order #:</b>" + order.Order_No;
+                    message = message + "<br><b>Order Status:</b>" + order.OrderStatu.Order_Status;
+                    message = message + "<br><b>Updated At:</b>" + orderAction.Updated_At;
+                    message = message + "<br><b>Total Items:</b>" + order.Total_Products;
+                    message = message + "<br><b>Total Price:</b>" + order.Total_Amount;
+                    message = message + "<br><b>Items:</b>";
+                    message = message + "<br><table border='1'><tr><td><b>Product Name</b></td><td><b>Quantity</b></td><td><b>Price</b></td></tr>";
+                    foreach (var item in order.OrderDetails)
+                    {
+                        message = message + "<tr><td>" + item.Product_Name + "</td><td>" + item.Product_Quantity + "</td><td>" + item.Total_Price + "</td></tr>";
+                    }
+                    message = message + "</table><br><b>Thankyou for using our services, For any further query you can contact at info@fitflexapparel.com</b>";
+                    MessagingController messagingController = new MessagingController();
+                    messagingController.SendEmail("Order Update | Fitflex", message, order.Shipping_Address_Email, order.User_Name);
 
+                }
+                catch (Exception ex)
+                {
+                    ExceptionManagerController.infoMessage(ex.Message);
+                    ExceptionManagerController.writeErrorLog(ex);
+                }
             }
             catch (Exception ex)
             {
@@ -263,7 +360,30 @@ namespace FitFlexApparel.Controllers
                 orderAction.Updated_By = userId;
                 db.OrderActionHistories.Add(orderAction);
                 db.SaveChanges();
+                try
+                {
+                    string message = "Your Order is Canceled, Please Contact with Admin at info@fitflexapparel.com<br>Order Details: ";
+                    message = message + "<br><b>Order #:</b>" + order.Order_No;
+                    message = message + "<br><b>Order Status:</b>" + order.OrderStatu.Order_Status;
+                    message = message + "<br><b>Updated At:</b>" + orderAction.Updated_At;
+                    message = message + "<br><b>Total Items:</b>" + order.Total_Products;
+                    message = message + "<br><b>Total Price:</b>" + order.Total_Amount;
+                    message = message + "<br><b>Items:</b>";
+                    message = message + "<br><table border='1'><tr><td><b>Product Name</b></td><td><b>Quantity</b></td><td><b>Price</b></td></tr>";
+                    foreach (var item in order.OrderDetails)
+                    {
+                        message = message + "<tr><td>" + item.Product_Name + "</td><td>" + item.Product_Quantity + "</td><td>" + item.Total_Price + "</td></tr>";
+                    }
+                    message = message + "</table><br><b>Thankyou for using our services, For any further query you can contact at info@fitflexapparel.com</b>";
+                    MessagingController messagingController = new MessagingController();
+                    messagingController.SendEmail("Order Update | Fitflex", message, order.Shipping_Address_Email, order.User_Name);
 
+                }
+                catch (Exception ex)
+                {
+                    ExceptionManagerController.infoMessage(ex.Message);
+                    ExceptionManagerController.writeErrorLog(ex);
+                }
             }
             catch (Exception ex)
             {

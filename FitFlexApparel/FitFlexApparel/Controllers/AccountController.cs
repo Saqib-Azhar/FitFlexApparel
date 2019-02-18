@@ -75,6 +75,17 @@ namespace FitFlexApparel.Controllers
                 return View(model);
             }
 
+            var db = new FitflexApparelEntities();
+            var user = db.AspNetUsers.FirstOrDefault(s => s.Email == model.Email);
+            if(user != null)
+            {
+                if(user.EmailConfirmed == false)
+                {
+                    ViewBag.Message = "Your account is not active, Please confirm your Email by following the link sent to your Email Id: " + user.Email;
+                    return View("ConfirmRegistration");
+                }
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -183,6 +194,7 @@ namespace FitFlexApparel.Controllers
                     registeredUser.Country = model.Country;
                     registeredUser.DisplayName = model.Name;
                     registeredUser.PostalCode = model.PostalCode;
+                    registeredUser.EmailConfirmed = false;
                     db.SaveChanges();
 
                     var context = new ApplicationDbContext();
@@ -193,20 +205,78 @@ namespace FitFlexApparel.Controllers
                     var userManager = new UserManager<ApplicationUser>(userStore);
                     userManager.AddToRole(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    try
+                    {
+                        MessagingController messagingController = new MessagingController();
+                        string message = "<b>Please Confirm your registration by following <a href='http://fitflexapprel.com/Account/ConfirmRegistration?Email="+user.Email+"&Token="+user.SecurityStamp+"'>THIS REGISTRATION LINK</a></b>";
+                        messagingController.SendEmail("Registeration Link Fitflexapparel.com", message, registeredUser.Email, registeredUser.DisplayName);
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionManagerController.infoMessage(ex.Message);
+                        ExceptionManagerController.writeErrorLog(ex);
+                    }
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                    ViewBag.Message = "A Confirmation Link is sent to your Email: " + user.Email + ", Please confirm your email via that link.";
+                    return View("ConfirmRegistration");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ConfirmRegistration(string Email,string Token)
+        {
+            var db = new FitflexApparelEntities();
+            var user = db.AspNetUsers.FirstOrDefault(s => s.Email == Email);
+            try
+            {
+                switch(user.EmailConfirmed)
+                {
+                    case true:
+                        ViewBag.Message = "Your Email is already confirmed!";
+                        return View();
+                        break;
+                    default:
+                        try
+                        {
+                            if (user.SecurityStamp == Token)
+                            {
+                                user.EmailConfirmed = true;
+                                db.SaveChanges();
+                                ViewBag.Message = "Your Email is Registered now!";
+                                return View();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ExceptionManagerController.infoMessage(ex.Message);
+                            ExceptionManagerController.writeErrorLog(ex);
+                            ViewBag.Message = "Something went wrong! Please try again or contact at info@fitflexapparel.com";
+                            return View();
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }
+            ViewBag.Message = "Something went wrong! Please try again or contact at info@fitflexapparel.com";
+            return View();
         }
 
         //
@@ -253,7 +323,21 @@ namespace FitFlexApparel.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    try
+                    {
+                        MessagingController messagingController = new MessagingController();
+                        string message = "<b>Please Confirm your registration by following <a href='http://fitflexapprel.com/Account/ConfirmRegistration?Email=" + user.Email + "&Token=" + user.SecurityStamp + "'>THIS REGISTRATION LINK</a></b>";
+                        messagingController.SendEmail("Registeration Link Fitflexapparel.com", message, registeredUser.Email, registeredUser.DisplayName);
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionManagerController.infoMessage(ex.Message);
+                        ExceptionManagerController.writeErrorLog(ex);
+                    }
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                    ViewBag.Message = "A Confirmation Link is sent to your Email: " + user.Email + ", Please confirm your email via that link.";
+                    return View("ConfirmRegistration");
                 }
                 AddErrors(result);
             }

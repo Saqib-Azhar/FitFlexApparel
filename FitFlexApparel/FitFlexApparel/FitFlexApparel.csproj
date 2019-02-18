@@ -230,6 +230,7 @@
     <Compile Include="Controllers\ExceptionManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagingController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductReviewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -703,10 +704,13 @@
     <Content Include="Views\ContributionRequests\Edit.cshtml" />
     <Content Include="Views\ContributionRequests\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Account\ConfirmRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\" />
     <Folder Include="Views\ExceptionManager\" />
+    <Folder Include="Views\Messaging\" />
+    <Folder Include="Views\Mess\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

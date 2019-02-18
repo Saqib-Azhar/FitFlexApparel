@@ -6,3 +6,21 @@
 
 
 
+18-Feb-19 2:17:41 PM | System | at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at FitFlexApparel.Controllers.MessagingController.SendEmail(String EmailSubject, String EmailBody, String EmailTo, String EmailName) | Failure sending mail.
+
+
+
+
+18-Feb-19 2:17:41 PM | System | Unable to connect to the remote server | at System.Net.ServicePoint.GetConnection(PooledStream PooledStream, Object owner, Boolean async, IPAddress& address, Socket& abortSocket, Socket& abortSocket6)
+   at System.Net.PooledStream.Activate(Object owningObject, Boolean async, GeneralAsyncDelegate asyncCallback)
+   at System.Net.PooledStream.Activate(Object owningObject, GeneralAsyncDelegate asyncCallback)
+   at System.Net.ConnectionPool.GetConnection(Object owningObject, GeneralAsyncDelegate asyncCallback, Int32 creationTimeout)
+   at System.Net.Mail.SmtpConnection.GetConnection(ServicePoint servicePoint)
+   at System.Net.Mail.SmtpTransport.GetConnection(ServicePoint servicePoint)
+   at System.Net.Mail.SmtpClient.GetConnection()
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+
+
+
+
