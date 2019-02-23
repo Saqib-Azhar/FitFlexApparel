@@ -130,38 +130,53 @@
                                 </div>
                                 <a data-toggle="tab" href="#tab3">@Model.Total_Ratings Review(s) / Add Review</a>
                             </div>
-                            @if (Model.Product_Stock > 0)
+                            <p> <strong>Brand:</strong> <input type="radio" name="brandRadio" value="Branded" checked/> @Model.Brand.Brand_Name <input type="radio" name="brandRadio" value="Customized" /> Customized </p>
+
+                            @*@if (Model.Product_Stock > 0)
                             {
-                                <p><strong>Availability:</strong> In Stock <strong style="padding-left:30px;">Brand:</strong> @Model.Brand.Brand_Name</p>
                             }
                             else
                             {
                                 <p><strong>Availability:</strong> Out of Stock <strong style="padding-left:30px;">Brand:</strong> @Model.Brand.Brand_Name</p>
-                            }
+                            }*@
                             <hr />
-                            
-                            @Html.Raw(Model.Product_Description)
+                            <div id="BrandSelection" hidden>
+                                @Html.Raw(Model.Product_Description)
 
-                            <div class="product-options">
-                                <ul class="size-option">
-                                    <li><span class="text-uppercase">Size:</span></li>
-                                    @if (Model.Sizes != null)
-                                    {
-                                        foreach (var item in Model.Sizes.Split(','))
+                                <div class="product-options">
+                                    <ul class="size-option">
+                                        <li><span class="text-uppercase">Size:</span></li>
+                                        @if (Model.Sizes != null)
                                         {
-                                            <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                            foreach (var item in Model.Sizes.Split(','))
+                                            {
+                                                <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                            }
                                         }
-                                    }
-                                </ul>
-                                <ul class="color-option">
-                                    <li><span class="text-uppercase">Color:</span></li>
-                                    @if (Model.Colors != null)
-                                    { foreach (var item in Model.Colors.Split(','))
+                                    </ul>
+                                    <ul class="color-option">
+                                        <li><span class="text-uppercase">Color:</span></li>
+                                        @if (Model.Colors != null)
                                         {
-                                        <li class="colorSelection" value="@item"><a onclick="SelectThis(this, 'color')" alt="@item" style="border:solid;cursor:pointer;background-color:#@item;"></a></li>
+                                            foreach (var item in Model.Colors.Split(','))
+                                            {
+                                                <li class="colorSelection" value="@item"><a onclick="SelectThis(this, 'color')" alt="@item" style="border:solid;cursor:pointer;background-color:#@item;"></a></li>
+                                            }
                                         }
-                                    }
-                                </ul>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="CustomizedSelected">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Name"/><br />
+                                        <input type="text" class="form-control" placeholder="Email"/><br />
+                                        <input type="text" class="form-control" placeholder="Phone"/><br />
+                                        <textarea class="form-control" placeholder="Requirement"></textarea><br />
+                                        <input type="button" class="btn btn-default" value="Submit Query"/>
+                                    </div>
+                                </form>
                             </div>
                             <script>
                                 function SelectThis(obj,attr)

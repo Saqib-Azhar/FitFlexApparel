@@ -75,5 +75,11 @@ namespace FitFlexApparel.Controllers
             db.SaveChanges();
             return RedirectToAction("Contact");
         }
+
+
+        public ActionResult FAQ()
+        {
+            return View();
+        }
     }
 }
