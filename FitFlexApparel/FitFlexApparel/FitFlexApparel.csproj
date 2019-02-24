@@ -706,6 +706,7 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Account\ConfirmRegistration.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Products\ProductListing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\" />

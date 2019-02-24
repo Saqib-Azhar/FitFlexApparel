@@ -13,8 +13,8 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="/Home/Index">Home</a></li>
-                <li><a href="#">@Model.SubCategory.Category.Category_Name</a></li>
-                <li><a href="#">@Model.SubCategory.Subcategory_Name</a></li>
+                <li><a href="/Products/CategoryProducts/@Model.SubCategory.Category_Id">@Model.SubCategory.Category.Category_Name</a></li>
+                <li><a href="/Products/SubCategoryProducts/@Model.Subcategory_Id">@Model.SubCategory.Subcategory_Name</a></li>
                 <li class="active">@Model.Product_Name</li>
             </ul>
         </div>

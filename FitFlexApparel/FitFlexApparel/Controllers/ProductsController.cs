@@ -756,5 +756,46 @@ namespace FitFlexApparel.Controllers
             }
             return Redirect(url);
         }
+
+
+        #region ProductsListings
+
+        public ActionResult CategoryProducts(int? id)
+        {
+            var products = new List<Product>();
+            try
+            {
+                products = db.Products.Where(s => s.SubCategory.Category.Id == id).OrderBy(s=>s.SubCategory.Category.Category_Name).ToList();
+                ViewBag.SearchedQuery = products.FirstOrDefault().SubCategory.Category.Category_Name.ToString();
+                ViewBag.ListingMethod = "Categories";
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }
+            return View("ProductListing", products);
+        }
+
+        public ActionResult SubCategoryProducts(int? id)
+        {
+            var products = new List<Product>();
+            try
+            {
+                products = db.Products.Where(s => s.SubCategory.Id == id).OrderBy(s=>s.SubCategory.Subcategory_Name).ToList();
+                ViewBag.SearchedQuery = products.FirstOrDefault().SubCategory.Subcategory_Name.ToString();
+                ViewBag.ListingMethod = "SubCategories";
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }
+            return View("ProductListing", products);
+        }
+
+
+
+        #endregion
     }
 }
