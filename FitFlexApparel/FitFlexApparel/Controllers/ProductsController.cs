@@ -731,8 +731,30 @@ namespace FitFlexApparel.Controllers
 
 
         #endregion
-
-
-
+        [HttpPost]
+        public ActionResult SubmitQuery(FormCollection fc)
+        {
+            var url = "";
+            try
+            {
+                CustomerContactRequest queryRequest = new CustomerContactRequest();
+                queryRequest.Customer_Name =  fc["Name"];
+                queryRequest.Customer_Email = fc["Email"];
+                queryRequest.Customer_Phone = fc["Phone"];
+                queryRequest.Message = fc["Requirements"];
+                queryRequest.Created_At = DateTime.Now;
+                queryRequest.IsDeleted = false;
+                db.CustomerContactRequests.Add(queryRequest);
+                db.SaveChanges();
+                url = Request.UrlReferrer.ToString();
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+                url = "http://fitflexapparel.com";
+            }
+            return Redirect(url);
+        }
     }
 }
