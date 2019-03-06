@@ -1,73 +1,98 @@
 ﻿@model IEnumerable<FitFlexApparel.Models.Product>
 @{
     string ComparisonVal = "";
+    var Categories = ViewBag.CategoriesLists as IEnumerable<FitFlexApparel.Models.Category>; 
 }
+<script src="~/Assets/js/jquery.min.js"></script>
 <div class="section">
-    <div class="container">
-        <!-- row -->
-        <h4>Total @Model.Count() Results found for<i>"@ViewBag.SearchedQuery"</i></h4>
-        <div class="row">
-            <div id="main" class="col-md-12">
-                <!-- store top filter -->
-                <!-- /store top filter -->
-                <!-- STORE -->
-                <div id="store">
-                    <!-- row -->
-                    <div class="row">
-                        @foreach (var item in Model)
+        <div class="container">
+            <div class="col-md-3">
+                <div class="aside">
+                    <h4 class="aside-title">Categories</h4>
+                    <ul class="list-links">
+                        @foreach (var item in Categories)
                         {
-                            @*if (ViewBag.ListingMethod == "Categories")
+                            <li id="menuCategory_@item.Id"><a href="/Products/CategoryProducts/@item.Id"><b>@item.Category_Name</b></a></li>
+                            foreach (var subcat in item.SubCategories)
                             {
-                                if (ComparisonVal != item.SubCategory.Subcategory_Name)
+                                <li id="menuSubCategory_@subcat.Id"><a href="/Products/SubCategoryProducts/@subcat.Id">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-@subcat.Subcategory_Name</a></li>
+                            }
+                            <hr>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <script>
+                var listingType = '@ViewBag.ListingMethod';
+                var listId = listingType == "SubCategories" ? "menuSubCategory_@Model.FirstOrDefault().Subcategory_Id" : "menuCategory_@Model.FirstOrDefault().SubCategory.Category_Id";
+                $("#" + listId).addClass("active");
+                $("#menuCategory_"+@Model.FirstOrDefault().SubCategory.Category_Id).addClass("active");
+            </script>
+            <div class="col-md-9">
+                <!-- row -->
+                <h4>Total @Model.Count() Results found for<i>"@ViewBag.SearchedQuery"</i></h4>
+                <div class="row">
+                    <div id="main" class="col-md-12">
+                        <!-- store top filter -->
+                        <!-- /store top filter -->
+                        <!-- STORE -->
+                        <div id="store">
+                            <!-- row -->
+                            <div class="row">
+                                @foreach (var item in Model)
                                 {
-                                    ComparisonVal = item.SubCategory.Subcategory_Name;
-                                    <div class="row">
-                                        <h4>
-                                            @ComparisonVal
-                                        </h4>
-                                        <hr />
-                                    </div>
-                                }
+                                    @*if (ViewBag.ListingMethod == "Categories")
+                                {
+                                    if (ComparisonVal != item.SubCategory.Subcategory_Name)
+                                    {
+                                        ComparisonVal = item.SubCategory.Subcategory_Name;
+                                        <div class="row">
+                                            <h4>
+                                                @ComparisonVal
+                                            </h4>
+                                            <hr />
+                                        </div>
+                                    }
 
-                            }*@
-                            <div class="col-md-3 col-sm-6 col-xs-6">
-                                <div class="product product-single">
-                                    <div class="product-thumb">
-                                        @*<div class="product-label">
+                                }*@
+                                    <div class="col-md-3 col-sm-6 col-xs-6">
+                                        <div class="product product-single">
+                                            <div class="product-thumb">
+                                                @*<div class="product-label">
                                                 <span>New</span>
                                                 <span class="sale">-20%</span>
                                             </div>*@
-                                        @*<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>*@
-                                        <img src="/UploadedImages/@item.Product_Image1" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <h3 class="product-price">$@item.Original_Price</h3>
-                                        <div class="product-rating">
-                                            @for (int star = 0; star < item.Average_Rating; star = star + 1)
-                                            {
-                                                <i class="fa fa-star"></i>
-                                            }
-                                            @for (double? star = (item.Average_Rating == null) ? 0 : item.Average_Rating; star < 5; star++)
-                                            {
-                                                <i class="fa fa-star-o empty"></i>
-                                            }
+                                                @*<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>*@
+                                                <img src="/UploadedImages/@item.Product_Image1" alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-price">$@item.Original_Price</h3>
+                                                <div class="product-rating">
+                                                    @for (int star = 0; star < item.Average_Rating; star = star + 1)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                    @for (double? star = (item.Average_Rating == null) ? 0 : item.Average_Rating; star < 5; star++)
+                                                    {
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    }
+                                                </div>
+                                                <h2 class="product-name"><a href="/Products/Display/@item.Id">@item.Product_Name</a></h2>
+                                                <div class="product-btns" style="text-align:right">
+                                                    <button onclick="AddToWishlist(@item.Id)" class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                                    <a href="/Products/Display/@item.Id" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> View</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h2 class="product-name"><a href="/Products/Display/@item.Id">@item.Product_Name</a></h2>
-                                        <div class="product-btns" style="text-align:right">
-                                            <button onclick="AddToWishlist(@item.Id)" class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                            <a href="/Products/Display/@item.Id" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> View</a>
-                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
-                        }
-                    </div>
-                    <!-- /row -->
-                </div>
-                <!-- /STORE -->
+                            <!-- /row -->
+                        </div>
+                        <!-- /STORE -->
 
+                    </div>
+                </div>
             </div>
-        </div>
     </div>
 </div>
-

@@ -79,11 +79,11 @@ namespace FitFlexApparel.Controllers
             var user = db.AspNetUsers.FirstOrDefault(s => s.Email == model.Email);
             if(user != null)
             {
-                if(user.EmailConfirmed == false)
-                {
-                    ViewBag.Message = "Your account is not active, Please confirm your Email by following the link sent to your Email Id: " + user.Email;
-                    return View("ConfirmRegistration");
-                }
+                //if(user.EmailConfirmed == false)
+                //{
+                //    ViewBag.Message = "Your account is not active, Please confirm your Email by following the link sent to your Email Id: " + user.Email;
+                //    return View("ConfirmRegistration");
+                //}
             }
 
             // This doesn't count login failures towards account lockout
@@ -194,7 +194,7 @@ namespace FitFlexApparel.Controllers
                     registeredUser.Country = model.Country;
                     registeredUser.DisplayName = model.Name;
                     registeredUser.PostalCode = model.PostalCode;
-                    registeredUser.EmailConfirmed = false;
+                    registeredUser.EmailConfirmed = true;
                     db.SaveChanges();
 
                     var context = new ApplicationDbContext();

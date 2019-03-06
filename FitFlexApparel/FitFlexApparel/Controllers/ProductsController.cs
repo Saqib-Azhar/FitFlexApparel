@@ -726,6 +726,7 @@ namespace FitFlexApparel.Controllers
                 ExceptionManagerController.writeErrorLog(ex);
 
             }
+            ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             return View(productsList);
         }
 
@@ -768,6 +769,7 @@ namespace FitFlexApparel.Controllers
                 products = db.Products.Where(s => s.SubCategory.Category.Id == id).OrderBy(s=>s.SubCategory.Category.Category_Name).ToList();
                 ViewBag.SearchedQuery = products.FirstOrDefault().SubCategory.Category.Category_Name.ToString();
                 ViewBag.ListingMethod = "Categories";
+                ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             }
             catch (Exception ex)
             {
@@ -785,6 +787,7 @@ namespace FitFlexApparel.Controllers
                 products = db.Products.Where(s => s.SubCategory.Id == id).OrderBy(s=>s.SubCategory.Subcategory_Name).ToList();
                 ViewBag.SearchedQuery = products.FirstOrDefault().SubCategory.Subcategory_Name.ToString();
                 ViewBag.ListingMethod = "SubCategories";
+                ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             }
             catch (Exception ex)
             {
