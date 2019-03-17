@@ -130,7 +130,7 @@
                                 </div>
                                 <a data-toggle="tab" href="#tab3">@Model.Total_Ratings Review(s) / Add Review</a>
                             </div>
-                            <p> <strong>Brand:</strong> <input type="radio" name="brandRadio" value="Branded" onclick="ChangeBrand()" checked/> @Model.Brand.Brand_Name <input type="radio" onclick="ChangeBrand()" name="brandRadio" value="Customized" /> Customized </p>
+                            <p> <strong>Brand:</strong> <input type="radio" name="brandRadio" value="Branded" onclick="ChangeBrand()" checked/> @Model.Brand.Brand_Name <input type="radio" onclick="ChangeBrand()" name="brandRadio" value="Customized" /> Customized Brand</p>
 
                             @*@if (Model.Product_Stock > 0)
                             {
@@ -165,6 +165,37 @@
                                         }
                                     </ul>
                                 </div>
+
+                                @if (Model.Product_Stock > 0 && Model.IsDeleted != true)
+                                {
+                                    <div class="product-btns">
+                                        <div class="qty-input">
+                                            <span class="text-uppercase">QTY: </span>
+                                            <input class="input" type="number" value="1" min="1" id="SelectedQuantity">
+                                        </div>
+                                        <button class="primary-btn add-to-cart" onclick="AddToCart()"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                        <div class="pull-right">
+                                            <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
+                                            @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
+                                            <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="product-btns">
+                                        <div class="qty-input">
+                                            <span class="text-uppercase">QTY: </span>
+                                            <input class="input" type="number" disabled value="0" min="0" id="SelectedQuantity">
+                                        </div>
+                                        <button class="primary-btn disabled" disabled title="Out of Stock"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                        <div class="pull-right">
+                                            <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
+                                            @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
+                                            <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                                        </div>
+                                    </div>
+                                }
                             </div>
 
                             <div id="CustomizedSelected" hidden>
@@ -239,57 +270,40 @@
                                     });
                                 }
                             </script>
-                            @if (Model.Product_Stock > 0 && Model.IsDeleted != true)
-                            {
-                                <div class="product-btns">
-                                    <div class="qty-input">
-                                        <span class="text-uppercase">QTY: </span>
-                                        <input class="input" type="number" value="1" min="1" id="SelectedQuantity">
-                                    </div>
-                                    <button class="primary-btn add-to-cart" onclick="AddToCart()"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                    <div class="pull-right">
-                                        <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
-                                        @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
-                                        <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="product-btns">
-                                    <div class="qty-input">
-                                        <span class="text-uppercase">QTY: </span>
-                                        <input class="input" type="number" disabled value="0" min="0" id="SelectedQuantity">
-                                    </div>
-                                    <button class="primary-btn disabled" disabled title="Out of Stock"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                    <div class="pull-right">
-                                        <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
-                                        @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
-                                        <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
-                                    </div>
-                                </div>
-                            }
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="product-tab">
                             <ul class="tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Overview</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                                 <li><a data-toggle="tab" href="#tab2">Company Profiles</a></li>
-                                <li><a data-toggle="tab" href="#tab4">Terms & Conditions</a></li>
-                                <li><a data-toggle="tab" href="#tab3">Reviews (@Model.Total_Ratings)</a></li>
+                                <li><a data-toggle="tab" href="#tab3">Terms & Conditions</a></li>
+                                <li><a data-toggle="tab" href="#tab4">Reviews (@Model.Total_Ratings)</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tab1" class="tab-pane fade in active">
                                     @Html.Raw(Model.Product_Overview)
+                                    <br />
+                                    <hr />
+                                    <a data-toggle="tab" href="#tab2" style="text-align:right;color:red" class="pull-right"><b>COMPANY PROFILE</b></a>
                                 </div>
                                 <div id="tab2" class="tab-pane fade in">
                                     @Html.Raw(Model.Company_Profile)
-                                </div>
-                                <div id="tab4" class="tab-pane fade in">
-                                    @Html.Raw(Model.Terms_And_Conditions)
+                                    <br />
+                                    <hr />
+                                    <a data-toggle="tab" href="#tab1" style="text-align:left;color:red" class="left"><b>DESCRIPTION</b></a>
+                                    <a data-toggle="tab" href="#tab3" style="text-align:right;color:red" class="pull-right"><b>TERMS & CONDITIONS</b></a>
                                 </div>
                                 <div id="tab3" class="tab-pane fade in">
+                                    @Html.Raw(Model.Terms_And_Conditions)
+                                    <br />
+                                    <a href="/Home/TermsAndConditions" style="text-align:right;color:red" class="pull-right"><b>DETAIL TERMS & CONDITIONS</b></a>
+                                    <br />
+                                    <hr />
+                                    <a data-toggle="tab" href="#tab2" style="text-align:left;color:red" class="left"><b>COMPANY PROFILE</b></a>
+                                    <a data-toggle="tab" href="#tab4" style="text-align:right;color:red" class="pull-right"><b>REVIEWS</b></a>
+                                </div>
+                                <div id="tab4" class="tab-pane fade in">
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -362,7 +376,9 @@
                                         </div>
                                     </div>
 
-
+                                    <br />
+                                    <hr />
+                                    <a data-toggle="tab" href="#tab3" style="text-align:left;color:red" class="left"><b>TERMS & CONDITIONS</b></a>
 
                                 </div>
                             </div>

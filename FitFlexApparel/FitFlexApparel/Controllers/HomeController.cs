@@ -81,5 +81,10 @@ namespace FitFlexApparel.Controllers
         {
             return View();
         }
+
+        public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
     }
 }

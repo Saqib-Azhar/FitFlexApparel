@@ -708,6 +708,7 @@
     <Content Include="Views\Account\ConfirmRegistration.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Products\ProductListing.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\" />
