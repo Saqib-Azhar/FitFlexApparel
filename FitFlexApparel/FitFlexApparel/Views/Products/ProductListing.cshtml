@@ -13,7 +13,7 @@
                         @foreach (var item in Categories)
                         {
                             <li id="menuCategory_@item.Id"><a href="/Products/CategoryProducts/@item.Id"><b>@item.Category_Name</b></a></li>
-                            foreach (var subcat in item.SubCategories)
+                            foreach (var subcat in item.SubCategories.OrderBy(s=>s.Subcategory_Name))
                             {
                                 <li id="menuSubCategory_@subcat.Id"><a href="/Products/SubCategoryProducts/@subcat.Id">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-@subcat.Subcategory_Name</a></li>
                             }
@@ -24,9 +24,10 @@
             </div>
             <script>
                 var listingType = '@ViewBag.ListingMethod';
-                var listId = listingType == "SubCategories" ? "menuSubCategory_@Model.FirstOrDefault().Subcategory_Id" : "menuCategory_@Model.FirstOrDefault().SubCategory.Category_Id";
+                var listId = listingType == "SubCategories" ? "menuSubCategory_@ViewBag.ModelId" : "menuCategory_@ViewBag.ModelId";
                 $("#" + listId).addClass("active");
-                $("#menuCategory_"+@Model.FirstOrDefault().SubCategory.Category_Id).addClass("active");
+                $("#menuCategory_"+@ViewBag.ModelCategoryId).addClass("active");
+
             </script>
             <div class="col-md-9">
                 <!-- row -->

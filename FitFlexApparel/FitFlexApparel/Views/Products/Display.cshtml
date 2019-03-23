@@ -233,7 +233,6 @@
                                 }
                                 function AddToCart()
                                 {
-                                    debugger;
                                     var selectedSize = $(".sizeSelection.active").children().text();
                                     var selectedColor = $(".colorSelection.active").children().attr('alt');
                                     var selectedQuantity = $("#SelectedQuantity").val();
@@ -275,33 +274,33 @@
                     <div class="col-md-12">
                         <div class="product-tab">
                             <ul class="tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Company Profiles</a></li>
-                                <li><a data-toggle="tab" href="#tab3">Terms & Conditions</a></li>
-                                <li><a data-toggle="tab" href="#tab4">Reviews (@Model.Total_Ratings)</a></li>
+                                <li class="active"><a data-toggle="tab" id="tab1Select" href="#tab1">Description</a></li>
+                                <li><a data-toggle="tab" href="#tab2" id="tab2Select">Company Profiles</a></li>
+                                <li><a data-toggle="tab" href="#tab3" id="tab3Select">Terms & Conditions</a></li>
+                                <li><a data-toggle="tab" href="#tab4" id="tab4Select">Reviews (@Model.Total_Ratings)</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tab1" class="tab-pane fade in active">
                                     @Html.Raw(Model.Product_Overview)
                                     <br />
                                     <hr />
-                                    <a data-toggle="tab" href="#tab2" style="text-align:right;color:red" class="pull-right"><b>COMPANY PROFILE</b></a>
+                                    <a onclick="switchTab('#tab2Select')" href="#tab2" style="text-align:right;color:red" class="pull-right"><b>COMPANY PROFILE</b></a>
                                 </div>
                                 <div id="tab2" class="tab-pane fade in">
                                     @Html.Raw(Model.Company_Profile)
                                     <br />
                                     <hr />
-                                    <a data-toggle="tab" href="#tab1" style="text-align:left;color:red" class="left"><b>DESCRIPTION</b></a>
-                                    <a data-toggle="tab" href="#tab3" style="text-align:right;color:red" class="pull-right"><b>TERMS & CONDITIONS</b></a>
+                                    <a href="#tab1" onclick="switchTab('#tab1Select')" style="text-align:left;color:red" class="left"><b>DESCRIPTION</b></a>
+                                    <a href="#tab3" onclick="switchTab('#tab3Select')" style="text-align:right;color:red" class="pull-right"><b>TERMS & CONDITIONS</b></a>
                                 </div>
                                 <div id="tab3" class="tab-pane fade in">
                                     @Html.Raw(Model.Terms_And_Conditions)
                                     <br />
-                                    <a href="/Home/TermsAndConditions" style="text-align:right;color:red" class="pull-right"><b>DETAIL TERMS & CONDITIONS</b></a>
+                                    <a href="/Home/TermsAndConditions" target="_blank" style="text-align:right;color:red" class="pull-right"><b>DETAIL TERMS & CONDITIONS</b></a>
                                     <br />
                                     <hr />
-                                    <a data-toggle="tab" href="#tab2" style="text-align:left;color:red" class="left"><b>COMPANY PROFILE</b></a>
-                                    <a data-toggle="tab" href="#tab4" style="text-align:right;color:red" class="pull-right"><b>REVIEWS</b></a>
+                                    <a href="#tab2" onclick="switchTab('#tab2Select')" style="text-align:left;color:red" class="left"><b>COMPANY PROFILE</b></a>
+                                    <a href="#tab4" onclick="switchTab('#tab4Select')" style="text-align:right;color:red" class="pull-right"><b>REVIEWS</b></a>
                                 </div>
                                 <div id="tab4" class="tab-pane fade in">
 
@@ -333,16 +332,6 @@
                                                         </div>
                                                     </div>
                                                 }
-                                                
-
-                                                
-
-                                                @*<ul class="reviews-pages">
-                                                    <li class="active">1</li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
-                                                    <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-                                                </ul>*@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -378,7 +367,7 @@
 
                                     <br />
                                     <hr />
-                                    <a data-toggle="tab" href="#tab3" style="text-align:left;color:red" class="left"><b>TERMS & CONDITIONS</b></a>
+                                    <a href="#tab3" onclick="switchTab('#tab3Select')" style="text-align:left;color:red" class="left"><b>TERMS & CONDITIONS</b></a>
 
                                 </div>
                             </div>
@@ -393,3 +382,11 @@
         <!-- /container -->
     </div>
     <!-- /section -->
+
+
+<script>
+    function switchTab(tabId)
+    {
+        $(tabId).trigger('click');
+    }
+</script>

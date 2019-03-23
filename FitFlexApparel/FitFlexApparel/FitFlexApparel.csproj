@@ -593,6 +593,7 @@
     <Content Include="Models\FitflexApparel.edmx.diagram">
       <DependentUpon>FitflexApparel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Fitflex Deployment 23 March.pubxml" />
     <None Include="Properties\PublishProfiles\FitFlex working site published version 1- 25jan19.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

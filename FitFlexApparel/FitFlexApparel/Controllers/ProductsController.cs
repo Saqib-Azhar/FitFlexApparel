@@ -767,15 +767,17 @@ namespace FitFlexApparel.Controllers
             try
             {
                 products = db.Products.Where(s => s.SubCategory.Category.Id == id).OrderBy(s=>s.SubCategory.Category.Category_Name).ToList();
-                ViewBag.SearchedQuery = products.FirstOrDefault().SubCategory.Category.Category_Name.ToString();
-                ViewBag.ListingMethod = "Categories";
-                ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             }
             catch (Exception ex)
             {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
             }
+            ViewBag.ModelId = id;
+            ViewBag.ModelCategoryId = id;
+            ViewBag.SearchedQuery = db.Categories.FirstOrDefault(s=>s.Id == id).Category_Name.ToString();
+            ViewBag.ListingMethod = "Categories";
+            ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             return View("ProductListing", products);
         }
 
@@ -785,15 +787,17 @@ namespace FitFlexApparel.Controllers
             try
             {
                 products = db.Products.Where(s => s.SubCategory.Id == id).OrderBy(s=>s.SubCategory.Subcategory_Name).ToList();
-                ViewBag.SearchedQuery = products.FirstOrDefault().SubCategory.Subcategory_Name.ToString();
-                ViewBag.ListingMethod = "SubCategories";
-                ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             }
             catch (Exception ex)
             {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
             }
+            ViewBag.ModelId = id;
+            ViewBag.SearchedQuery = db.SubCategories.FirstOrDefault(s=>s.Id == id).Subcategory_Name.ToString();
+            ViewBag.ListingMethod = "SubCategories";
+            ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
+            ViewBag.ModelCategoryId = db.SubCategories.FirstOrDefault(s => s.Id == id).Category_Id;
             return View("ProductListing", products);
         }
 
