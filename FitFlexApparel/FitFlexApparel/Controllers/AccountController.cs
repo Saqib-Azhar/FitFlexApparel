@@ -58,7 +58,17 @@ namespace FitFlexApparel.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = Request.UrlReferrer.AbsoluteUri.ToString();
+
+            try
+            {
+                ViewBag.ReturnUrl = Request.UrlReferrer.AbsoluteUri.ToString();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ReturnUrl = "/Home/Index";
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }   
             
             return View();
         }

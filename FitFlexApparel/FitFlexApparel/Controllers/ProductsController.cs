@@ -517,7 +517,8 @@ namespace FitFlexApparel.Controllers
 			{
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
+
+                return RedirectToAction("SoftDelete", "Products",new { id = id});
 			}
         }
 
