@@ -189,8 +189,9 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        @Html.Label("", "Select Colors", htmlAttributes: new { @class = "control-label col-md-6" })
-                                        <a class="btn btn-sm pull-right right btn-info" style="color:white;"  onclick="$('#NewColorPanel').removeAttr('hidden')">New Color</a>
+                                        @Html.Label("", "Select Colors", htmlAttributes: new { @class = "control-label col-md-6" })<br />
+                                        <a class="btn btn-sm pull-right right btn-info" style="color:white;"  onclick="$('#NewColorPanel').removeAttr('hidden')">Add</a>
+                                        <a class="btn btn-sm pull-right right btn-danger" style="color:white;" onclick="TruncateColors()">Truncate</a>
                                         @Html.DropDownList("ColorsAvailable", null, htmlAttributes: new { @class = "form-control col-md-12", @multiple = "multiple" })
                                         <div class="panel panel-default" style="border:solid" id="NewColorPanel" hidden>
                                             <div class="panel-body">
@@ -222,8 +223,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        @Html.Label("", "Select Sizes", htmlAttributes: new { @class = "control-label col-md-6" })
+                                        @Html.Label("", "Select Sizes", htmlAttributes: new { @class = "control-label col-md-6" })<br />
                                         <a class="btn btn-sm pull-right right btn-info" style="color:white;"  onclick="$('#NewSizePanel').removeAttr('hidden')">New Size</a>
+                                        <a class="btn btn-sm pull-right right btn-danger" style="color:white;" onclick="TruncateSizes()">Truncate</a>
                                         @Html.DropDownList("SizesAvailable", null, htmlAttributes: new { @class = "form-control", @multiple = "multiple" })
                                         <div class="panel panel-default" style="border:solid" id="NewSizePanel" hidden>
                                             <div class="panel-body">
@@ -310,3 +312,21 @@
 
     <div>
     </div>
+<script>
+    function TruncateColors()
+    {
+        $.ajax({
+            url: "/Products/DeleteColors",
+            type: "POST",
+            success: function () { window.location.reload();}
+        })
+    }
+
+    function TruncateSizes() {
+        $.ajax({
+            url: "/Products/DeleteSizes",
+            type: "POST",
+            success: function () { window.location.reload(); }
+        })
+    }
+</script>

@@ -19,6 +19,7 @@ namespace FitFlexApparel.Models
         public Product()
         {
             this.Carts = new HashSet<Cart>();
+            this.Inquiries = new HashSet<Inquiry>();
             this.ProductPrices = new HashSet<ProductPrice>();
             this.Wishlists = new HashSet<Wishlist>();
         }
@@ -53,6 +54,8 @@ namespace FitFlexApparel.Models
         public virtual Brand Brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inquiry> Inquiries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPrice> ProductPrices { get; set; }
         public virtual SubCategory SubCategory { get; set; }

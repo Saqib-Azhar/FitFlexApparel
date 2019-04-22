@@ -229,6 +229,7 @@
     <Compile Include="Controllers\CustomerContactRequestsController.cs" />
     <Compile Include="Controllers\ExceptionManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InquiriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessagingController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -276,6 +277,12 @@
     <Compile Include="Models\CustomerContactRequest.cs">
       <DependentUpon>FitflexApparel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Custom_Table_1.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Custom_Table_2.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>FitflexApparel.tt</DependentUpon>
     </Compile>
@@ -295,6 +302,9 @@
       <DependentUpon>FitflexApparel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Inquiry.cs">
+      <DependentUpon>FitflexApparel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>FitflexApparel.tt</DependentUpon>
@@ -593,6 +603,7 @@
     <Content Include="Models\FitflexApparel.edmx.diagram">
       <DependentUpon>FitflexApparel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FitFlex Deployment 19 April.pubxml" />
     <None Include="Properties\PublishProfiles\Fitflex Deployment 23 March.pubxml" />
     <None Include="Properties\PublishProfiles\FitFlex working site published version 1- 25jan19.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -710,9 +721,14 @@
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Products\ProductListing.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Inquiries\Create.cshtml" />
+    <Content Include="Views\Inquiries\Delete.cshtml" />
+    <Content Include="Views\Inquiries\Details.cshtml" />
+    <Content Include="Views\Inquiries\Edit.cshtml" />
+    <Content Include="Views\Inquiries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UploadedImages\" />
+    <Folder Include="UploadedImages\Inquiries\" />
     <Folder Include="Views\ExceptionManager\" />
     <Folder Include="Views\Messaging\" />
     <Folder Include="Views\Mess\" />

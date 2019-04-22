@@ -130,8 +130,8 @@
                                 </div>
                                 <a data-toggle="tab" href="#tab3">@Model.Total_Ratings Review(s) / Add Review</a>
                             </div>
-                            <p> <strong>Brand:</strong> <input type="radio" name="brandRadio" value="Branded" onclick="ChangeBrand()" checked/> @Model.Brand.Brand_Name <input type="radio" onclick="ChangeBrand()" name="brandRadio" value="Customized" /> Customized Brand</p>
-
+                            <p> <strong>Brand:</strong> @Model.Brand.Brand_Name <a href="/Inquiries/Create/@Model.Id" class="main-btn btn btn-sm pull-right" target="_blank">Customized Brand</a></p>
+                            <br />
                             @*@if (Model.Product_Stock > 0)
                             {
                             }
@@ -175,6 +175,7 @@
                                         </div>
                                         <button class="primary-btn add-to-cart" onclick="AddToCart()"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
                                         <div class="pull-right">
+                                            <a href="/Inquiries/Create/@Model.Id" class="main-btn btn" target="_blank">Request Sample</a>
                                             <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
                                             @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
                                             <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>

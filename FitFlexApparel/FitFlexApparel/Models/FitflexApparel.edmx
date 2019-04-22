@@ -159,6 +159,38 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Request_Type" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Custom_Table_1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Column_1" Type="nvarchar(max)" />
+          <Property Name="Column_2" Type="nvarchar(max)" />
+          <Property Name="Column_3" Type="nvarchar(max)" />
+          <Property Name="Column_4" Type="nvarchar(max)" />
+          <Property Name="Column_5" Type="nvarchar(max)" />
+          <Property Name="Column_6" Type="nvarchar(max)" />
+          <Property Name="Column_7" Type="nvarchar(max)" />
+          <Property Name="Column_8" Type="nvarchar(max)" />
+          <Property Name="Column_9" Type="nvarchar(max)" />
+          <Property Name="Column_10" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Custom_Table_2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Column_1" Type="nvarchar(max)" />
+          <Property Name="Column_2" Type="nvarchar(max)" />
+          <Property Name="Column_3" Type="nvarchar(max)" />
+          <Property Name="Column_4" Type="nvarchar(max)" />
+          <Property Name="Column_5" Type="nvarchar(max)" />
+          <Property Name="Column_6" Type="nvarchar(max)" />
+          <Property Name="Column_7" Type="nvarchar(max)" />
+          <Property Name="Column_8" Type="nvarchar(max)" />
+          <Property Name="Column_9" Type="nvarchar(max)" />
+          <Property Name="Column_10" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="CustomerContactRequests">
           <Key>
             <PropertyRef Name="Id" />
@@ -170,6 +202,38 @@
           <Property Name="Message" Type="nvarchar(max)" />
           <Property Name="Created_At" Type="datetime" />
           <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Inquiries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="int" />
+          <Property Name="Product_Name" Type="nvarchar(max)" />
+          <Property Name="Number_Of_Samples" Type="int" />
+          <Property Name="Payment_For_Sample" Type="bit" />
+          <Property Name="Payment_For_Shipment" Type="bit" />
+          <Property Name="First_Name" Type="nvarchar(max)" />
+          <Property Name="Last_Name" Type="nvarchar(max)" />
+          <Property Name="Business_Email" Type="nvarchar(max)" />
+          <Property Name="Company_Name" Type="nvarchar(max)" />
+          <Property Name="Country_Code" Type="nvarchar(max)" />
+          <Property Name="Area_Code" Type="nvarchar(max)" />
+          <Property Name="Telephone_Number" Type="nvarchar(max)" />
+          <Property Name="Ext_Number" Type="nvarchar(max)" />
+          <Property Name="Company_Website" Type="nvarchar(max)" />
+          <Property Name="Business_Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State_Province" Type="nvarchar(max)" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Image_File_1" Type="nvarchar(max)" />
+          <Property Name="Image_File_2" Type="nvarchar(max)" />
+          <Property Name="Image_File_3" Type="nvarchar(max)" />
+          <Property Name="Image_File_4" Type="nvarchar(max)" />
+          <Property Name="Image_File_5" Type="nvarchar(max)" />
+          <Property Name="Custom_Field1" Type="nvarchar(max)" />
+          <Property Name="Custom_Field2" Type="nvarchar(max)" />
+          <Property Name="Custom_Field3" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="OrderActionHistory">
           <Key>
@@ -431,6 +495,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Inquiries_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Inquiries" Type="Self.Inquiries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inquiries">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderActionHistory_ToAspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
@@ -625,7 +701,10 @@
           <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContributionRequests" EntityType="Self.ContributionRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContributionRequestsTypes" EntityType="Self.ContributionRequestsTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Custom_Table_1" EntityType="Self.Custom_Table_1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Custom_Table_2" EntityType="Self.Custom_Table_2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerContactRequests" EntityType="Self.CustomerContactRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inquiries" EntityType="Self.Inquiries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderActionHistory" EntityType="Self.OrderActionHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -666,6 +745,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inquiries_ToProducts" Association="Self.FK_Inquiries_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Inquiries" EntitySet="Inquiries" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderActionHistory_ToAspNetUsers" Association="Self.FK_OrderActionHistory_ToAspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -897,6 +980,38 @@
           <Property Name="Request_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ContributionRequests" Relationship="Self.FK_ContributionRequests_ToContributionRequestsTypes" FromRole="ContributionRequestsTypes" ToRole="ContributionRequests" />
         </EntityType>
+        <EntityType Name="Custom_Table_1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Column_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_7" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_8" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_9" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_10" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Custom_Table_2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Column_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_7" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_8" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_9" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Column_10" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="CustomerContactRequest">
           <Key>
             <PropertyRef Name="Id" />
@@ -908,6 +1023,39 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created_At" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Inquiry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int32" />
+          <Property Name="Product_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number_Of_Samples" Type="Int32" />
+          <Property Name="Payment_For_Sample" Type="Boolean" />
+          <Property Name="Payment_For_Shipment" Type="Boolean" />
+          <Property Name="First_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Business_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Company_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Area_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone_Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ext_Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Company_Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Business_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State_Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_File_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_File_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_File_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_File_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_File_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Custom_Field1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Custom_Field2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Custom_Field3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Inquiries_ToProducts" FromRole="Inquiries" ToRole="Products" />
         </EntityType>
         <EntityType Name="OrderActionHistory">
           <Key>
@@ -1038,6 +1186,7 @@
           <Property Name="Added_On" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Products_ToBrand" FromRole="Products" ToRole="Brands" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToProducts" FromRole="Products" ToRole="Cart" />
+          <NavigationProperty Name="Inquiries" Relationship="Self.FK_Inquiries_ToProducts" FromRole="Products" ToRole="Inquiries" />
           <NavigationProperty Name="ProductPrices" Relationship="Self.FK_ProductPrices_ToProducts" FromRole="Products" ToRole="ProductPrices" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Products_ToSubCategories" FromRole="Products" ToRole="SubCategories" />
           <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToProducts" FromRole="Products" ToRole="Wishlist" />
@@ -1249,6 +1398,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Inquiries_ToProducts">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Inquiries" Type="Self.Inquiry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inquiries">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderActionHistory_ToOrders">
           <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
           <End Role="OrderActionHistory" Type="Self.OrderActionHistory" Multiplicity="*" />
@@ -1362,7 +1523,10 @@
           <EntitySet Name="Colors" EntityType="Self.Color" />
           <EntitySet Name="ContributionRequests" EntityType="Self.ContributionRequest" />
           <EntitySet Name="ContributionRequestsTypes" EntityType="Self.ContributionRequestsType" />
+          <EntitySet Name="Custom_Table_1" EntityType="Self.Custom_Table_1" />
+          <EntitySet Name="Custom_Table_2" EntityType="Self.Custom_Table_2" />
           <EntitySet Name="CustomerContactRequests" EntityType="Self.CustomerContactRequest" />
+          <EntitySet Name="Inquiries" EntityType="Self.Inquiry" />
           <EntitySet Name="OrderActionHistories" EntityType="Self.OrderActionHistory" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
@@ -1423,6 +1587,10 @@
           <AssociationSet Name="FK_ContributionRequests_ToContributionRequestsTypes" Association="Self.FK_ContributionRequests_ToContributionRequestsTypes">
             <End Role="ContributionRequestsTypes" EntitySet="ContributionRequestsTypes" />
             <End Role="ContributionRequests" EntitySet="ContributionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inquiries_ToProducts" Association="Self.FK_Inquiries_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Inquiries" EntitySet="Inquiries" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderActionHistory_ToOrders" Association="Self.FK_OrderActionHistory_ToOrders">
             <End Role="Orders" EntitySet="Orders" />
@@ -1622,6 +1790,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Custom_Table_1">
+            <EntityTypeMapping TypeName="Model.Custom_Table_1">
+              <MappingFragment StoreEntitySet="Custom_Table_1">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Column_1" ColumnName="Column_1" />
+                <ScalarProperty Name="Column_2" ColumnName="Column_2" />
+                <ScalarProperty Name="Column_3" ColumnName="Column_3" />
+                <ScalarProperty Name="Column_4" ColumnName="Column_4" />
+                <ScalarProperty Name="Column_5" ColumnName="Column_5" />
+                <ScalarProperty Name="Column_6" ColumnName="Column_6" />
+                <ScalarProperty Name="Column_7" ColumnName="Column_7" />
+                <ScalarProperty Name="Column_8" ColumnName="Column_8" />
+                <ScalarProperty Name="Column_9" ColumnName="Column_9" />
+                <ScalarProperty Name="Column_10" ColumnName="Column_10" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Custom_Table_2">
+            <EntityTypeMapping TypeName="Model.Custom_Table_2">
+              <MappingFragment StoreEntitySet="Custom_Table_2">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Column_1" ColumnName="Column_1" />
+                <ScalarProperty Name="Column_2" ColumnName="Column_2" />
+                <ScalarProperty Name="Column_3" ColumnName="Column_3" />
+                <ScalarProperty Name="Column_4" ColumnName="Column_4" />
+                <ScalarProperty Name="Column_5" ColumnName="Column_5" />
+                <ScalarProperty Name="Column_6" ColumnName="Column_6" />
+                <ScalarProperty Name="Column_7" ColumnName="Column_7" />
+                <ScalarProperty Name="Column_8" ColumnName="Column_8" />
+                <ScalarProperty Name="Column_9" ColumnName="Column_9" />
+                <ScalarProperty Name="Column_10" ColumnName="Column_10" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CustomerContactRequests">
             <EntityTypeMapping TypeName="Model.CustomerContactRequest">
               <MappingFragment StoreEntitySet="CustomerContactRequests">
@@ -1632,6 +1834,39 @@
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Created_At" ColumnName="Created_At" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inquiries">
+            <EntityTypeMapping TypeName="Model.Inquiry">
+              <MappingFragment StoreEntitySet="Inquiries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Number_Of_Samples" ColumnName="Number_Of_Samples" />
+                <ScalarProperty Name="Payment_For_Sample" ColumnName="Payment_For_Sample" />
+                <ScalarProperty Name="Payment_For_Shipment" ColumnName="Payment_For_Shipment" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Business_Email" ColumnName="Business_Email" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+                <ScalarProperty Name="Area_Code" ColumnName="Area_Code" />
+                <ScalarProperty Name="Telephone_Number" ColumnName="Telephone_Number" />
+                <ScalarProperty Name="Ext_Number" ColumnName="Ext_Number" />
+                <ScalarProperty Name="Company_Website" ColumnName="Company_Website" />
+                <ScalarProperty Name="Business_Address" ColumnName="Business_Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State_Province" ColumnName="State_Province" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Image_File_1" ColumnName="Image_File_1" />
+                <ScalarProperty Name="Image_File_2" ColumnName="Image_File_2" />
+                <ScalarProperty Name="Image_File_3" ColumnName="Image_File_3" />
+                <ScalarProperty Name="Image_File_4" ColumnName="Image_File_4" />
+                <ScalarProperty Name="Image_File_5" ColumnName="Image_File_5" />
+                <ScalarProperty Name="Custom_Field1" ColumnName="Custom_Field1" />
+                <ScalarProperty Name="Custom_Field2" ColumnName="Custom_Field2" />
+                <ScalarProperty Name="Custom_Field3" ColumnName="Custom_Field3" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

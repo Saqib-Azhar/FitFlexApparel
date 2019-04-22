@@ -805,5 +805,59 @@ namespace FitFlexApparel.Controllers
 
 
         #endregion
+
+        #region Colors/Sizes
+        public void DeleteColors()
+        {
+            try
+            {
+                var colorsList = db.Colors.ToList();
+                foreach (var item in colorsList)
+                {
+                    try
+                    {
+                        db.Colors.Remove(item);
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionManagerController.infoMessage(ex.Message);
+                        ExceptionManagerController.writeErrorLog(ex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }
+        }
+
+        public void DeleteSizes()
+        {
+            try
+            {
+                var sizesList = db.Sizes.ToList();
+                foreach (var item in sizesList)
+                {
+                    try
+                    {
+                        db.Sizes.Remove(item);
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionManagerController.infoMessage(ex.Message);
+                        ExceptionManagerController.writeErrorLog(ex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+            }
+        }
+        #endregion
     }
 }

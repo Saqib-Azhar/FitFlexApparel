@@ -1,0 +1,325 @@
+﻿@model FitFlexApparel.Models.Inquiry
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+
+<div>
+    <h4>Inquiry</h4>
+    <hr />
+    <div class="row">
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product_Name)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Number Of Samples")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Number_Of_Samples)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Payment For Sample")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Payment_For_Sample)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Payment For Shipment")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Payment_For_Shipment)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("First Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.First_Name)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Last Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Last_Name)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Business Email")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Business_Email)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Company Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Company_Name)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Country Code")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Country_Code)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Area Code")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Area_Code)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Telephone Number")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Telephone_Number)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Ext Number")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Ext_Number)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Company Website")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Company_Website)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Business Address")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Business_Address)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("City")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.City)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("State Province")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.State_Province)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Message")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Message)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Image File 1")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				<img src="/UploadedImages/@Model.Image_File_1" style="width:250px;height:250px;border:solid" />
+			</div>
+		</div>
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Image File 2")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				<img src="/UploadedImages/@Model.Image_File_2" style="width:250px;height:250px;border:solid" />
+			</div>
+		</div>
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Image File 3")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				<img src="/UploadedImages/@Model.Image_File_3" style="width:250px;height:250px;border:solid" />
+			</div>
+		</div>
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Image File 4")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				<img src="/UploadedImages/@Model.Image_File_4" style="width:250px;height:250px;border:solid" />
+			</div>
+		</div>
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Image File 5")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				<img src="/UploadedImages/@Model.Image_File_5" style="width:250px;height:250px;border:solid" />
+			</div>
+		</div>
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Custom Field1")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Custom_Field1)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Custom Field2")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Custom_Field2)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Custom Field3")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Custom_Field3)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Product.Product Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.Product.Product_Name)
+			</div>
+		</div>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+</p>

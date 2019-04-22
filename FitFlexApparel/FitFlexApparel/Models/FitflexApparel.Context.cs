@@ -37,7 +37,10 @@ namespace FitFlexApparel.Models
         public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<ContributionRequest> ContributionRequests { get; set; }
         public virtual DbSet<ContributionRequestsType> ContributionRequestsTypes { get; set; }
+        public virtual DbSet<Custom_Table_1> Custom_Table_1 { get; set; }
+        public virtual DbSet<Custom_Table_2> Custom_Table_2 { get; set; }
         public virtual DbSet<CustomerContactRequest> CustomerContactRequests { get; set; }
+        public virtual DbSet<Inquiry> Inquiries { get; set; }
         public virtual DbSet<OrderActionHistory> OrderActionHistories { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

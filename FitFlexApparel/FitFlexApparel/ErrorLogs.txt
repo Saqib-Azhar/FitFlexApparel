@@ -13,3 +13,18 @@
 
 
 
+12-Apr-19 11:36:59 PM: The underlying provider failed on Open.
+
+
+
+
+14-Apr-19 6:45:18 PM: Object reference not set to an instance of an object.
+
+
+
+
+18-Apr-19 11:16:46 PM: Could not find a part of the path 'C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Uploadedimages\Inquiries\aug28_men_category.jpg'.
+
+
+
+
