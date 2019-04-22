@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                @Html.Label("", "Number Of Samples", htmlAttributes: new { @class = "control-label col-md-12" })
+                                @Html.Label("", "Number Of Samples/Products", htmlAttributes: new { @class = "control-label col-md-12" })
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Number_Of_Samples, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Number_Of_Samples, "", new { @class = "text-danger" })
@@ -54,23 +54,36 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                @Html.Label("", "Payment For Sample", htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    <div class="checkbox">
-                                        @Html.CheckBox("Payment_For_Sample")
-                                        @Html.ValidationMessageFor(model => model.Payment_For_Sample, "", new { @class = "text-danger" })
-                                    </div>
+                                @Html.Label("", "Payment For Sample", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.Payment_For_Sample, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "True" },
+                                           new SelectListItem() { Text = "No", Value = "False"}
+                                        }, null, new { @id = "Payment_For_Sample", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Payment_For_Sample, "", new { @class = "text-danger" })                                    
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                @Html.Label("", "Payment For Shipment", htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    <div class="checkbox">
-                                        @Html.CheckBox("Payment_For_Shipment")
+                                @Html.Label("", "Payment For Shipment", htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.Payment_For_Shipment, new List<SelectListItem>()
+                                        {
+                                           new SelectListItem() { Text = "Yes", Value = "True" },
+                                           new SelectListItem() { Text = "No", Value = "False"}
+                                        }, null, new { @id = "Payment_For_Shipment", @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Payment_For_Shipment, "", new { @class = "text-danger" })
                                     </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Label("", "Message", htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.Message, 8, 20, new { @class = "form-control", @maxlength = "10000", @placeholder = "Max 1000 words" })
+                                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -179,15 +192,6 @@
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.State_Province, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.State_Province, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.Label("", "Message", htmlAttributes: new { @class = "control-label col-md-12" })
-                                <div class="col-md-12">
-                                    @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
