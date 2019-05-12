@@ -85,3 +85,38 @@
 
 
 
+02-May-19 9:55:50 PM | FitFlexApparel | at FitFlexApparel.Controllers.AccountController.Login(String returnUrl) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\AccountController.cs:line 64 | Object reference not set to an instance of an object.
+
+
+
+
+At Date Time: 02-May-19 11:09:06 PM 
+| Source: EntityFramework 
+| StackTrace: at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at FitFlexApparel.Controllers.ProductsController.DeleteConfirmed(Int32 id) in C:\Users\saqib\Source\Repos\FitFlexApparel\FitFlexApparel\FitFlexApparel\Controllers\ProductsController.cs:line 513 
+| Message: An error occurred while updating the entries. See the inner exception for details.
+
+
+
+
+At Date Time: 02-May-19 11:09:06 PM 
+| Inner Exception Source: EntityFramework 
+| Inner Exception Message: An error occurred while updating the entries. See the inner exception for details. 
+| Stack trace: at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.<Update>b__2(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStore>b__35()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass2a.<SaveChangesInternal>b__27()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+
+
+
+
