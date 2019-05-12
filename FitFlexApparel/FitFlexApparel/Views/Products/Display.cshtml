@@ -116,7 +116,6 @@
                                     }
                                 </tr>
                             </table>
-                            @*<h3 class="product-price">$@Model.Original_Price <del class="product-old-price">$45.00</del></h3>*@
                             <div>
                                 <div class="product-rating">
                                     @for (int star = 0; star < Model.Average_Rating; star = star + 1)
@@ -132,28 +131,11 @@
                             </div>
                             <p> <strong>Brand:</strong> @Model.Brand.Brand_Name <a href="/Inquiries/Create/@Model.Id" class="main-btn btn btn-sm pull-right" target="_blank">Customized Brand</a></p>
                             <br />
-                            @*@if (Model.Product_Stock > 0)
-                            {
-                            }
-                            else
-                            {
-                                <p><strong>Availability:</strong> Out of Stock <strong style="padding-left:30px;">Brand:</strong> @Model.Brand.Brand_Name</p>
-                            }*@
                             <hr />
                             <div id="BrandSelection">
                                 @Html.Raw(Model.Product_Description)
 
                                 <div class="product-options">
-                                    <ul class="size-option">
-                                        <li><span class="text-uppercase">Size:</span></li>
-                                        @if (Model.Sizes != null)
-                                        {
-                                            foreach (var item in Model.Sizes.Split(','))
-                                            {
-                                                <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
-                                            }
-                                        }
-                                    </ul>
                                     <ul class="color-option">
                                         <li><span class="text-uppercase">Color:</span></li>
                                         @if (Model.Colors != null)
@@ -164,25 +146,59 @@
                                             }
                                         }
                                     </ul>
+                                    @*<ul class="size-option"> 11 May change, to be add back 
+                                        <li><span class="text-uppercase">Size:</span></li>
+                                        @if (Model.Sizes != null)
+                                        {
+                                            foreach (var item in Model.Sizes.Split(','))
+                                            {
+                                                <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                            }
+                                        }
+                                    </ul>*@
+                                    <style>
+                                        .td-Custom{
+                                            padding:10px;
+                                        }
+                                    </style>
+                                    <div>
+                                        <table>
+                                            @if (Model.Sizes != null)
+                                            {
+                                            <tr style="text-align:center"><td class="td-Custom"><span class="text-uppercase">Size</span></td><td class="td-Custom"><span class="text-uppercase">Quantity</span></td></tr>
+                                                foreach (var item in Model.Sizes.Split(','))
+                                                {
+                                            <tr style="text-align:center">
+                                                <td class="sizeSelection td-Custom" value="@item"><span style="cursor:pointer;">@item</span> </td>
+                                                <td class="qty-input td-Custom">
+                                                    <input type="number" min="0" id="SizeQuantity_@item" value="100" class="form-control sizeValInput" style="width:80px" sizeVal="@item"/>
+                                                </td>
+                                                <td><span>Pcs</span></td>
+                                            </tr>
+                                                }
+                                            }
+                                        </table>
+                                    </div>
                                 </div>
 
-                                @if (Model.Product_Stock > 0 && Model.IsDeleted != true)
-                                {
+                                @*@if (Model.Product_Stock > 0 && Model.IsDeleted != true) 11 May change, add it back after customer needs it
+                                {*@
                                     <div class="product-btns">
-                                        <div class="qty-input">
+                                        @*<div class="qty-input">
                                             <span class="text-uppercase">QTY: </span>
                                             <input class="input" type="number" value="1" min="1" id="SelectedQuantity">
                                         </div>
-                                        <button class="primary-btn add-to-cart" onclick="AddToCart()"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                        <button class="primary-btn add-to-cart" onclick="AddToCart()"><i class="fa fa-shopping-cart"></i> Add to Cart</button> Commenting Addtocart button for 11 may change, add it after customer needs it*@
                                         <div class="pull-right">
+                                            <form id="AddToInquiryForm" method="post"></form>
+                                            <button class="primary-btn add-to-cart" onclick="AddToInquiry()"><i class="fa fa-shopping-cart"></i> Add to Inquiry</button>
                                             <a href="/Inquiries/Create/@Model.Id" class="main-btn btn" target="_blank">Request Sample</a>
                                             <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
-                                            @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
-                                            <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                                            @*<button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>*@
                                         </div>
                                     </div>
-                                }
-                                else
+                                @*}*@
+                                @*else 11 May change, add it back after customer needs it
                                 {
                                     <div class="product-btns">
                                         <div class="qty-input">
@@ -192,11 +208,10 @@
                                         <button class="primary-btn disabled" disabled title="Out of Stock"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
                                         <div class="pull-right">
                                             <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
-                                            @*<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>*@
                                             <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
                                         </div>
                                     </div>
-                                }
+                                }*@
                             </div>
 
                             <div id="CustomizedSelected" hidden>
@@ -259,7 +274,7 @@
                                                 alert("Please create an account or login to your account to add this product!");
                                                 window.location = "/Account/Login?url="+window.location.href;
                                             }
-                                            else 
+                                            else
                                             {
                                                 alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)")
                                             }
@@ -268,6 +283,42 @@
                                             alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
                                         }
                                     });
+                                }
+
+
+                                function AddToInquiry()
+                                {
+                                    var ColorSelected = $(".colorSelection.active").children().attr('alt');
+                                    if(ColorSelected == null || ColorSelected == "")
+                                    {
+                                        alert("In order to Add product to inquiry, please select a Color!");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        var SizeQuantitySelected = [];debugger;
+                                        var sizes = $(".sizeValInput");
+                                        $.each(sizes, function () {
+                                            var sizeQuanObj = {};
+                                            sizeQuanObj["Size"] = $(this).attr("sizeVal");
+                                            sizeQuanObj["Quantity"] = $(this).val();
+                                            SizeQuantitySelected.push(sizeQuanObj);
+                                        });
+                                        window.location = "/Products/AddToInquiry?ProductId="+'@Model.Id'+"&ColorSelected="+ColorSelected+"&SizeQuantities="+ JSON.stringify(SizeQuantitySelected);
+                                        //$.ajax({
+                                        //    url: "/Products/AddToInquiry",
+                                        //    type: "POST",
+                                        //    async: true,
+                                        //    data: { ProductId: , ColorSelected: ColorSelected, SizeQuantities: JSON.stringify(SizeQuantitySelected)},
+                                        //    success: function (data) {
+                                        //        debugger;
+                                        //        window.location = "/Products/ViewInquiry?html=" + data;
+                                        //    },
+                                        //    error: function () {
+                                        //        alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
+                                        //    }
+                                        //})
+                                    }
                                 }
                             </script>
                         </div>

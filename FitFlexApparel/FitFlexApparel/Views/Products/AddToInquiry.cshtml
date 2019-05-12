@@ -1,0 +1,28 @@
+﻿@model FitFlexApparel.Models.Product
+@{
+    ViewBag.Title = "AddToInquiry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Index">Home</a></li>
+            <li><a href="/Products/CategoryProducts/@Model.SubCategory.Category_Id">@Model.SubCategory.Category.Category_Name</a></li>
+            <li><a href="/Products/SubCategoryProducts/@Model.Subcategory_Id">@Model.SubCategory.Subcategory_Name</a></li>
+            <li class="active">@Model.Product_Name</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <h2 style="text-align:center;">INQUIRY BASKET</h2>
+        </div>
+    </div>
+</div>
+

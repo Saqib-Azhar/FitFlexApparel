@@ -203,18 +203,23 @@
                                                     {
                                                         var colorName = $("#newColorName").val();
                                                         var colorCode = $("#newColorCode").val();
+                                                        if (colorName != null && colorName != "" && colorCode != null && colorCode != "") {
 
-                                                        $.ajax({
-                                                            url: "/Products/AddColor",
-                                                            type: 'POST',
-                                                            data: { colorCode: colorCode, colorName: colorName },
-                                                            success: function (result) {
-                                                                $("#ColorsAvailable").append('<option value="'+colorCode+'">'+colorName+'</option>')
-                                                            },
-                                                            error: function () {
-                                                                alert("Error adding new color! (please make sure you are connected with Internet & your browser is compatible)");
-                                                            }
-                                                        });
+                                                            $.ajax({
+                                                                url: "/Products/AddColor",
+                                                                type: 'POST',
+                                                                data: { colorCode: colorCode, colorName: colorName },
+                                                                success: function (result) {
+                                                                    $("#ColorsAvailable").append('<option value="' + colorCode + '">' + colorName + '</option>')
+                                                                },
+                                                                error: function () {
+                                                                    alert("Error adding new color! (please make sure you are connected with Internet & your browser is compatible)");
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            alert("Color Name & Code couldn't load properly! Please make sure to enter both values or reload the page and try again.")
+                                                        }
 
                                                         $("#NewColorPanel").attr("hidden","hidden");
                                                     }
@@ -237,19 +242,24 @@
                                                     {
                                                         var SizeName = $("#newSizeName").val();
                                                         var SizeCode = $("#newSizeCode").val();
-
-                                                        $.ajax({
-                                                            url: "/Products/AddSize",
-                                                            type: 'POST',
-                                                            data: { SizeCode: SizeCode, SizeName: SizeName },
-                                                            success: function (result) {
-                                                                $("#SizesAvailable").append('<option value="'+SizeCode+'">'+SizeName+'</option>')
-                                                            },
-                                                            error: function () {
-                                                                alert("Error adding new Size! (please make sure you are connected with Internet & your browser is compatible)");
-                                                            }
-                                                        });
-
+                                                        if (SizeName != null && SizeName != "" && SizeCode != null && SizeCode != "")
+                                                        {
+                                                            $.ajax({
+                                                                url: "/Products/AddSize",
+                                                                type: 'POST',
+                                                                data: { SizeCode: SizeCode, SizeName: SizeName },
+                                                                success: function (result) {
+                                                                    $("#SizesAvailable").append('<option value="' + SizeCode + '">' + SizeName + '</option>')
+                                                                },
+                                                                error: function () {
+                                                                    alert("Error adding new Size! (please make sure you are connected with Internet & your browser is compatible)");
+                                                                }
+                                                            });
+                                                        }
+                                                        else
+                                                        {
+                                                            alert("Size Name & Code couldn't load properly! Please make sure to enter both values or reload the page and try again.")
+                                                        }
                                                         $("#NewSizePanel").attr("hidden","hidden");
                                                     }
                                                 </script>

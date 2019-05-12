@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using FitFlexApparel.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace FitFlexApparel.Controllers
 {
@@ -859,5 +860,26 @@ namespace FitFlexApparel.Controllers
             }
         }
         #endregion
+
+        #region Inquiry
+
+        protected class SizeQuantityObj
+        {
+            public string Size { get; set; }
+            public int Quantity { get; set; }
+        }
+
+        public ActionResult AddToInquiry(int ProductId, string ColorSelected, string SizeQuantities)
+        {
+            ViewBag.ProductId = ProductId;
+            ViewBag.ColorSelected = ColorSelected;
+            var sizeQuant = JsonConvert.DeserializeObject<List<SizeQuantityObj>>(SizeQuantities);
+            ViewBag.SizeQuantity = sizeQuant;
+            var model = db.Products.FirstOrDefault(s => s.Id == ProductId);
+            return View(model);
+        }
+        
+        #endregion
     }
+    
 }
