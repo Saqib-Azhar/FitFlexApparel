@@ -20,46 +20,46 @@ namespace FitFlexApparel.Controllers
         // GET: Products
         public ActionResult Index()
         {
-			try{
-				var products = db.Products.Include(p => p.Brand).Include(p => p.SubCategory).Where(s => s.IsDeleted != true);
-				return View(products.ToList());
-			}
-			catch(Exception ex)
-			{
+            try {
+                var products = db.Products.Include(p => p.Brand).Include(p => p.SubCategory).Where(s => s.IsDeleted != true);
+                return View(products.ToList());
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
-			}
-		}
+                return RedirectToAction("Error", "Home");
+            }
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
-			try
-			{
-				if (id == null)
-				{
-					return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-				}
-				Product product = db.Products.Find(id);
-				if (product == null)
-				{
-					return HttpNotFound();
-				}
-				return View(product);
-			
-			}
-			catch(Exception ex)
-			{
+            try
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = db.Products.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
+
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
-			}
+                return RedirectToAction("Error", "Home");
+            }
         }
         [HttpPost]
         public ActionResult NewReview(FormCollection fc)
         {
-                var ProductId = fc["ProductId"];
+            var ProductId = fc["ProductId"];
             try
             {
                 var Name = fc["Name"];
@@ -91,7 +91,7 @@ namespace FitFlexApparel.Controllers
                 ExceptionManagerController.writeErrorLog(ex);
 
             }
-                return Redirect("/Products/Display/"+ProductId);
+            return Redirect("/Products/Display/" + ProductId);
         }
 
         public ActionResult Display(int? id)
@@ -119,7 +119,7 @@ namespace FitFlexApparel.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-        
+
         public JsonResult AddColor(string colorCode, string colorName)
         {
             try
@@ -160,21 +160,21 @@ namespace FitFlexApparel.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-			try
+            try
             {
-                ViewBag.ColorsAvailable = new SelectList(db.Colors, "Color_Code", "Color_Name"); 
+                ViewBag.ColorsAvailable = new SelectList(db.Colors, "Color_Code", "Color_Name");
                 ViewBag.SizesAvailable = new SelectList(db.Sizes, "Size_Code", "Size_Name");
-				ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name");
-				ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name");
-				return View();
-				
-			}
-			catch(Exception ex)
-			{
+                ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name");
+                ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name");
+                return View();
+
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
-			}
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // POST: Products/Create
@@ -184,15 +184,15 @@ namespace FitFlexApparel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Product_Name,Product_Description,Product_Image1,Product_Image2,Product_Image3,Product_Image4,Product_Image5,Product_Overview,Subcategory_Id,Brand_Id,Product_Stock,Company_Profile,Original_Price,Average_Rating,Total_Ratings,Product_Slug,IsDeleted,Product_Overview")] Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5)
         {
-			try
-			{
-				if (ModelState.IsValid)
+            try
+            {
+                if (ModelState.IsValid)
                 {
                     var priceList = Request.Form["PricesListField"];
                     List<ProductPrice> PricesList = new List<ProductPrice>();
-                    if(priceList != null && priceList != "")
+                    if (priceList != null && priceList != "")
                     {
-                        foreach(var item in priceList.Split('|'))
+                        foreach (var item in priceList.Split('|'))
                         {
                             ProductPrice priceObj = new ProductPrice();
                             foreach (var obj in item.Split(','))
@@ -306,63 +306,63 @@ namespace FitFlexApparel.Controllers
                     var colors = Request.Form["ColorsAvailable"];
                     product.Average_Rating = 0;
                     product.Total_Ratings = 0;
-                    product.Product_Slug = product.Product_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "-").Replace('"','-');
+                    product.Product_Slug = product.Product_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "-").Replace('"', '-');
                     product.IsDeleted = false;
                     product.Sizes = sizes;
                     product.Colors = colors;
-					db.Products.Add(product);
-					db.SaveChanges();
-                    foreach(var item in PricesList)
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    foreach (var item in PricesList)
                     {
                         item.Product_Id = product.Id;
                         db.ProductPrices.Add(item);
                         db.SaveChanges();
                     }
-					return RedirectToAction("Index");
-				}
+                    return RedirectToAction("Index");
+                }
 
                 ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name", product.Brand_Id);
-				ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name", product.Subcategory_Id);
-				return View(product);
-				
-			}
-			catch(Exception ex)
-			{
+                ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name", product.Subcategory_Id);
+                return View(product);
+
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
-			}
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
-			try
-			{
-				if (id == null)
-				{
-					return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-				}
-				Product product = db.Products.Find(id);
-				if (product == null)
-				{
-					return HttpNotFound();
-				}
+            try
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = db.Products.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
 
                 ViewBag.ColorsAvailable = new SelectList(db.Colors, "Color_Code", "Color_Name");
                 ViewBag.SizesAvailable = new SelectList(db.Sizes, "Size_Code", "Size_Name");
                 ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name");
                 ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name");
                 return View(product);
-				
-			}
-			catch(Exception ex)
-			{
+
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
-			}
-		}
+                return RedirectToAction("Error", "Home");
+            }
+        }
 
         // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -371,9 +371,9 @@ namespace FitFlexApparel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Product_Name,Product_Description,Product_Overview,Subcategory_Id,Brand_Id,Product_Stock,Company_Profile,Original_Price,Average_Rating,Total_Ratings,Product_Slug,IsDeleted")] Product product, HttpPostedFileBase Product_Image1, HttpPostedFileBase Product_Image2, HttpPostedFileBase Product_Image3, HttpPostedFileBase Product_Image4, HttpPostedFileBase Product_Image5)
         {
-			try{
-				if (ModelState.IsValid)
-				{
+            try {
+                if (ModelState.IsValid)
+                {
 
                     if (Product_Image1 != null)
                     {
@@ -462,44 +462,44 @@ namespace FitFlexApparel.Controllers
 
                     product.Product_Slug = product.Product_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "-").Replace('"', '-');
                     db.Entry(product).State = EntityState.Modified;
-					product.IsDeleted = false;
-					db.SaveChanges();
-					return RedirectToAction("Index");
-				}
-				ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name", product.Brand_Id);
-				ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name", product.Subcategory_Id);
-				return View(product);
-			}
-			catch(Exception ex)
-			{
+                    product.IsDeleted = false;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name", product.Brand_Id);
+                ViewBag.Subcategory_Id = new SelectList(db.SubCategories.Where(s => s.IsDeleted != true), "Id", "Subcategory_Name", product.Subcategory_Id);
+                return View(product);
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
-			}
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
-			try
-			{
-				if (id == null)
-				{
-					return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-				}
-				Product product = db.Products.Find(id);
-				if (product == null)
-				{
-					return HttpNotFound();
-				}
-				return View(product);
-			}
-			catch(Exception ex)
-			{
+            try
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = db.Products.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
-				return RedirectToAction("Error","Home");
-			}
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // POST: Products/Delete/5
@@ -507,28 +507,28 @@ namespace FitFlexApparel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-			try
-			{
-				Product product = db.Products.Find(id);
-				db.Products.Remove(product);
-				db.SaveChanges();
-				return RedirectToAction("Index");
-			}
-			catch(Exception ex)
-			{
+            try
+            {
+                Product product = db.Products.Find(id);
+                db.Products.Remove(product);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
 
-                return RedirectToAction("SoftDelete", "Products",new { id = id});
-			}
+                return RedirectToAction("SoftDelete", "Products", new { id = id });
+            }
         }
 
-		
+
         public ActionResult SoftDelete(int id)
         {
             try
             {
-				Product product = db.Products.Find(id);
+                Product product = db.Products.Find(id);
                 product.IsDeleted = true;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -563,7 +563,7 @@ namespace FitFlexApparel.Controllers
                 }
                 var userId = User.Identity.GetUserId();
                 var findObj = db.Carts.FirstOrDefault(s => s.Product_Id == productId && s.User_Id == userId && s.Color == selectedColor && s.Size == selectedSize);
-                if(findObj != null)
+                if (findObj != null)
                 {
                     findObj.Quantity = findObj.Quantity + selectedQuantity;
                     var productPriceObj1 = db.ProductPrices.FirstOrDefault(s => s.Product_Id == productId && s.Min <= findObj.Quantity && (s.Max >= findObj.Quantity || s.Max == null));
@@ -615,7 +615,7 @@ namespace FitFlexApparel.Controllers
                 var userId = User.Identity.GetUserId();
                 var cartItems = db.Carts.Where(s => s.User_Id == userId);
                 double? totalPrice = 0;
-                foreach(var item in cartItems)
+                foreach (var item in cartItems)
                 {
                     totalPrice = totalPrice + item.Total_Price;
                 }
@@ -701,9 +701,9 @@ namespace FitFlexApparel.Controllers
                 if (selectedCategory == 0)
                 {
                     productsList = db.Products.Where(s => s.Product_Name.Contains(searchedString) && s.IsDeleted != true).ToList();
-                    if(productsList.Count == 0)
+                    if (productsList.Count == 0)
                     {
-                        foreach(var item in queries)
+                        foreach (var item in queries)
                         {
                             productsList.AddRange(db.Products.Where(s => s.Product_Name.Contains(item) && s.IsDeleted != true).ToList());
                         }
@@ -741,7 +741,7 @@ namespace FitFlexApparel.Controllers
             try
             {
                 CustomerContactRequest queryRequest = new CustomerContactRequest();
-                queryRequest.Customer_Name =  fc["Name"];
+                queryRequest.Customer_Name = fc["Name"];
                 queryRequest.Customer_Email = fc["Email"];
                 queryRequest.Customer_Phone = fc["Phone"];
                 queryRequest.Message = fc["Requirements"];
@@ -768,7 +768,7 @@ namespace FitFlexApparel.Controllers
             var products = new List<Product>();
             try
             {
-                products = db.Products.Where(s => s.SubCategory.Category.Id == id).OrderBy(s=>s.SubCategory.Category.Category_Name).ToList();
+                products = db.Products.Where(s => s.SubCategory.Category.Id == id).OrderBy(s => s.SubCategory.Category.Category_Name).ToList();
             }
             catch (Exception ex)
             {
@@ -777,7 +777,7 @@ namespace FitFlexApparel.Controllers
             }
             ViewBag.ModelId = id;
             ViewBag.ModelCategoryId = id;
-            ViewBag.SearchedQuery = db.Categories.FirstOrDefault(s=>s.Id == id).Category_Name.ToString();
+            ViewBag.SearchedQuery = db.Categories.FirstOrDefault(s => s.Id == id).Category_Name.ToString();
             ViewBag.ListingMethod = "Categories";
             ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             return View("ProductListing", products);
@@ -788,7 +788,7 @@ namespace FitFlexApparel.Controllers
             var products = new List<Product>();
             try
             {
-                products = db.Products.Where(s => s.SubCategory.Id == id).OrderBy(s=>s.SubCategory.Subcategory_Name).ToList();
+                products = db.Products.Where(s => s.SubCategory.Id == id).OrderBy(s => s.SubCategory.Subcategory_Name).ToList();
             }
             catch (Exception ex)
             {
@@ -796,7 +796,7 @@ namespace FitFlexApparel.Controllers
                 ExceptionManagerController.writeErrorLog(ex);
             }
             ViewBag.ModelId = id;
-            ViewBag.SearchedQuery = db.SubCategories.FirstOrDefault(s=>s.Id == id).Subcategory_Name.ToString();
+            ViewBag.SearchedQuery = db.SubCategories.FirstOrDefault(s => s.Id == id).Subcategory_Name.ToString();
             ViewBag.ListingMethod = "SubCategories";
             ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
             ViewBag.ModelCategoryId = db.SubCategories.FirstOrDefault(s => s.Id == id).Category_Id;
@@ -869,16 +869,123 @@ namespace FitFlexApparel.Controllers
             public int Quantity { get; set; }
         }
 
-        public ActionResult AddToInquiry(int ProductId, string ColorSelected, string SizeQuantities)
+        [HttpPost]
+        public JsonResult AddToInquiry(int p, string c, string sq)
         {
-            ViewBag.ProductId = ProductId;
-            ViewBag.ColorSelected = ColorSelected;
-            var sizeQuant = JsonConvert.DeserializeObject<List<SizeQuantityObj>>(SizeQuantities);
+            var productId = p;
+            ViewBag.ProductId = p;
+            ViewBag.ColorSelected = c;
+            var sizeQuant = JsonConvert.DeserializeObject<List<SizeQuantityObj>>(sq);
             ViewBag.SizeQuantity = sizeQuant;
-            var model = db.Products.FirstOrDefault(s => s.Id == ProductId);
+            var model = db.Products.FirstOrDefault(s => s.Id == p);
+            var selectedColor = c;
+            try
+            {
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return Json("LoginError", JsonRequestBehavior.AllowGet);
+                }
+                var userId = User.Identity.GetUserId();
+                foreach (var inquiryItem in sizeQuant)
+                {
+                    var selectedSize = inquiryItem.Size;
+                    var selectedQuantity = inquiryItem.Quantity;
+                    var findObj = db.Carts.FirstOrDefault(s => s.Product_Id == productId && s.User_Id == userId && s.Color == selectedColor && s.Size == selectedSize);
+                    if (findObj != null)
+                    {
+                        findObj.Quantity = selectedQuantity;
+                        var productPriceObj1 = db.ProductPrices.FirstOrDefault(s => s.Product_Id == productId);
+                        findObj.Price_Per_Item = productPriceObj1.Price;
+                        findObj.Total_Price = findObj.Price_Per_Item * findObj.Quantity;
+                        db.SaveChanges();
+                        var res1 = SyncCart();
+                        //return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        var cart = new Cart();
+                        cart.Product_Id = productId;
+                        cart.Quantity = selectedQuantity;
+                        cart.Size = selectedSize;
+                        cart.Color = selectedColor;
+                        cart.User_Id = userId;
+                        var productPriceObj = db.ProductPrices.FirstOrDefault(s => s.Product_Id == productId);
+                        cart.Price_Per_Item = productPriceObj.Price;
+                        cart.Product_Name = productPriceObj.Product.Product_Name;
+                        cart.Total_Price = cart.Price_Per_Item * selectedQuantity;
+                        cart.Added_At = DateTime.Now;
+                        var productObj = db.Products.FirstOrDefault(s => s.Id == productId);
+                        if (productObj.Product_Image1 != null)
+                            cart.Image = productObj.Product_Image1;
+                        else if (productObj.Product_Image2 != null)
+                            cart.Image = productObj.Product_Image2;
+                        else if (productObj.Product_Image3 != null)
+                            cart.Image = productObj.Product_Image3;
+                        else if (productObj.Product_Image4 != null)
+                            cart.Image = productObj.Product_Image4;
+                        else if (productObj.Product_Image5 != null)
+                            cart.Image = productObj.Product_Image5;
+                        db.Carts.Add(cart);
+                        db.SaveChanges();
+                    }
+                    var res = SyncCart();
+                }
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManagerController.infoMessage(ex.Message);
+                ExceptionManagerController.writeErrorLog(ex);
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [Authorize]
+        public ActionResult AllInquiries()
+        {
+            var userId = User.Identity.GetUserId();
+            var cartDetails = db.Carts.Where(s => s.User_Id == userId).OrderBy(s => s.Product_Id).ToList();
+
+            var cartProdIdsList = cartDetails.Select(s => s.Product_Id).Distinct();
+            
+            List<List<Cart>> model = new List<List<Cart>>();
+
+            foreach (var prodId in cartProdIdsList)
+            {
+                var cartProdList = cartDetails.Where(s=>s.Product_Id == prodId).OrderBy(s=>s.Color);
+                var cartProdColorList = cartProdList.Select(s => s.Color).Distinct();
+                foreach (var color in cartProdColorList)
+                {
+                    var cartList = cartProdList.Where(s => s.Color == color).ToList();
+                    model.Add(cartList);
+                }
+            }
+
             return View(model);
         }
-        
+
+        public ActionResult RemoveFromInquiries(int ProdId, string Color)
+        {
+            var userId = User.Identity.GetUserId();
+            var cartDetails = db.Carts.Where(s => s.User_Id == userId).OrderBy(s => s.Product_Id).ToList();
+            foreach (var cartItem in cartDetails)
+            {
+                if(cartItem.Product_Id == ProdId && Color == cartItem.Color)
+                {
+                    try
+                    {
+                        db.Carts.Remove(cartItem);
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionManagerController.infoMessage(ex.Message);
+                        ExceptionManagerController.writeErrorLog(ex);
+                    }
+                }
+            }
+            return RedirectToAction("AllInquiries");
+        }
         #endregion
     }
     

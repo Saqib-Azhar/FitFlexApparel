@@ -43,3 +43,28 @@
 
 
 
+26-May-19 8:20:59 PM: Object reference not set to an instance of an object.
+
+
+
+
+01-Jun-19 7:48:03 PM: The underlying provider failed on Open.
+
+
+
+
+01-Jun-19 11:51:58 PM: Object reference not set to an instance of an object.
+
+
+
+
+08-Jun-19 7:23:20 PM: Object reference not set to an instance of an object.
+
+
+
+
+08-Jun-19 9:06:22 PM: LINQ to Entities does not recognize the method 'System.String ToString(Int32)' method, and this method cannot be translated into a store expression.
+
+
+
+

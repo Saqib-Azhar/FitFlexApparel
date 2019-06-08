@@ -296,7 +296,7 @@
                                     }
                                     else
                                     {
-                                        var SizeQuantitySelected = [];debugger;
+                                        var SizeQuantitySelected = [];
                                         var sizes = $(".sizeValInput");
                                         $.each(sizes, function () {
                                             var sizeQuanObj = {};
@@ -304,20 +304,29 @@
                                             sizeQuanObj["Quantity"] = $(this).val();
                                             SizeQuantitySelected.push(sizeQuanObj);
                                         });
-                                        window.location = "/Products/AddToInquiry?ProductId="+'@Model.Id'+"&ColorSelected="+ColorSelected+"&SizeQuantities="+ JSON.stringify(SizeQuantitySelected);
-                                        //$.ajax({
-                                        //    url: "/Products/AddToInquiry",
-                                        //    type: "POST",
-                                        //    async: true,
-                                        //    data: { ProductId: , ColorSelected: ColorSelected, SizeQuantities: JSON.stringify(SizeQuantitySelected)},
-                                        //    success: function (data) {
-                                        //        debugger;
-                                        //        window.location = "/Products/ViewInquiry?html=" + data;
-                                        //    },
-                                        //    error: function () {
-                                        //        alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
-                                        //    }
-                                        //})
+                                        //window.location = "/Products/AddToInquiry?p="+'@Model.Id'+"&c="+ColorSelected+"&sq="+ JSON.stringify(SizeQuantitySelected);
+                                        $.ajax({
+                                            url: "/Products/AddToInquiry",
+                                            type: "POST",
+                                            async: true,
+                                            data: { p: '@Model.Id', c: ColorSelected, sq: JSON.stringify(SizeQuantitySelected) },
+                                            success: function (result) {
+                                                if (result == "Success") {
+                                                    alert("Successfully added in Inquiries!");
+                                                    window.location = "/Products/AllInquiries";
+                                                }
+                                                else if (result == "LoginError") {
+                                                    alert("Please create an account or login to your account to add this product!");
+                                                    window.location = "/Account/Login?url=" + window.location.href;
+                                                }
+                                                else {
+                                                    alert("Something went wrong! (please make sure you are connected with Internet)")
+                                                }
+                                            },
+                                            error: function () {
+                                                alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
+                                            }
+                                        })
                                     }
                                 }
                             </script>

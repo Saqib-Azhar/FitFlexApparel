@@ -1,0 +1,157 @@
+﻿@model FitFlexApparel.Controllers.CustomizedInquiry
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .img{
+        height:200px;
+        width:200px;
+    }
+</style>
+<div>
+    <h4>Inquiries</h4>
+    <hr />
+    <div class="row">
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Name")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.CustomInquiry.Column_1)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Email")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.CustomInquiry.Column_2)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Country")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.CustomInquiry.Column_3)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Fax")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.CustomInquiry.Column_4)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Address")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.CustomInquiry.Column_5)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Phone")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.CustomInquiry.Column_7)
+			</div>
+		</div>
+
+		<div class="col-md-6" style="padding:15px;">
+			<div class="col-md-12">
+				<b>
+					@Html.DisplayName("Added At")
+				</b>
+			</div>
+
+			<div class="col-md-12">
+				@Html.DisplayFor(model => model.CustomInquiry.Column_8)
+			</div>
+		</div>
+
+        <div class="col-md-12" style="padding:15px;">
+            <div class="col-md-12">
+                <b>
+                    @Html.DisplayName("Message")
+                </b>
+            </div>
+
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.CustomInquiry.Column_6, new { @class = "form-control", @readonly = "readonly", @rows = "6" })
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <table class="shopping-cart-table table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center" colspan="2">Product Details</th>
+                    <th class="text-center">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemsList in Model.InquiryItems)
+                {
+                    <tr>
+                        <td class="thumb"><img class="img" src="/UploadedImages/@itemsList.FirstOrDefault().Column_7" alt=""></td>
+                        <td class="details">
+                            <a href="/Products/Display/@itemsList.FirstOrDefault().Column_2" style="margin-left:10px">@itemsList.FirstOrDefault().Column_8</a>
+                            <div class="product-options">
+                                <ul style="margin-left:10px" class="color-option">
+                                    <li class="colorSelection">Color: <a style="border:solid;background-color:#@itemsList.FirstOrDefault().Column_3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <ul id="SizeQuantItem_@itemsList.FirstOrDefault().Column_2">
+                                @foreach (var item in itemsList)
+                                {
+                                    <li class="text-center size-quantity" prodId="@item.Column_2" style="padding:10px">
+                                        <strong>@item.Column_4: </strong>
+                                        <input class="input sizeValInput" type="number" value="@item.Column_5" style="max-width:50%" min="0" readonly> Pcs
+                                    </li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+</p>

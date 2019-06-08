@@ -228,6 +228,7 @@
     <Compile Include="Controllers\InquiriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessagingController.cs" />
+    <Compile Include="Controllers\OrderInquiriesController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductReviewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -724,6 +725,13 @@
     <Content Include="Views\Inquiries\Index.cshtml" />
     <Content Include="Views\Products\AddToInquiry.cshtml" />
     <Content Include="Views\Products\ViewInquiry.cshtml" />
+    <Content Include="Views\Products\AllInquiries.cshtml" />
+    <Content Include="Views\Orders\CheckoutInquiries.cshtml" />
+    <Content Include="Views\OrderInquiries\Create.cshtml" />
+    <Content Include="Views\OrderInquiries\Delete.cshtml" />
+    <Content Include="Views\OrderInquiries\Details.cshtml" />
+    <Content Include="Views\OrderInquiries\Edit.cshtml" />
+    <Content Include="Views\OrderInquiries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\Inquiries\" />

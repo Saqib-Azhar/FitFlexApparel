@@ -8,14 +8,14 @@
 <h2>Inquiry</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+    @*@Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })*@
 </p>
 <table class="table table-striped" style="text-align:center; border:double; display:block; overflow:auto;">
     <tr>
         <th>
             @Html.DisplayName("Product Name")
         </th>
-        <th>
+        @*<th>
             @Html.DisplayName("Number Of Samples")
         </th>
         <th>
@@ -23,7 +23,7 @@
         </th>
         <th>
             @Html.DisplayName("Payment For Shipment")
-        </th>
+        </th>*@
         <th>
             @Html.DisplayName("First Name")
         </th>
@@ -36,7 +36,7 @@
         <th>
             @Html.DisplayName("Company Name")
         </th>
-        <th>
+        @*<th>
             @Html.DisplayName("Country Code")
         </th>
         <th>
@@ -89,7 +89,7 @@
         </th>
         <th>
             @Html.DisplayName("Product.Product Name")
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -98,7 +98,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Product_Name)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Number_Of_Samples)
         </td>
         <td>
@@ -106,7 +106,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Payment_For_Shipment)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.First_Name)
         </td>
@@ -119,7 +119,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Company_Name)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Country_Code)
         </td>
         <td>
@@ -172,7 +172,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Product.Product_Name)
-        </td>
+        </td>*@
         <td style="width:175px!important">
             @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-success", @style = "width:65px" }) 
             @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 

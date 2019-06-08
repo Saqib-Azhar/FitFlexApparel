@@ -1,0 +1,118 @@
+﻿@model FitFlexApparel.Models.Custom_Table_1
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Custom_Table_1", FormMethod.Post, new { @enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>New Custom_Table_1</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="row">
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 1", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 2", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 3", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 4", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_4, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 5", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_5, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_5, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 6", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_6, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_6, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 7", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_7, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_7, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 8", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_8, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_8, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 9", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_9, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_9, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		<div class="col-md-6">
+        <div class="form-group">
+			@Html.Label("","Column 10", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Column_10, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Column_10, "", new { @class = "text-danger" })
+            </div>
+        </div>
+		</div>
+		</div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+				@Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+</div>

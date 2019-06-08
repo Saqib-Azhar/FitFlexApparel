@@ -72,6 +72,13 @@ namespace FitFlexApparel.Controllers
             return View(cartDetails);
         }
 
+        public ActionResult SubmitInquiries()
+        {
+            var userId = User.Identity.GetUserId();
+            var cartDetails = db.Carts.Where(s => s.User_Id == userId);
+            return View(cartDetails);
+        }
+
         public ActionResult ConfirmOrder(FormCollection fc)
         {
             var TransactionObj = db.Database.BeginTransaction();
@@ -81,7 +88,7 @@ namespace FitFlexApparel.Controllers
                 var userId = User.Identity.GetUserId();
                 var userObj = db.AspNetUsers.FirstOrDefault(s => s.Id == userId);
                 var prevOrders = db.Orders.Where(s => s.User_Id == userId);
-                order.Order_No = "o"+(prevOrders.Count()+1)+":"+userId;
+                order.Order_No = "o" + (prevOrders.Count() + 1) + ":" + userId;
                 order.IsDeleted = false;
                 order.Order_Status = 1;
                 order.Order_Time = DateTime.Now;
@@ -89,15 +96,15 @@ namespace FitFlexApparel.Controllers
                 order.Shipping_Address_City = fc["Shipping_Address_City"];
                 order.Shipping_Address_Country = fc["Shipping_Address_Country"];
                 order.Shipping_Address_Email = userObj.Email;
-                order.Shipping_Address_Line1 = fc["Shipping_Address_Line1"]; 
-                order.Shipping_Address_Line2 = fc["Shipping_Address_Line2"]; 
+                order.Shipping_Address_Line1 = fc["Shipping_Address_Line1"];
+                order.Shipping_Address_Line2 = fc["Shipping_Address_Line2"];
                 order.Shipping_Address_PhoneNo = userObj.PhoneNumber;
                 order.Shipping_Address_PostCode = fc["Shipping_Address_PostCode"];
                 order.User_Name = userObj.DisplayName;
 
                 var orderProducts = db.Carts.Where(s => s.User_Id == userId);
                 double? totalAmount = 0;
-                foreach(var item in orderProducts)
+                foreach (var item in orderProducts)
                 {
                     totalAmount = totalAmount + item.Total_Price;
                 }
@@ -120,7 +127,7 @@ namespace FitFlexApparel.Controllers
                     db.OrderDetails.Add(orderDetail);
                     db.SaveChanges();
 
-                    
+
                 }
 
                 OrderActionHistory orderAction = new OrderActionHistory();
@@ -171,7 +178,7 @@ namespace FitFlexApparel.Controllers
                 ViewBag.ErrorMessage = "Something went wrong! Please try again later.";
                 return RedirectToAction("Checkout");
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)
@@ -394,5 +401,77 @@ namespace FitFlexApparel.Controllers
             return RedirectToAction("AllOrders");
         }
         #endregion
+
+        #region Inquiries
+
+        [Authorize]
+        public ActionResult CheckoutInquiries()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult SubmitOrderInquiries(FormCollection fc)
+        {
+            var BuyerName = fc["BuyerName"];
+            var BuyerEmail = fc["BuyerEmail"];
+            var BuyerCountry = fc["Country"];
+            var BuyerPhone = fc["Phone"];
+            var BuyerFax = fc["Fax"];
+            var BuyerAddress = fc["Address"];
+            var BuyerMessage = fc["Message"];
+
+            var userId = User.Identity.GetUserId();
+
+            var cartDetails = db.Carts.Where(s => s.User_Id == userId).OrderBy(s => s.Product_Id).ToList();
+
+            Custom_Table_1 customInquiries = new Custom_Table_1();
+            customInquiries.Column_1 = BuyerName;
+            customInquiries.Column_2 = BuyerEmail;
+            customInquiries.Column_3 = BuyerCountry;
+            customInquiries.Column_4 = BuyerFax;
+            customInquiries.Column_5 = BuyerAddress;
+            customInquiries.Column_6 = BuyerMessage;
+            customInquiries.Column_7 = BuyerPhone;
+            customInquiries.Column_8 = Convert.ToString(DateTime.Now);
+            db.Custom_Table_1.Add(customInquiries);
+            db.SaveChanges();
+
+            foreach (var cartItem in cartDetails)
+            {
+                Custom_Table_2 customInquiryItem = new Custom_Table_2();
+                customInquiryItem.Column_1 = cartItem.User_Id;
+                customInquiryItem.Column_2 = Convert.ToString(cartItem.Product_Id);
+                customInquiryItem.Column_3 = cartItem.Color;
+                customInquiryItem.Column_4 = cartItem.Size;
+                customInquiryItem.Column_5 = Convert.ToString(cartItem.Quantity);
+                customInquiryItem.Column_6 = Convert.ToString(cartItem.Price_Per_Item);
+                customInquiryItem.Column_7 = Convert.ToString(cartItem.Image);
+                customInquiryItem.Column_10 = Convert.ToString(customInquiries.Id); // Foreign key of inquiry
+                customInquiryItem.Column_9 = Convert.ToString(DateTime.Now);//Added At
+                customInquiryItem.Column_8 = cartItem.Product_Name;
+                db.Custom_Table_2.Add(customInquiryItem);
+                db.SaveChanges();
+
+                db.Carts.Remove(cartItem);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult InquiriesList()
+        {
+            List<CustomizedInquiry> model = new List<Controllers.CustomizedInquiry>();
+            return View(model);
+        }
+        #endregion
     }
+    public class CustomizedInquiry
+    {
+        public Custom_Table_1 CustomInquiry { get; set; }
+        public List<List<Custom_Table_2>> InquiryItems { get; set; }
+    }
+
 }

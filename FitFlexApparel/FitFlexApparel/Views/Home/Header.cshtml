@@ -83,16 +83,14 @@
                     <!-- /Account -->
                     <!-- Cart -->
                     <li class="header-cart dropdown default-dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        <a class="dropdown-toggle" href="/Products/AllInquiries">
                             <div class="header-btns-icon">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span class="qty">@CartItemsList.Count()</span>
+                                @*<span class="qty">@CartItemsList.Select(s=>s.Product_Id).Distinct().Count()</span>*@
                             </div>
-                            <strong class="text-uppercase">My Cart:</strong>
-                            <br>
-                            <span>@totalPrice$</span>
+                            <strong class="text-uppercase">Inquiries</strong>
                         </a>
-                        <div class="custom-menu">
+                        @*<div class="custom-menu">
                             <div id="shopping-cart">
                                 <div class="shopping-cart-list">
                                     @foreach (var item in CartItemsList)
@@ -115,7 +113,7 @@
                                     <a href="/Orders/Checkout" class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </li>
                     <!-- /Cart -->
                     <!-- Mobile nav toggle-->
@@ -154,19 +152,19 @@
                                             <ul class="list-links">
                                                 @if (subcatCount < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount].Id">@subCatArray[subcatCount].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount].Id" style="height:350px; width:720px">@subCatArray[subcatCount].Subcategory_Name</a></li>
                                                 }
                                                 @if (subcatCount+1 < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 1].Id">@subCatArray[subcatCount + 1].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 1].Id" style="height:350px; width:720px">@subCatArray[subcatCount + 1].Subcategory_Name</a></li>
                                                 }
                                                 @if (subcatCount+2 < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 2].Id">@subCatArray[subcatCount + 2].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 2].Id" style="height:350px; width:720px">@subCatArray[subcatCount + 2].Subcategory_Name</a></li>
                                                 }
                                                 @if (subcatCount+3 < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 3].Id">@subCatArray[subcatCount + 3].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 3].Id" style="height:350px; width:720px">@subCatArray[subcatCount + 3].Subcategory_Name</a></li>
                                                 }
 
                                             </ul>

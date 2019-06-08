@@ -421,8 +421,8 @@
                         </ul>
                     </li>
                     <li class="sw-toc-item">
-                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseOrdersSubMenus" aria-expanded="false"
-                           aria-controls="collapseOrdersSubMenus">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseContributionsSubMenus" aria-expanded="false"
+                           aria-controls="collapseContributionsSubMenus">
                             <span class="oi oi-spreadsheet"></span>
                             <span class="text">Join Requests</span>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
@@ -431,7 +431,7 @@
                                 </button>
                             </div>
                         </a>
-                        <ul id="collapseOrdersSubMenus" class="collapse list-unstyled">
+                        <ul id="collapseContributionsSubMenus" class="collapse list-unstyled">
                             <li class="active sw-sidenav-active">
                                 <a href="/ContributionRequests/Index">
                                     <span class="oi oi-list"></span>
@@ -446,7 +446,7 @@
                 </li>*@
                         </ul>
                     </li>
-                    <li class="sw-toc-item">
+                    @*<li class="sw-toc-item">
                         <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseOrdersSubMenus" aria-expanded="false"
                            aria-controls="collapseOrdersSubMenus">
                             <span class="oi oi-spreadsheet"></span>
@@ -465,6 +465,26 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>*@
+                    <li class="sw-toc-item">
+                        <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseCustomizationSubMenus" aria-expanded="false"
+                           aria-controls="collapseCustomizationSubMenus">
+                            <span class="oi oi-spreadsheet"></span>
+                            <span class="text">Customization Req.</span>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button onclick="window.location = '/Inquiries/Index'" class="btn btn-light">
+                                    <span class="oi oi-list"></span>
+                                </button>
+                            </div>
+                        </a>
+                        <ul id="collapseCustomizationSubMenus" class="collapse list-unstyled">
+                            <li class="active sw-sidenav-active">
+                                <a href="/Inquiries/Index">
+                                    <span class="oi oi-list"></span>
+                                    <span class="text">All Requests</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="sw-toc-item">
                         <a class="sw-toc-link" data-toggle="collapse" data-parent="#sw-docs-nav" href="#collapseInquiriesSubMenus" aria-expanded="false"
@@ -472,14 +492,14 @@
                             <span class="oi oi-spreadsheet"></span>
                             <span class="text">Inquiries</span>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button onclick="window.location = '/Inquiries/Index'" class="btn btn-light">
+                                <button onclick="window.location = '/OrderInquiries/Index'" class="btn btn-light">
                                     <span class="oi oi-list"></span>
                                 </button>
                             </div>
                         </a>
                         <ul id="collapseInquiriesSubMenus" class="collapse list-unstyled">
                             <li class="active sw-sidenav-active">
-                                <a href="/Inquiries/Index">
+                                <a href="/OrderInquiries/Index">
                                     <span class="oi oi-list"></span>
                                     <span class="text">All Inquiries</span>
                                 </a>

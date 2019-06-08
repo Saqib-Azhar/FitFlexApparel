@@ -1,0 +1,116 @@
+﻿@model List<List<FitFlexApparel.Models.Cart>>
+@{
+    ViewBag.Title = "AllInquiries";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Inquiries</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <div class="col-md-12">
+            <div class="order-summary clearfix">
+                <div class="section-title">
+                    <h3 class="title">Inquiries</h3>
+                </div>
+                <table class="shopping-cart-table table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="2">Product Details</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var itemsList in Model)
+                        {
+                            <tr>
+                                <td class="thumb"><img src="/UploadedImages/@itemsList.FirstOrDefault().Image" alt=""></td>
+                                <td class="details">
+                                    <a href="/Products/Display/@itemsList.FirstOrDefault().Product_Id" style="margin-left:10px">@itemsList.FirstOrDefault().Product.Product_Name</a>
+                                    <div class="product-options">
+                                        <ul style="margin-left:10px" class="color-option">
+                                            <li class="colorSelection">Color: <a style="border:solid;background-color:#@itemsList.FirstOrDefault().Color;"></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul id="SizeQuantItem_@itemsList.FirstOrDefault().Product_Id">
+                                        @foreach (var item in itemsList)
+                                        {
+                                            <li class="text-center size-quantity" prodId="@item.Product_Id" style="padding:10px">
+                                                <strong>@item.Size: </strong>
+                                                <input class="input sizeValInput" type="number" value="@item.Quantity" sizeVal="@item.Size" style="max-width:50%" min="0"> Pcs
+                                            </li>
+                                        }
+                                        <li class="text-right" style="padding:10px">
+                                            <button type="button" class="primary-btn" onclick="UpdateInquiry('@itemsList.FirstOrDefault().Product_Id','@itemsList.FirstOrDefault().Color')">Update</button>
+                                        </li>
+                                    </ul>
+                                    <script>
+                                        function UpdateInquiry(prodId, ColorSelected)
+                                        {
+                                            var SizeQuantitySelected = [];
+                                            var sizes = $("#SizeQuantItem_" + prodId + " .sizeValInput");
+                                            $.each(sizes, function () {
+                                                var sizeQuanObj = {};
+                                                sizeQuanObj["Size"] = $(this).attr("sizeVal");
+                                                sizeQuanObj["Quantity"] = $(this).val();
+                                                SizeQuantitySelected.push(sizeQuanObj);
+                                            });
+                                            $.ajax({
+                                                url: "/Products/AddToInquiry",
+                                                type: "POST",
+                                                async: true,
+                                                data: { p: prodId, c: ColorSelected, sq: JSON.stringify(SizeQuantitySelected) },
+                                                success: function (result) {
+                                                    if (result == "Success") {
+                                                        alert("Successfully added in Inquiries!");
+                                                        window.location = "/Products/AllInquiries";
+                                                    }
+                                                    else if (result == "LoginError") {
+                                                        alert("Please create an account or login to your account to add this product!");
+                                                        window.location = "/Account/Login?url=" + window.location.href;
+                                                    }
+                                                    else {
+                                                        alert("Something went wrong! (please make sure you are connected with Internet)")
+                                                    }
+                                                },
+                                                error: function () {
+                                                    alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
+                                                }
+                                            })
+                                        }
+                                    </script>
+                                </td>
+                                <td class="text-center"><a href="/Products/RemoveFromInquiries?ProdId=@itemsList.FirstOrDefault().Product_Id&Color=@itemsList.FirstOrDefault().Color" class="main-btn icon-btn"><i class="fa fa-close"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                    
+                </table>
+                <div class="pull-right">
+                    @if (Model.Count() > 0)
+                    {
+                        <a href="/Orders/CheckoutInquiries" class="primary-btn">Submit Inquies</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function UpdateQuantity(id,elem)
+    {
+        window.location.href = '/Products/UpdateCartQuantity?id=' + id + '&quantity=' + $(elem).val();
+    }
+</script>
