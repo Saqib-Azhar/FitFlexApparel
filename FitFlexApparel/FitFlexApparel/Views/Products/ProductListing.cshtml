@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<FitFlexApparel.Models.Product>
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     string ComparisonVal = "";
-    var Categories = ViewBag.CategoriesLists as IEnumerable<FitFlexApparel.Models.Category>; 
+    var Categories = ViewBag.CategoriesLists as IEnumerable<FitFlexApparel.Models.Category>;
 }
 <script src="~/Assets/js/jquery.min.js"></script>
 <div class="section">

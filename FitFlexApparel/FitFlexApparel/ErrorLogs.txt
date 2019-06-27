@@ -68,3 +68,18 @@
 
 
 
+24-Jun-19 10:36:10 PM: The underlying provider failed on Open.
+
+
+
+
+24-Jun-19 11:08:26 PM: Attaching an entity of type 'FitFlexApparel.Models.Product' failed because another entity of the same type already has the same primary key value. This can happen when using the 'Attach' method or setting the state of an entity to 'Unchanged' or 'Modified' if any entities in the graph have conflicting key values. This may be because some entities are new and have not yet received database-generated key values. In this case use the 'Add' method or the 'Added' entity state to track the graph and then set the state of non-new entities to 'Unchanged' or 'Modified' as appropriate.
+
+
+
+
+27-Jun-19 10:41:30 PM: Non-static field requires a target.
+
+
+
+

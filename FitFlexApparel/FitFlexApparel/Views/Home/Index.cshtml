@@ -16,8 +16,8 @@
                     <img src="/Assets/img/banner01.jpg" alt="">
                     <div class="banner-caption text-center" style="top:45%!important">
                         <h1>Bags sale</h1>
-                        <h3 class="white-color font-weak">Up to 50% Discount</h3>
-                        <button class="primary-btn">Shop Now</button>
+                        <h3 class="white-color font-weak">Have a look at New Arrivals</h3>
+                        <a class="primary-btn" href="/Products/SubCategoryProducts/14" target="_blank">Shop Now</a>
                     </div>
                 </div>
                 <!-- /banner -->
@@ -25,8 +25,8 @@
                 <div class="banner banner-1">
                     <img src="/Assets/img/banner02.jpg" alt="">
                     <div class="banner-caption" style="top:45%!important">
-                        <h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-                        <button class="primary-btn">Shop Now</button>
+                        <h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Have a look at New Arrivals</span></h1>
+                        <a class="primary-btn" href="/Products/SubCategoryProducts/14" target="_blank">Shop Now</a>
                     </div>
                 </div>
                 <!-- /banner -->
@@ -35,7 +35,7 @@
                     <img src="/Assets/img/banner03.jpg" alt="">
                     <div class="banner-caption" style="top:45%!important">
                         <h1 class="white-color">New Product <span>Collection</span></h1>
-                        <button class="primary-btn">Shop Now</button>
+                        @*<button class="primary-btn">Shop Now</button>*@
                     </div>
                 </div>
                 <!-- /banner -->
@@ -97,17 +97,21 @@
             <!-- row -->
             <div class="row">
                 <!-- section-title -->
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h2 class="title">New Arrivals</h2>
-                        <div class="pull-right">
-                            <div class="product-slick-dots-1 custom-dots"></div>
+                @if (Model.Count() > 0)
+                {
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <h2 class="title">New Arrivals</h2>
+                            <div class="pull-right">
+                                <div class="product-slick-dots-1 custom-dots"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                }
                 <!-- /section-title -->
                 <!-- banner -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
+                @*<div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="banner banner-2">
                         <img src="/Assets/img/banner14.jpg" alt="">
                         <div class="banner-caption">
@@ -115,17 +119,17 @@
                             <button class="primary-btn">Shop Now</button>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- /banner -->
                 <!-- Product Slick -->
-                <div class="col-md-9 col-sm-6 col-xs-6">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <div id="product-slick-1" class="product-slick">
                             <!-- Product Single -->
                             @foreach (var item in Model)
                             {
                                 <div class="product product-single">
-                                    <div class="product-thumb">
+                                    <div class="product-thumb" style="height:330px;">
                                         @*<div class="product-label">
                                             <span>New</span>
                                             <span class="sale">-20%</span>
@@ -190,32 +194,32 @@
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="product product-single product-hot">
                         <div class="product-thumb">
-                            <div class="product-label">
+                            @*<div class="product-label">
                                 <span class="sale">-20%</span>
-                            </div>
-                            <ul class="product-countdown">
+                            </div>*@
+                            @*<ul class="product-countdown">
                                 <li><span>00 H</span></li>
                                 <li><span>00 M</span></li>
                                 <li><span>00 S</span></li>
-                            </ul>
-                            <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+                            </ul>*@
+                            @*<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> View</button>*@
                             <img src="/Assets/img/product01.jpg" alt="">
                         </div>
                         <div class="product-body">
-                            <h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
+                            @*<h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
                             <div class="product-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o empty"></i>
-                            </div>
-                            <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                            <div class="product-btns">
+                            </div>*@
+                            <h2 style="text-align:center"><a href="/Products/SubCategoryProducts/15" style="text-align:center">New Arrivals</a></h2>
+                            @*<div class="product-btns">
                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
                                 <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>

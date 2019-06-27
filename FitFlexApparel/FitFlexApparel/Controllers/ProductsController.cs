@@ -374,7 +374,37 @@ namespace FitFlexApparel.Controllers
             try {
                 if (ModelState.IsValid)
                 {
-
+                    var priceList = Request.Form["PricesListField"];
+                    List<ProductPrice> PricesList = new List<ProductPrice>();
+                    if (priceList != null && priceList != "")
+                    {
+                        foreach (var item in priceList.Split('|'))
+                        {
+                            ProductPrice priceObj = new ProductPrice();
+                            foreach (var obj in item.Split(','))
+                            {
+                                priceObj.IsDeleted = false;
+                                var objProp = obj.Split(':');
+                                if (objProp[0] == "Min")
+                                    priceObj.Min = Convert.ToInt32(objProp[1]);
+                                if (objProp[0] == "Max")
+                                {
+                                    if (objProp[1] == null || objProp[1] == "")
+                                        priceObj.Max = null;
+                                    else
+                                        priceObj.Max = Convert.ToInt32(objProp[1]);
+                                }
+                                if (objProp[0] == "Price")
+                                    priceObj.Price = Convert.ToInt32(objProp[1]);
+                                if (objProp[0] == "Discount")
+                                    priceObj.Discount = Convert.ToInt32(objProp[1]);
+                            }
+                            if (priceObj.Price == null)
+                                continue;
+                            PricesList.Add(priceObj);
+                        }
+                    }
+                    var existingProd = db.Products.FirstOrDefault(s => s.Id == product.Id);
                     if (Product_Image1 != null)
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image1.FileName);
@@ -389,7 +419,11 @@ namespace FitFlexApparel.Controllers
                             byte[] array = ms.GetBuffer();
                         }
                         product.Product_Image1 = "Products/" + Product_Image1.FileName;
-
+                        existingProd.Product_Image1 = "Products/" + Product_Image1.FileName;
+                    }
+                    else
+                    {
+                        product.Product_Image1 = existingProd.Product_Image1;
                     }
 
                     if (Product_Image2 != null)
@@ -406,7 +440,12 @@ namespace FitFlexApparel.Controllers
                             byte[] array = ms.GetBuffer();
                         }
                         product.Product_Image2 = "Products/" + Product_Image2.FileName;
+                        existingProd.Product_Image2 = "Products/" + Product_Image2.FileName;
 
+                    }
+                    else
+                    {
+                        product.Product_Image2 = existingProd.Product_Image2;
                     }
 
                     if (Product_Image3 != null)
@@ -423,7 +462,12 @@ namespace FitFlexApparel.Controllers
                             byte[] array = ms.GetBuffer();
                         }
                         product.Product_Image3 = "Products/" + Product_Image3.FileName;
+                        existingProd.Product_Image3 = "Products/" + Product_Image3.FileName;
 
+                    }
+                    else
+                    {
+                        product.Product_Image3 = existingProd.Product_Image3;
                     }
 
                     if (Product_Image4 != null)
@@ -440,7 +484,12 @@ namespace FitFlexApparel.Controllers
                             byte[] array = ms.GetBuffer();
                         }
                         product.Product_Image4 = "Products/" + Product_Image4.FileName;
+                        existingProd.Product_Image4 = "Products/" + Product_Image4.FileName;
 
+                    }
+                    else
+                    {
+                        product.Product_Image4 = existingProd.Product_Image4;
                     }
 
                     if (Product_Image5 != null)
@@ -457,13 +506,49 @@ namespace FitFlexApparel.Controllers
                             byte[] array = ms.GetBuffer();
                         }
                         product.Product_Image5 = "Products/" + Product_Image5.FileName;
+                        existingProd.Product_Image5 = "Products/" + Product_Image5.FileName;
 
                     }
+                    else
+                    {
+                        product.Product_Image5 = existingProd.Product_Image5;
+                    }
+                    var sizes = Request.Form["SizesAvailable"];
+                    var colors = Request.Form["ColorsAvailable"];
+                    //existingProd.Average_Rating = 0;
+                    //existingProd.Total_Ratings = 0;
+                    existingProd.Product_Slug = product.Product_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "-").Replace('"', '-');
+                    existingProd.IsDeleted = false;
+                    existingProd.Sizes = sizes;
+                    existingProd.Colors = colors;
 
+                    existingProd.Product_Name = product.Product_Name;
+                    existingProd.Product_Description = product.Product_Description;
+                    existingProd.Product_Overview = product.Product_Overview;
+                    existingProd.Subcategory_Id = product.Subcategory_Id;
+                    existingProd.Brand_Id = product.Brand_Id;
+                    existingProd.Product_Stock = product.Product_Stock;
+                    existingProd.Company_Profile = product.Company_Profile;
+                    existingProd.Original_Price = product.Original_Price;
+
+                    product.Average_Rating = 0;
+                    product.Total_Ratings = 0;
                     product.Product_Slug = product.Product_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "-").Replace('"', '-');
-                    db.Entry(product).State = EntityState.Modified;
+                    product.IsDeleted = false;
+                    product.Sizes = sizes;
+                    product.Colors = colors;
+
+                    //db.Entry(product).State = EntityState.Modified;
+                    existingProd.IsDeleted = false;
                     product.IsDeleted = false;
                     db.SaveChanges();
+
+                    foreach (var item in PricesList)
+                    {
+                        item.Product_Id = product.Id;
+                        db.ProductPrices.Add(item);
+                        db.SaveChanges();
+                    }
                     return RedirectToAction("Index");
                 }
                 ViewBag.Brand_Id = new SelectList(db.Brands.Where(s => s.IsDeleted != true), "Id", "Brand_Name", product.Brand_Id);
@@ -795,11 +880,12 @@ namespace FitFlexApparel.Controllers
                 ExceptionManagerController.infoMessage(ex.Message);
                 ExceptionManagerController.writeErrorLog(ex);
             }
+            var subCat = db.SubCategories.ToList(); 
             ViewBag.ModelId = id;
-            ViewBag.SearchedQuery = db.SubCategories.FirstOrDefault(s => s.Id == id).Subcategory_Name.ToString();
+            ViewBag.SearchedQuery = subCat.FirstOrDefault(s => s.Id == id) != null ? subCat.FirstOrDefault(s => s.Id == id).Subcategory_Name.ToString() : "";
             ViewBag.ListingMethod = "SubCategories";
             ViewBag.CategoriesLists = db.Categories.Include(s => s.SubCategories);
-            ViewBag.ModelCategoryId = db.SubCategories.FirstOrDefault(s => s.Id == id).Category_Id;
+            ViewBag.ModelCategoryId = subCat.FirstOrDefault(s => s.Id == id) != null ? db.SubCategories.FirstOrDefault(s => s.Id == id).Category_Id: 1;
             return View("ProductListing", products);
         }
 

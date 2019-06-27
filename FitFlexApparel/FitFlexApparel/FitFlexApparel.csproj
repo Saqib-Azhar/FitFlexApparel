@@ -602,6 +602,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\FitFlex Deployment 19 April.pubxml" />
     <None Include="Properties\PublishProfiles\Fitflex Deployment 23 March.pubxml" />
+    <None Include="Properties\PublishProfiles\Fitflex publish 9 jun.pubxml" />
     <None Include="Properties\PublishProfiles\FitFlex working site published version 1- 25jan19.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

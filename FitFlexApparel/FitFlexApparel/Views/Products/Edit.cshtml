@@ -18,7 +18,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>New Product</h4>
+        <h4>Update Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
@@ -31,13 +31,48 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
-                    @Html.Label("", "Product Description", htmlAttributes: new { @class = "control-label col-md-12" })
+                    @Html.Label("", "Product Overview", htmlAttributes: new { @class = "control-label col-md-12" })
                     <div class="col-md-12">
                         @*@Html.EditorFor(model => model.Product_Description, new { htmlAttributes = new { @class = "form-control" } })*@
                         <textarea id="Product_Description" name="Product_Description" class="form-control">@Html.Raw(Model.Product_Description)</textarea>
                         @Html.ValidationMessageFor(model => model.Product_Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.Label("", "Product Description", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @*@Html.EditorFor(model => model.Product_Overview, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <textarea id="Product_Overview" name="Product_Overview" class="form-control">@Html.Raw(Model.Product_Overview)</textarea>
+                        @Html.ValidationMessageFor(model => model.Product_Overview, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.Label("", "Company Profile", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @*@Html.EditorFor(model => model.Company_Profile, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <textarea id="Company_Profile" name="Company_Profile" class="form-control">@Html.Raw(Model.Company_Profile)</textarea>
+                        @Html.ValidationMessageFor(model => model.Company_Profile, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.Label("", "Terms & Conditions", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <textarea id="Terms_And_Conditions" name="Terms_And_Conditions" class="form-control">@Html.Raw(Model.Terms_And_Conditions)</textarea>
+                        @Html.ValidationMessageFor(model => model.Terms_And_Conditions, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -93,30 +128,6 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    @Html.Label("", "Product Overview", htmlAttributes: new { @class = "control-label col-md-12" })
-                    <div class="col-md-12">
-                        @*@Html.EditorFor(model => model.Product_Overview, new { htmlAttributes = new { @class = "form-control" } })*@
-                        <textarea id="Product_Overview" name="Product_Overview" class="form-control">@Model.Product_Overview</textarea>
-                        @Html.ValidationMessageFor(model => model.Product_Overview, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.Label("", "Company Profile", htmlAttributes: new { @class = "control-label col-md-12" })
-                    <div class="col-md-12">
-                        @*@Html.EditorFor(model => model.Company_Profile, new { htmlAttributes = new { @class = "form-control" } })*@
-                        <textarea id="Company_Profile" name="Company_Profile" class="form-control">@Model.Company_Profile</textarea>
-                        @Html.ValidationMessageFor(model => model.Company_Profile, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
                     <div class="row">
                         @Html.Label("", "Prices", htmlAttributes: new { @class = "control-label col-md-10" })
                         <a class="col-md-2 btn btn-sm pull-right right btn-info" style="color:white;" onclick="$('#NewPricePanel').removeAttr('hidden')">Add Price</a>
@@ -131,17 +142,7 @@
                             <td>Discount</td>
                         </tr>
                     </thead>
-                    <tbody id="PriceTableBody">
-                        @foreach (var item in Model.ProductPrices)
-                        {
-                            <tr style="text-align:center">
-                                <td>@item.Min</td>
-                                <td>@item.Max</td>
-                                <td>@item.Price</td>
-                                <td>@item.Discount</td>
-                            </tr>
-                        }
-                    </tbody>
+                    <tbody id="PriceTableBody"></tbody>
                 </table><input type="text" name="PricesListField" hidden value="" id="PricesListField" />
                 <div class="panel panel-default" style="border:solid" id="NewPricePanel" hidden>
                     <div class="panel-body">
@@ -187,8 +188,9 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("", "Select Colors", htmlAttributes: new { @class = "control-label col-md-6" })
-                                    <a class="btn btn-sm pull-right right btn-info" style="color:white;" onclick="$('#NewColorPanel').removeAttr('hidden')">New Color</a>
+                                    @Html.Label("", "Select Colors", htmlAttributes: new { @class = "control-label col-md-6" })<br />
+                                    <a class="btn btn-sm pull-right right btn-info" style="color:white;" onclick="$('#NewColorPanel').removeAttr('hidden')">Add</a>
+                                    <a class="btn btn-sm pull-right right btn-danger" style="color:white;" onclick="TruncateColors()">Truncate</a>
                                     @Html.DropDownList("ColorsAvailable", null, htmlAttributes: new { @class = "form-control col-md-12", @multiple = "multiple" })
                                     <div class="panel panel-default" style="border:solid" id="NewColorPanel" hidden>
                                         <div class="panel-body">
@@ -200,18 +202,23 @@
                                                     {
                                                         var colorName = $("#newColorName").val();
                                                         var colorCode = $("#newColorCode").val();
+                                                        if (colorName != null && colorName != "" && colorCode != null && colorCode != "") {
 
-                                                        $.ajax({
-                                                            url: "/Products/AddColor",
-                                                            type: 'POST',
-                                                            data: { colorCode: colorCode, colorName: colorName },
-                                                            success: function (result) {
-                                                                $("#ColorsAvailable").append('<option value="'+colorCode+'">'+colorName+'</option>')
-                                                            },
-                                                            error: function () {
-                                                                alert("Error adding new color! (please make sure you are connected with Internet & your browser is compatible)");
-                                                            }
-                                                        });
+                                                            $.ajax({
+                                                                url: "/Products/AddColor",
+                                                                type: 'POST',
+                                                                data: { colorCode: colorCode, colorName: colorName },
+                                                                success: function (result) {
+                                                                    $("#ColorsAvailable").append('<option value="' + colorCode + '">' + colorName + '</option>')
+                                                                },
+                                                                error: function () {
+                                                                    alert("Error adding new color! (please make sure you are connected with Internet & your browser is compatible)");
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            alert("Color Name & Code couldn't load properly! Please make sure to enter both values or reload the page and try again.")
+                                                        }
 
                                                         $("#NewColorPanel").attr("hidden","hidden");
                                                     }
@@ -220,8 +227,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("", "Select Sizes", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    @Html.Label("", "Select Sizes", htmlAttributes: new { @class = "control-label col-md-6" })<br />
                                     <a class="btn btn-sm pull-right right btn-info" style="color:white;" onclick="$('#NewSizePanel').removeAttr('hidden')">New Size</a>
+                                    <a class="btn btn-sm pull-right right btn-danger" style="color:white;" onclick="TruncateSizes()">Truncate</a>
                                     @Html.DropDownList("SizesAvailable", null, htmlAttributes: new { @class = "form-control", @multiple = "multiple" })
                                     <div class="panel panel-default" style="border:solid" id="NewSizePanel" hidden>
                                         <div class="panel-body">
@@ -233,19 +241,24 @@
                                                     {
                                                         var SizeName = $("#newSizeName").val();
                                                         var SizeCode = $("#newSizeCode").val();
-
-                                                        $.ajax({
-                                                            url: "/Products/AddSize",
-                                                            type: 'POST',
-                                                            data: { SizeCode: SizeCode, SizeName: SizeName },
-                                                            success: function (result) {
-                                                                $("#SizesAvailable").append('<option value="'+SizeCode+'">'+SizeName+'</option>')
-                                                            },
-                                                            error: function () {
-                                                                alert("Error adding new Size! (please make sure you are connected with Internet & your browser is compatible)");
-                                                            }
-                                                        });
-
+                                                        if (SizeName != null && SizeName != "" && SizeCode != null && SizeCode != "")
+                                                        {
+                                                            $.ajax({
+                                                                url: "/Products/AddSize",
+                                                                type: 'POST',
+                                                                data: { SizeCode: SizeCode, SizeName: SizeName },
+                                                                success: function (result) {
+                                                                    $("#SizesAvailable").append('<option value="' + SizeCode + '">' + SizeName + '</option>')
+                                                                },
+                                                                error: function () {
+                                                                    alert("Error adding new Size! (please make sure you are connected with Internet & your browser is compatible)");
+                                                                }
+                                                            });
+                                                        }
+                                                        else
+                                                        {
+                                                            alert("Size Name & Code couldn't load properly! Please make sure to enter both values or reload the page and try again.")
+                                                        }
                                                         $("#NewSizePanel").attr("hidden","hidden");
                                                     }
                                             </script>
@@ -299,7 +312,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Update" class="btn btn-default" />
                 @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-info" })
             </div>
         </div>
@@ -308,3 +321,21 @@
 
 <div>
 </div>
+<script>
+    function TruncateColors()
+    {
+        $.ajax({
+            url: "/Products/DeleteColors",
+            type: "POST",
+            success: function () { window.location.reload();}
+        })
+    }
+
+    function TruncateSizes() {
+        $.ajax({
+            url: "/Products/DeleteSizes",
+            type: "POST",
+            success: function () { window.location.reload(); }
+        })
+    }
+</script>

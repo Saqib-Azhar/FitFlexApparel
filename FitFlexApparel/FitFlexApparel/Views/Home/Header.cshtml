@@ -152,19 +152,19 @@
                                             <ul class="list-links">
                                                 @if (subcatCount < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount].Id" style="height:350px; width:720px">@subCatArray[subcatCount].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount].Id" >@subCatArray[subcatCount].Subcategory_Name</a></li>
                                                 }
                                                 @if (subcatCount+1 < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 1].Id" style="height:350px; width:720px">@subCatArray[subcatCount + 1].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 1].Id" >@subCatArray[subcatCount + 1].Subcategory_Name</a></li>
                                                 }
                                                 @if (subcatCount+2 < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 2].Id" style="height:350px; width:720px">@subCatArray[subcatCount + 2].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 2].Id">@subCatArray[subcatCount + 2].Subcategory_Name</a></li>
                                                 }
                                                 @if (subcatCount+3 < subCatArray.Count())
                                                 {
-                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 3].Id" style="height:350px; width:720px">@subCatArray[subcatCount + 3].Subcategory_Name</a></li>
+                                                    <li><a href="/Products/SubCategoryProducts/@subCatArray[subcatCount + 3].Id" >@subCatArray[subcatCount + 3].Subcategory_Name</a></li>
                                                 }
 
                                             </ul>
@@ -176,7 +176,7 @@
                                     <div class="col-md-12">
                                         <hr>
                                         <a class="banner banner-1" href="#">
-                                            <img src="~/UploadedImages/@categItem.Category_Image" alt="">
+                                            <img src="~/UploadedImages/@categItem.Category_Image" alt="" style="height:300px;">
                                             <div class="banner-caption text-center">
                                                 <h2 class="white-color">NEW COLLECTION</h2>
                                                 <h3 class="white-color font-weak">HOT DEAL</h3>
