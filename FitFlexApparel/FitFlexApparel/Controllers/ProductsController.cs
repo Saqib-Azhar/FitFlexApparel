@@ -21,7 +21,7 @@ namespace FitFlexApparel.Controllers
         public ActionResult Index()
         {
             try {
-                var products = db.Products.Include(p => p.Brand).Include(p => p.SubCategory).Where(s => s.IsDeleted != true);
+                var products = db.Products.Include(p => p.Brand).Include(p => p.SubCategory);
                 return View(products.ToList());
             }
             catch (Exception ex)
@@ -853,7 +853,7 @@ namespace FitFlexApparel.Controllers
             var products = new List<Product>();
             try
             {
-                products = db.Products.Where(s => s.SubCategory.Category.Id == id).OrderBy(s => s.SubCategory.Category.Category_Name).ToList();
+                products = db.Products.Where(s => s.SubCategory.Category.Id == id && s.IsDeleted != true).OrderBy(s => s.SubCategory.Category.Category_Name).ToList();
             }
             catch (Exception ex)
             {
@@ -873,7 +873,7 @@ namespace FitFlexApparel.Controllers
             var products = new List<Product>();
             try
             {
-                products = db.Products.Where(s => s.SubCategory.Id == id).OrderBy(s => s.SubCategory.Subcategory_Name).ToList();
+                products = db.Products.Where(s => s.SubCategory.Id == id && s.IsDeleted != true).OrderBy(s => s.SubCategory.Subcategory_Name).ToList();
             }
             catch (Exception ex)
             {
