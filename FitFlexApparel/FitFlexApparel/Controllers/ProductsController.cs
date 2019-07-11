@@ -104,6 +104,7 @@ namespace FitFlexApparel.Controllers
                 }
                 ViewBag.Reviews = db.ProductReviews.Where(s => s.Product_Id == id && s.IsDeleted != true).ToList();
                 ViewBag.ProductPrices = db.ProductPrices.Where(s => s.Product_Id == id).ToList();
+                ViewBag.ColorsList = db.Colors.ToList();
                 Product product = db.Products.Find(id);
                 if (product == null)
                 {

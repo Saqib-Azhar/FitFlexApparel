@@ -3,16 +3,17 @@
 
         var ReviewsList = ViewBag.Reviews as IEnumerable<FitFlexApparel.Models.ProductReview>;
         var ProductPricesList = ViewBag.ProductPrices as IEnumerable<FitFlexApparel.Models.ProductPrice>;
-
+        var ColorDetailsList = ViewBag.ColorsList as IEnumerable<FitFlexApparel.Models.Color>;
+        
         Layout = "~/Views/Shared/_Layout.cshtml";
         var FacebookURL = "https://www.facebook.com/sharer/sharer.php?u=http://fitflexapparel.com/Products/Display/" + Model.Id + "&t=" + Model.Product_Slug;
     }
 
-<style>
+@*<style>
     .fa-check{
         color:#40e0d0;
     }
-</style>
+</style>*@
     <!-- /NAVIGATION -->
     <!-- BREADCRUMB -->
     <div id="breadcrumb">
@@ -140,15 +141,18 @@
                             <hr />
                             <div id="BrandSelection">
                                 @Html.Raw(Model.Product_Description)
-
                                 <div class="product-options">
+
                                     <ul class="color-option">
-                                        <li><span class="text-uppercase">Color:</span></li>
+                                        <li><span class="text-uppercase">Color: </span><br />
+                                            <span style="text-align:center"><b><u id="SelectedColorName">Select</u></b></span>
+                                        </li>
                                         @if (Model.Colors != null)
                                         {
                                             foreach (var item in Model.Colors.Split(','))
                                             {
-                                                <li class="colorSelection" value="@item"><a onclick="SelectThis(this, 'color')" alt="@item" style="border:solid;cursor:pointer;background-color:#@item;" class="fa"></a></li>
+                                                var colorName = ColorDetailsList.FirstOrDefault(s=>s.Color_Code == item) == null ? "" : ColorDetailsList.FirstOrDefault(s => s.Color_Code == item).Color_Name;
+                                                <li class="colorSelection" value="@item"><a onclick="SelectThis(this, 'color')" alt="@item" style="border:solid;width:40px;height:40px;cursor:pointer;background-color:#@item;" class="fa" title="@colorName"></a></li>
                                             }
                                         }
                                     </ul>
@@ -253,11 +257,13 @@
                                     if (attr == 'color') {
                                         $(".colorSelection").removeClass("active");
                                         $(".fa").removeClass("fa-check");
+                                        var name = $(obj).attr("title");
+                                        $("#SelectedColorName").text(name);
                                     }
                                     else if (attr == 'size')
                                         $(".sizeSelection").removeClass("active");
                                     $(obj).parent().addClass('active');
-                                    $(obj).addClass('fa-check');
+                                    //$(obj).addClass('fa-check');
                                 }
                                 function AddToCart()
                                 {
