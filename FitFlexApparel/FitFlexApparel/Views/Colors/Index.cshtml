@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FitFlexApparel.Models.Color>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Color</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table table-striped" style="text-align:center; border:double;  overflow:auto;">
+    <tr>
+        <th>
+            @Html.DisplayName("Color Name")
+        </th>
+        <th>
+            @Html.DisplayName("Color")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td width="300">
+            @Html.DisplayFor(modelItem => item.Color_Name)
+        </td>
+        <td width="300">
+            <span style="border:solid 1px;background-color:#@item.Color_Code;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </td>
+        <td width="300">
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-info", @style = "width:65px" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @class = "btn btn-sm btn-primary", @style = "width:65px" }) 
+        </td>
+    </tr>
+}
+
+</table>

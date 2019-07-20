@@ -221,6 +221,7 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ColorsController.cs" />
     <Compile Include="Controllers\ContributionRequestsController.cs" />
     <Compile Include="Controllers\CustomerContactRequestsController.cs" />
     <Compile Include="Controllers\ExceptionManagerController.cs" />
@@ -600,6 +601,8 @@
     <Content Include="Models\FitflexApparel.edmx.diagram">
       <DependentUpon>FitflexApparel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Terms and conditions.docx" />
+    <Content Include="Content\Terms and conditions - Fitflex.pdf" />
     <None Include="Properties\PublishProfiles\FitFlex Deployment 19 April.pubxml" />
     <None Include="Properties\PublishProfiles\Fitflex Deployment 23 March.pubxml" />
     <None Include="Properties\PublishProfiles\Fitflex publish 9 jun.pubxml" />
@@ -733,6 +736,11 @@
     <Content Include="Views\OrderInquiries\Details.cshtml" />
     <Content Include="Views\OrderInquiries\Edit.cshtml" />
     <Content Include="Views\OrderInquiries\Index.cshtml" />
+    <Content Include="Views\Colors\Create.cshtml" />
+    <Content Include="Views\Colors\Delete.cshtml" />
+    <Content Include="Views\Colors\Details.cshtml" />
+    <Content Include="Views\Colors\Edit.cshtml" />
+    <Content Include="Views\Colors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UploadedImages\Inquiries\" />
