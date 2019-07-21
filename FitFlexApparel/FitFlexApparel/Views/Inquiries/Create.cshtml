@@ -80,9 +80,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                @Html.Label("", "Message", htmlAttributes: new { @class = "control-label col-md-12" })
+                                @Html.Label("", "Message (with COLORS & SIZES)", htmlAttributes: new { @class = "control-label col-md-12" })
                                 <div class="col-md-12">
-                                    @Html.TextAreaFor(model => model.Message, 8, 20, new { @class = "form-control", @maxlength = "10000", @placeholder = "Max 1000 words" })
+                                    @Html.TextAreaFor(model => model.Message, 8, 20, new { @class = "form-control", @maxlength = "10000", @placeholder = "Please specify Colors & Sizes along with your message in Max 1000 words" })
                                     @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -252,10 +252,11 @@
         </div>
     </div>
 </div>
-
+<script src="~/Assets/js/jquery.min.js"></script>
 
 <script>
     $(document).ready(function () {
-        $("#Product_Id").val("@ViewBag.ProdId")
+        var prod = parseInt("@ViewBag.ProdId");
+        $("#Product_Id").val(prod)
     })
 </script>

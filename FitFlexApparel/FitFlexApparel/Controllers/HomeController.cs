@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 
 namespace FitFlexApparel.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()

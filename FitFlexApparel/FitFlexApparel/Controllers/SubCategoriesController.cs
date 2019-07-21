@@ -11,6 +11,7 @@ using System.IO;
 
 namespace FitFlexApparel.Controllers
 {
+    [RequireHttps]
     public class SubCategoriesController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

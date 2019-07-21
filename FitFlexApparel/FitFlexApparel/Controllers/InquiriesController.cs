@@ -12,6 +12,7 @@ using System.IO;
 namespace FitFlexApparel.Controllers
 {
     [Authorize(Roles ="Admin")]
+    [RequireHttps]
     public class InquiriesController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

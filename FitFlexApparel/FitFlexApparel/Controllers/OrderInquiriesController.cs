@@ -11,6 +11,7 @@ using FitFlexApparel.Models;
 namespace FitFlexApparel.Controllers
 {
     [Authorize(Roles = "Admin")]
+    [RequireHttps]
     public class OrderInquiriesController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

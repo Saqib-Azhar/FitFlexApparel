@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 
 namespace FitFlexApparel.Controllers
 {
+    [RequireHttps]
     public class ProductsController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

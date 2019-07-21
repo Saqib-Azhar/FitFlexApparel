@@ -10,6 +10,7 @@ using FitFlexApparel.Models;
 
 namespace FitFlexApparel.Controllers
 {
+    [RequireHttps]
     public class ProductReviewsController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();
