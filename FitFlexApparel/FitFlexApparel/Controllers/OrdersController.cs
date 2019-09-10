@@ -13,7 +13,7 @@ using FitFlexApparel.Controllers;
 namespace FitFlexApparel.Controllers
 {
     [Authorize]
-    [RequireHttps]
+    //[RequireHttps]
     public class OrdersController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

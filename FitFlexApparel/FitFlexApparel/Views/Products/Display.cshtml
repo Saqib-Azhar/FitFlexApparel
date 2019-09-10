@@ -1,19 +1,78 @@
 ﻿@model FitFlexApparel.Models.Product
-    @{ 
 
-        var ReviewsList = ViewBag.Reviews as IEnumerable<FitFlexApparel.Models.ProductReview>;
-        var ProductPricesList = ViewBag.ProductPrices as IEnumerable<FitFlexApparel.Models.ProductPrice>;
-        var ColorDetailsList = ViewBag.ColorsList as IEnumerable<FitFlexApparel.Models.Color>;
-        
-        Layout = "~/Views/Shared/_Layout.cshtml";
-        var FacebookURL = "https://www.facebook.com/sharer/sharer.php?u=http://fitflexapparel.com/Products/Display/" + Model.Id + "&t=" + Model.Product_Slug;
-    }
+<!DOCTYPE html>
+@{
+
+    var ReviewsList = ViewBag.Reviews as IEnumerable<FitFlexApparel.Models.ProductReview>;
+    var ProductPricesList = ViewBag.ProductPrices as IEnumerable<FitFlexApparel.Models.ProductPrice>;
+    var ColorDetailsList = ViewBag.ColorsList as IEnumerable<FitFlexApparel.Models.Color>;
+
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+    var FacebookURL = "https://www.facebook.com/sharer/sharer.php?u=http://fitflexapparel.com/Products/Display/" + Model.Id + "&t=" + Model.Product_Slug;
+}
 
 @*<style>
-    .fa-check{
-        color:#40e0d0;
-    }
-</style>*@
+        .fa-check{
+            color:#40e0d0;
+        }
+    </style>*@
+
+
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Fitflex Apparel</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/Assets/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/Assets/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/Assets/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/Assets/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/Assets/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/Assets/css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <meta property="og:url" content="fitflexapparel.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@Model.Product_Name | Fitflex Apparel" />
+    <meta property="og:description" content="Fitflex Apparel" />
+    <meta property="og:image" content="http://fitflexapparel.com/Content/Screenshot_2019-08-04-17-44-15.png" />
+
+</head>
+
+<body>
+
+    @Html.Action("Header", "Home")
+
+
+
+
+
+
     <!-- /NAVIGATION -->
     <!-- BREADCRUMB -->
     <div id="breadcrumb">
@@ -104,13 +163,13 @@
                     <div class="col-md-6">
                         <div class="product-body">
                             @*<div class="product-label">
-                                <span>New</span>
-                                <span class="sale">-20%</span>
-                            </div>*@
+                                    <span>New</span>
+                                    <span class="sale">-20%</span>
+                                </div>*@
                             <h2 class="product-name">@Model.Product_Name</h2>
                             <table class="table table-responsive table-hover" style="border:double" border="1">
                                 <tr>
-                                    @foreach (var item in ProductPricesList.OrderBy(s=>s.Min))
+                                    @foreach (var item in ProductPricesList.OrderBy(s => s.Min))
                                     {
                                         if (item.Max != null)
                                         {
@@ -128,11 +187,11 @@
                                     @for (int star = 0; star < Model.Average_Rating; star = star + 1)
                                     {
                                         <i class="fa fa-star"></i>
-                                    } 
-                                     @for (double? star = (Model.Average_Rating == null) ? 0 : Model.Average_Rating; star < 5; star++)
-                                     {
+                                    }
+                                    @for (double? star = (Model.Average_Rating == null) ? 0 : Model.Average_Rating; star < 5; star++)
+                                    {
                                         <i class="fa fa-star-o empty"></i>
-                                     }
+                                    }
                                 </div>
                                 <a data-toggle="tab" href="#tab3">@Model.Total_Ratings Review(s) / Add Review</a>
                             </div>
@@ -144,47 +203,48 @@
                                 <div class="product-options">
 
                                     <ul class="color-option">
-                                        <li><span class="text-uppercase">Color: </span><br />
+                                        <li>
+                                            <span class="text-uppercase">Color: </span><br />
                                             <span style="text-align:center"><b><u id="SelectedColorName">Select</u></b></span>
                                         </li>
                                         @if (Model.Colors != null)
                                         {
                                             foreach (var item in Model.Colors.Split(','))
                                             {
-                                                var colorName = ColorDetailsList.FirstOrDefault(s=>s.Color_Code == item) == null ? "" : ColorDetailsList.FirstOrDefault(s => s.Color_Code == item).Color_Name;
+                                                var colorName = ColorDetailsList.FirstOrDefault(s => s.Color_Code == item) == null ? "" : ColorDetailsList.FirstOrDefault(s => s.Color_Code == item).Color_Name;
                                                 <li class="colorSelection" value="@item"><a onclick="SelectThis(this, 'color')" alt="@item" style="border:solid;width:40px;height:40px;cursor:pointer;background-color:#@item;" class="fa" title="@colorName"></a></li>
                                             }
                                         }
                                     </ul>
-                                    @*<ul class="size-option"> 11 May change, to be add back 
-                                        <li><span class="text-uppercase">Size:</span></li>
-                                        @if (Model.Sizes != null)
-                                        {
-                                            foreach (var item in Model.Sizes.Split(','))
+                                    @*<ul class="size-option"> 11 May change, to be add back
+                                            <li><span class="text-uppercase">Size:</span></li>
+                                            @if (Model.Sizes != null)
                                             {
-                                                <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                                foreach (var item in Model.Sizes.Split(','))
+                                                {
+                                                    <li class="sizeSelection" value="@item"><a style="cursor:pointer;" onclick="SelectThis(this, 'size')">@item</a></li>
+                                                }
                                             }
-                                        }
-                                    </ul>*@
+                                        </ul>*@
                                     <style>
-                                        .td-Custom{
-                                            padding:10px;
+                                        .td-Custom {
+                                            padding: 10px;
                                         }
                                     </style>
                                     <div>
                                         <table>
                                             @if (Model.Sizes != null)
                                             {
-                                            <tr style="text-align:center"><td class="td-Custom"><span class="text-uppercase">Size</span></td><td class="td-Custom"><span class="text-uppercase">Quantity</span></td></tr>
+                                                <tr style="text-align:center"><td class="td-Custom"><span class="text-uppercase">Size</span></td><td class="td-Custom"><span class="text-uppercase">Quantity</span></td></tr>
                                                 foreach (var item in Model.Sizes.Split(','))
                                                 {
-                                            <tr style="text-align:center">
-                                                <td class="sizeSelection td-Custom" value="@item"><span style="cursor:pointer;">@item</span> </td>
-                                                <td class="qty-input td-Custom">
-                                                    <input type="number" min="0" id="SizeQuantity_@item" value="100" class="form-control sizeValInput" style="width:80px" sizeVal="@item"/>
-                                                </td>
-                                                <td><span>Pcs</span></td>
-                                            </tr>
+                                                    <tr style="text-align:center">
+                                                        <td class="sizeSelection td-Custom" value="@item"><span style="cursor:pointer;">@item</span> </td>
+                                                        <td class="qty-input td-Custom">
+                                                            <input type="number" min="0" id="SizeQuantity_@item" value="100" class="form-control sizeValInput" style="width:80px" sizeVal="@item" />
+                                                        </td>
+                                                        <td><span>Pcs</span></td>
+                                                    </tr>
                                                 }
                                             }
                                         </table>
@@ -192,68 +252,66 @@
                                 </div>
 
                                 @*@if (Model.Product_Stock > 0 && Model.IsDeleted != true) 11 May change, add it back after customer needs it
-                                {*@
-                                    <div class="product-btns">
-                                        @*<div class="qty-input">
+                                    {*@
+                                <div class="product-btns">
+                                    @*<div class="qty-input">
                                             <span class="text-uppercase">QTY: </span>
                                             <input class="input" type="number" value="1" min="1" id="SelectedQuantity">
                                         </div>
                                         <button class="primary-btn add-to-cart" onclick="AddToCart()"><i class="fa fa-shopping-cart"></i> Add to Cart</button> Commenting Addtocart button for 11 may change, add it after customer needs it*@
-                                        <div class="pull-right">
-                                            <form id="AddToInquiryForm" method="post"></form>
-                                            <button class="primary-btn add-to-cart" onclick="AddToInquiry()"><i class="fa fa-shopping-cart"></i> Add to Inquiry</button>
-                                            <a href="/Inquiries/Create/@Model.Id" class="main-btn btn" target="_blank">Request Sample</a>
-                                            <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
-                                            <a href="@FacebookURL"
-                                               onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
-                                               target="_blank" title="Share on Facebook"  class="main-btn icon-btn"><i class="fa fa-facebook"></i>
-                                            </a>
-                                        </div>
+                                    <div class="pull-right">
+                                        <form id="AddToInquiryForm" method="post"></form>
+                                        <button class="primary-btn add-to-cart" onclick="AddToInquiry()"><i class="fa fa-shopping-cart"></i> Add to Inquiry</button>
+                                        <a href="/Inquiries/Create/@Model.Id" class="main-btn btn" target="_blank">Request Sample</a>
+                                        <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
+                                        <a href="@FacebookURL"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+                                           target="_blank" title="Share on Facebook" class="main-btn icon-btn">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
                                     </div>
+                                </div>
                                 @*}*@
-                                @*else 11 May change, add it back after customer needs it
-                                {
-                                    <div class="product-btns">
-                                        <div class="qty-input">
-                                            <span class="text-uppercase">QTY: </span>
-                                            <input class="input" type="number" disabled value="0" min="0" id="SelectedQuantity">
+                                @*else 11 May change, add it back when customer needs it
+                                    {
+                                        <div class="product-btns">
+                                            <div class="qty-input">
+                                                <span class="text-uppercase">QTY: </span>
+                                                <input class="input" type="number" disabled value="0" min="0" id="SelectedQuantity">
+                                            </div>
+                                            <button class="primary-btn disabled" disabled title="Out of Stock"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                            <div class="pull-right">
+                                                <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
+                                                <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                                            </div>
                                         </div>
-                                        <button class="primary-btn disabled" disabled title="Out of Stock"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                        <div class="pull-right">
-                                            <button class="main-btn icon-btn" onclick="AddToWishlist(@Model.Id)"><i class="fa fa-heart"></i></button>
-                                            <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
-                                        </div>
-                                    </div>
-                                }*@
+                                    }*@
                             </div>
 
                             <div id="CustomizedSelected" hidden>
                                 <form method="post" action="/Products/SubmitQuery">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="Name" placeholder="Name"/><br />
-                                        <input type="text" class="form-control" name="Email" placeholder="Email"/><br />
-                                        <input type="text" class="form-control" name="Phone" placeholder="Phone"/><br />
+                                        <input type="text" class="form-control" name="Name" placeholder="Name" /><br />
+                                        <input type="text" class="form-control" name="Email" placeholder="Email" /><br />
+                                        <input type="text" class="form-control" name="Phone" placeholder="Phone" /><br />
                                         <textarea class="form-control" name="Requirements" placeholder="Requirements"></textarea><br />
-                                        <input type="submit" class="btn btn-default" value="Submit Query"/>
+                                        <input type="submit" class="btn btn-default" value="Submit Query" />
                                     </div>
                                 </form>
                             </div>
                             <script>
-                                function ChangeBrand()
-                                {
+                                function ChangeBrand() {
                                     var res = $("input[name=brandRadio]:checked").val();
                                     if (res == "Branded") {
                                         $("#CustomizedSelected").attr("hidden", "hidden");
-                                        $("#BrandSelection").attr("hidden",false);
+                                        $("#BrandSelection").attr("hidden", false);
                                     }
-                                    else if (res == "Customized")
-                                    {
+                                    else if (res == "Customized") {
                                         $("#BrandSelection").attr("hidden", "hidden");
-                                        $("#CustomizedSelected").attr("hidden",false);
+                                        $("#CustomizedSelected").attr("hidden", false);
                                     }
                                 }
-                                function SelectThis(obj,attr)
-                                {
+                                function SelectThis(obj, attr) {
                                     if (attr == 'color') {
                                         $(".colorSelection").removeClass("active");
                                         $(".fa").removeClass("fa-check");
@@ -265,14 +323,12 @@
                                     $(obj).parent().addClass('active');
                                     //$(obj).addClass('fa-check');
                                 }
-                                function AddToCart()
-                                {
+                                function AddToCart() {
                                     var selectedSize = $(".sizeSelection.active").children().text();
                                     var selectedColor = $(".colorSelection.active").children().attr('alt');
                                     var selectedQuantity = $("#SelectedQuantity").val();
                                     var productId = '@Model.Id';
-                                    if(selectedColor == null || selectedSize == null || selectedQuantity == null)
-                                    {
+                                    if (selectedColor == null || selectedSize == null || selectedQuantity == null) {
                                         alert("Please select valid color size and quantity!");
                                         return 0;
 
@@ -280,20 +336,17 @@
                                     $.ajax({
                                         url: "/Products/AddToCart",
                                         type: 'POST',
-                                        data: { productId: productId, selectedQuantity: selectedQuantity, selectedColor:selectedColor, selectedSize:selectedSize },
+                                        data: { productId: productId, selectedQuantity: selectedQuantity, selectedColor: selectedColor, selectedSize: selectedSize },
                                         success: function (result) {
-                                            if (result == "Success")
-                                            {
+                                            if (result == "Success") {
                                                 alert("Successfully added in Cart!");
                                                 window.location.reload();
                                             }
-                                            else if(result == "LoginError")
-                                            {
+                                            else if (result == "LoginError") {
                                                 alert("Please create an account or login to your account to add this product!");
-                                                window.location = "/Account/Login?url="+window.location.href;
+                                                window.location = "/Account/Login?url=" + window.location.href;
                                             }
-                                            else
-                                            {
+                                            else {
                                                 alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)")
                                             }
                                         },
@@ -304,16 +357,13 @@
                                 }
 
 
-                                function AddToInquiry()
-                                {
+                                function AddToInquiry() {
                                     var ColorSelected = $(".colorSelection.active").children().attr('alt');
-                                    if(ColorSelected == null || ColorSelected == "")
-                                    {
+                                    if (ColorSelected == null || ColorSelected == "") {
                                         alert("In order to Add product to inquiry, please select a Color!");
                                         return;
                                     }
-                                    else
-                                    {
+                                    else {
                                         var SizeQuantitySelected = [];
                                         var sizes = $(".sizeValInput");
                                         $.each(sizes, function () {
@@ -366,12 +416,12 @@
                                     <a onclick="switchTab('#tab3Select')" href="#tab2" style="text-align:right;color:red" class="pull-right"><b>TERMS & CONDITIONS</b></a>
                                 </div>
                                 @*<div id="tab2" class="tab-pane fade in">
-                                    @Html.Raw(Model.Company_Profile)
-                                    <br />
-                                    <hr />
-                                    <a href="#tab1" onclick="switchTab('#tab1Select')" style="text-align:left;color:red" class="left"><b>DESCRIPTION</b></a>
-                                    <a href="#tab3" onclick="switchTab('#tab3Select')" style="text-align:right;color:red" class="pull-right"><b>TERMS & CONDITIONS</b></a>
-                                </div>*@
+                                        @Html.Raw(Model.Company_Profile)
+                                        <br />
+                                        <hr />
+                                        <a href="#tab1" onclick="switchTab('#tab1Select')" style="text-align:left;color:red" class="left"><b>DESCRIPTION</b></a>
+                                        <a href="#tab3" onclick="switchTab('#tab3Select')" style="text-align:right;color:red" class="pull-right"><b>TERMS & CONDITIONS</b></a>
+                                    </div>*@
                                 <div id="tab3" class="tab-pane fade in">
                                     @Html.Raw(Model.Terms_And_Conditions)
                                     <br />
@@ -386,7 +436,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="product-reviews">
-                                                
+
                                                 @foreach (var item in ReviewsList)
                                                 {
                                                     <div class="single-review">
@@ -463,9 +513,75 @@
     <!-- /section -->
 
 
-<script>
-    function switchTab(tabId)
-    {
-        $(tabId).trigger('click');
-    }
-</script>
+    <script>
+        function switchTab(tabId) {
+            $(tabId).trigger('click');
+        }
+    </script>
+
+    @Html.Action("Footer", "Home")
+    <!-- jQuery Plugins -->
+    <script src="/Assets/js/jquery.min.js"></script>
+    <script src="/Assets/js/bootstrap.min.js"></script>
+    <script src="/Assets/js/slick.min.js"></script>
+    <script src="/Assets/js/nouislider.min.js"></script>
+    <script src="/Assets/js/jquery.zoom.min.js"></script>
+    <script src="/Assets/js/main.js"></script>
+
+    <script>
+        function AddToWishlist(id) {
+
+            $.ajax({
+                url: "/Wishlists/AddToWishlist",
+                type: 'POST',
+                data: { id:id },
+                success: function (result) {
+                    if (result == "Success") {
+                        alert("Successfully added in Wishlist!");
+                    }
+                    else if (result == "LoginError") {
+                        alert("Please create an account or login to existing account to add this product!");
+                        window.location = "/Account/Login?url=" + window.location.href;
+                    }
+                    else
+                    {
+                        alert(result);
+                    }
+                },
+                error: function () {
+                    alert("Something went wrong! (please make sure you are connected with Internet OR Reload this page)");
+                }
+            });
+
+        }
+        function RemoveFromWishlist(id) {
+
+            $.ajax({
+                url: "/Wishlists/RemoveFromWishlist",
+                type: 'POST',
+                data: { id: id },
+                success: function (result) {
+                    if (result == "Success") {
+                        alert("Successfully Removed from Wishlist!");
+                    }
+                    else if (result == "LoginError") {
+                        alert("Please create an account or login to existing account to add this product!");
+                        window.location = "/Account/Login?url=" + window.location.href;
+                    }
+                    else {
+                        alert(result)
+                    }
+                },
+                error: function () {
+                    alert("Something went wrong! (please make sure you are connected with Internet & your browser is compatible)");
+                }
+            });
+
+        }
+    </script>
+
+    @*@RenderSection("scripts", required: false)*@
+
+</body>
+
+</html>

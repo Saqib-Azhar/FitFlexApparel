@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 namespace FitFlexApparel.Controllers
 {
     [Authorize]
-    [RequireHttps]
+    //[RequireHttps]
     public class WishlistsController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

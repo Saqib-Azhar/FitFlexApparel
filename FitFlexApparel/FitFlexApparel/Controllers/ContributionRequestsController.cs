@@ -10,7 +10,7 @@ using FitFlexApparel.Models;
 
 namespace FitFlexApparel.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class ContributionRequestsController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();

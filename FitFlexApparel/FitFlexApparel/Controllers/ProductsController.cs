@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace FitFlexApparel.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class ProductsController : Controller
     {
         private FitflexApparelEntities db = new FitflexApparelEntities();
@@ -190,6 +190,7 @@ namespace FitFlexApparel.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    product.Product_Slug = product.Product_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "-").Replace('"', '-');
                     var priceList = Request.Form["PricesListField"];
                     List<ProductPrice> PricesList = new List<ProductPrice>();
                     if (priceList != null && priceList != "")
@@ -220,11 +221,17 @@ namespace FitFlexApparel.Controllers
                             PricesList.Add(priceObj);
                         }
                     }
+                    string imagesFolderPath = "Products/" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    if (Product_Image1 != null || Product_Image2 != null || Product_Image3 != null || Product_Image4 != null || Product_Image5 != null)
+                    {
+                        var FolderUploadDir = Server.MapPath("~/Uploadedimages/" + imagesFolderPath);
+                        Directory.CreateDirectory(FolderUploadDir);
+                    }
                     if (Product_Image1 != null)
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image1.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/"+ imagesFolderPath), pic);
 
                         Product_Image1.SaveAs(path);
 
@@ -233,7 +240,7 @@ namespace FitFlexApparel.Controllers
                             Product_Image1.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image1 = "Products/" + Product_Image1.FileName;
+                        product.Product_Image1 = imagesFolderPath + "/" + Product_Image1.FileName;
 
                     }
 
@@ -241,7 +248,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image2.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/"+ imagesFolderPath), pic);
 
                         Product_Image2.SaveAs(path);
 
@@ -250,7 +257,7 @@ namespace FitFlexApparel.Controllers
                             Product_Image2.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image2 = "Products/" + Product_Image2.FileName;
+                        product.Product_Image2 = imagesFolderPath + "/" + Product_Image2.FileName;
 
                     }
 
@@ -258,7 +265,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image3.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/"+ imagesFolderPath), pic);
 
                         Product_Image3.SaveAs(path);
 
@@ -267,7 +274,7 @@ namespace FitFlexApparel.Controllers
                             Product_Image3.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image3 = "Products/" + Product_Image3.FileName;
+                        product.Product_Image3 = imagesFolderPath + "/" + Product_Image3.FileName;
 
                     }
 
@@ -275,7 +282,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image4.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/"+ imagesFolderPath), pic);
 
                         Product_Image4.SaveAs(path);
 
@@ -284,7 +291,7 @@ namespace FitFlexApparel.Controllers
                             Product_Image4.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image4 = "Products/" + Product_Image4.FileName;
+                        product.Product_Image4 = imagesFolderPath + "/" + Product_Image4.FileName;
 
                     }
 
@@ -292,7 +299,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image5.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/"+ imagesFolderPath), pic);
 
                         Product_Image5.SaveAs(path);
 
@@ -301,14 +308,13 @@ namespace FitFlexApparel.Controllers
                             Product_Image5.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image5 = "Products/" + Product_Image5.FileName;
+                        product.Product_Image5 = imagesFolderPath + "/" + Product_Image5.FileName;
 
                     }
                     var sizes = Request.Form["SizesAvailable"];
                     var colors = Request.Form["ColorsAvailable"];
                     product.Average_Rating = 0;
                     product.Total_Ratings = 0;
-                    product.Product_Slug = product.Product_Name.ToLower().Trim().Replace(' ', '-').Replace("'", "-").Replace('"', '-');
                     product.IsDeleted = false;
                     product.Sizes = sizes;
                     product.Colors = colors;
@@ -407,11 +413,19 @@ namespace FitFlexApparel.Controllers
                         }
                     }
                     var existingProd = db.Products.FirstOrDefault(s => s.Id == product.Id);
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    string imagesFolderPath = "Products/" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    if (Product_Image1 != null || Product_Image2 != null || Product_Image3 != null || Product_Image4 != null || Product_Image5 != null)
+                    {
+                        var FolderUploadDir = Server.MapPath("~/Uploadedimages/" + imagesFolderPath);
+                        Directory.CreateDirectory(FolderUploadDir);
+                    }
                     if (Product_Image1 != null)
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image1.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/" + imagesFolderPath), pic);
 
                         Product_Image1.SaveAs(path);
 
@@ -420,8 +434,9 @@ namespace FitFlexApparel.Controllers
                             Product_Image1.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image1 = "Products/" + Product_Image1.FileName;
-                        existingProd.Product_Image1 = "Products/" + Product_Image1.FileName;
+                        product.Product_Image1 = imagesFolderPath + "/" + Product_Image1.FileName;
+
+                        existingProd.Product_Image1 = product.Product_Image1;
                     }
                     else
                     {
@@ -432,7 +447,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image2.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/" + imagesFolderPath), pic);
 
                         Product_Image2.SaveAs(path);
 
@@ -441,9 +456,9 @@ namespace FitFlexApparel.Controllers
                             Product_Image2.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image2 = "Products/" + Product_Image2.FileName;
-                        existingProd.Product_Image2 = "Products/" + Product_Image2.FileName;
+                        product.Product_Image2 = imagesFolderPath + "/" + Product_Image2.FileName;
 
+                        existingProd.Product_Image2 = product.Product_Image2;
                     }
                     else
                     {
@@ -454,7 +469,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image3.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/" + imagesFolderPath), pic);
 
                         Product_Image3.SaveAs(path);
 
@@ -463,9 +478,9 @@ namespace FitFlexApparel.Controllers
                             Product_Image3.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image3 = "Products/" + Product_Image3.FileName;
-                        existingProd.Product_Image3 = "Products/" + Product_Image3.FileName;
+                        product.Product_Image3 = imagesFolderPath + "/" + Product_Image3.FileName;
 
+                        existingProd.Product_Image3 = product.Product_Image3;
                     }
                     else
                     {
@@ -476,7 +491,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image4.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/" + imagesFolderPath), pic);
 
                         Product_Image4.SaveAs(path);
 
@@ -485,9 +500,9 @@ namespace FitFlexApparel.Controllers
                             Product_Image4.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image4 = "Products/" + Product_Image4.FileName;
-                        existingProd.Product_Image4 = "Products/" + Product_Image4.FileName;
-
+                        product.Product_Image4 = imagesFolderPath + "/" + Product_Image4.FileName;
+                        
+                        existingProd.Product_Image4 = product.Product_Image4;
                     }
                     else
                     {
@@ -498,7 +513,7 @@ namespace FitFlexApparel.Controllers
                     {
                         string pic = System.IO.Path.GetFileName(Product_Image5.FileName);
                         string path = System.IO.Path.Combine(
-                                               Server.MapPath("~/Uploadedimages/Products"), pic);
+                                               Server.MapPath("~/Uploadedimages/" + imagesFolderPath), pic);
 
                         Product_Image5.SaveAs(path);
 
@@ -507,14 +522,16 @@ namespace FitFlexApparel.Controllers
                             Product_Image5.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
-                        product.Product_Image5 = "Products/" + Product_Image5.FileName;
-                        existingProd.Product_Image5 = "Products/" + Product_Image5.FileName;
-
+                        product.Product_Image5 = imagesFolderPath + "/" + Product_Image5.FileName;
+                        existingProd.Product_Image1 = product.Product_Image5;
                     }
                     else
                     {
                         product.Product_Image5 = existingProd.Product_Image5;
                     }
+
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
                     var sizes = Request.Form["SizesAvailable"];
                     var colors = Request.Form["ColorsAvailable"];
                     //existingProd.Average_Rating = 0;
@@ -596,7 +613,7 @@ namespace FitFlexApparel.Controllers
         {
             try
             {
-                Product product = db.Products.Find(id);
+                Product product = db.Products.FirstOrDefault(s=>s.Id == id);
                 db.Products.Remove(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
